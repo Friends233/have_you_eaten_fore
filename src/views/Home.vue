@@ -12,7 +12,9 @@ export default class HelloWorld extends Vue {
 
   protected render() {
     return (
-      <h1>Hello World</h1>
+      <h1>
+      <b-alert show>HelloWorld</b-alert>
+      </h1>
     )
   }
 }
