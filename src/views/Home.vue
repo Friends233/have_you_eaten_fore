@@ -4,7 +4,7 @@
 -->
 <script lang="tsx">
 import { Component, Vue } from 'vue-property-decorator'
-import EatenHeader from '@/components/EatenHeader.vue'
+import EatenHeader from '@/components/EatenHeader/index'
 
 @Component({
   components: { EatenHeader }

@@ -2,3 +2,9 @@
  * @Description: 公共样式
  * @Author: Friends233
  */
+
+ .el-menu--horizontal {
+   ul {
+     min-width: 100px;
+   }
+ }
