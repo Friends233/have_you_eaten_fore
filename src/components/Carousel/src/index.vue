@@ -3,7 +3,6 @@
  * @Author: Friends233
 -->
 <script lang="tsx">
-import { Button } from 'element-ui'
 import { Component, Vue } from 'vue-property-decorator'
 
 @Component({
