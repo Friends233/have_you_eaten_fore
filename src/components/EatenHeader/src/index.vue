@@ -140,6 +140,7 @@ export default class EatenHeader extends Vue {
   background: #fff;
   box-shadow: 0 2px 27px 0 rgba(0, 0, 0, 0.1);
   &-top {
+    width: $bodyWidth;
     background: #f8f8f8;
     width: 100%;
     box-sizing: border-box;
@@ -206,7 +207,7 @@ export default class EatenHeader extends Vue {
     }
   }
   &-mid {
-    box-sizing: border-box;
+    width: $bodyWidth;
     padding: 30px $padding;
     display: flex;
     &-logo {
@@ -233,6 +234,7 @@ export default class EatenHeader extends Vue {
     }
   }
   &-nav {
+    width: $bodyWidth;
     padding: 0 $padding;
     margin-top: 2px;
     ul {
@@ -247,7 +249,7 @@ export default class EatenHeader extends Vue {
       font-size: 16px;
       cursor: pointer;
       &:hover {
-        color: $blue;
+        color: #fbc700;
       }
     }
   }
