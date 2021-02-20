@@ -3,8 +3,10 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
+// 引入全局样式
 import '@/styles/index.scss'
 
+// 引入element ui
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 

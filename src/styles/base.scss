@@ -9,6 +9,7 @@
    width: 100%;
    padding: 0;
    margin: 0;
+   background-color: #f8f8f8;
  }
 
  a{
@@ -16,6 +17,10 @@
    text-decoration: none;
  }
 
- ul li{
-   list-style: none;
+ ul{
+  margin: 0;
+  padding: 0;
+  li{
+    list-style: none;
+  }
  }

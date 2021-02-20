@@ -4,6 +4,7 @@
 -->
 <script lang="tsx">
 import { Component, Vue } from 'vue-property-decorator'
+import { createRandomId } from '@/utils/index'
 import { Nav } from './index'
 
 @Component({
@@ -47,6 +48,13 @@ export default class EatenHeader extends Vue {
     }
   ]
   // 轮播旁的菜单
+  headerNavMenu: Array<Nav> = [
+    { id: createRandomId(), value: '美食外卖' },
+    { id: createRandomId(), value: '超市便利' },
+    { id: createRandomId(), value: '水果' },
+    { id: createRandomId(), value: '跑腿代购' },
+    { id: createRandomId(), value: '休闲玩乐' }
+  ]
 
   searchContent = ''
 
@@ -108,19 +116,29 @@ export default class EatenHeader extends Vue {
             <el-button type="primary" icon="el-icon-search"></el-button>
           </div>
         </div>
-        <el-menu default-active="activeIndex" class="eaten-header-nav" mode="horizontal" onSelect={this.handleSelect}>
-          {this.renderTopNavMenu(this.topNavMenu)}
-        </el-menu>
+        <div class="eaten-header-nav">
+          <ul>
+            {this.headerNavMenu.map((item) => {
+              return (
+                <li key={item.id} class="eaten-header-nav-list">
+                  {item.value}
+                </li>
+              )
+            })}
+          </ul>
+        </div>
       </div>
     )
   }
 }
 </script>
 <style scoped lang="scss">
-$padding: 351px;
+@import '@/styles/constant.scss';
 .eaten-header {
   width: 100%;
   min-height: 197px;
+  background: #fff;
+  box-shadow: 0 2px 27px 0 rgba(0, 0, 0, 0.1);
   &-top {
     background: #f8f8f8;
     width: 100%;
@@ -192,6 +210,7 @@ $padding: 351px;
     padding: 30px $padding;
     display: flex;
     &-logo {
+      position: absolute;
       img {
         width: 126px;
         height: 46px;
@@ -210,6 +229,25 @@ $padding: 351px;
         height: 40px;
         width: 70px;
         border-radius: 0;
+      }
+    }
+  }
+  &-nav {
+    padding: 0 $padding;
+    margin-top: 2px;
+    ul {
+      display: flex;
+      justify-content: space-between;
+      width: 500px;
+      margin: 0 auto;
+    }
+    &-list {
+      color: #222;
+      font-weight: 700;
+      font-size: 16px;
+      cursor: pointer;
+      &:hover {
+        color: $blue;
       }
     }
   }
