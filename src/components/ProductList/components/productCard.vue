@@ -11,9 +11,12 @@ import { Component, Vue } from 'vue-property-decorator'
 export default class ProductCard extends Vue {
   protected render() {
     return (
-      <el-card body-style="{ padding: '0px' }">
-        <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"/>
-        <div style="padding: 14px;">
+      <el-card body-style={'padding: 10px;'}>
+        <img
+          width="213"
+          src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+        />
+        <div>
           <span>好吃的汉堡</span>
           <div class="bottom clearfix">
             <time class="time"></time>
@@ -28,4 +31,9 @@ export default class ProductCard extends Vue {
 }
 </script>
 <style scoped lang="scss">
+.el-card {
+  width: 233px;
+  cursor: pointer;
+  // float: left;
+}
 </style>

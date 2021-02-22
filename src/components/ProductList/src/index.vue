@@ -10,12 +10,13 @@ import ProductCard from '../components/productCard.vue'
   components: { ProductCard }
 })
 export default class ProductList extends Vue {
-  cardList: Array<number> = [1, 2, 3, 4]
+  cardList: Array<number> = [1, 2, 3, 4, 5, 6]
 
   protected render() {
     return (
-      <div class="product-list">
-        <ul class="product-list-recommend">
+      <div class="product">
+        <ul class="product-list product-list-recommend">
+          <h3 class="product-card-header">附近热卖推荐</h3>
           {this.cardList.map((item) => {
             return (
               <li class="product-card-wrapper">
@@ -24,15 +25,127 @@ export default class ProductList extends Vue {
             )
           })}
         </ul>
-        <ul class="product-list-find"></ul>
-        <ul class="product-list-supermarket"></ul>
-        <ul class="product-list-fruit"></ul>
-        <ul class="product-list-vegettables"></ul>
-        <ul class="product-list-medicine"></ul>
+        <ul class="product-list product-list-find">
+          <h3 class="product-card-header">附近热卖推荐</h3>
+          {this.cardList.map((item) => {
+            return (
+              <li class="product-card-wrapper">
+                <product-card></product-card>
+              </li>
+            )
+          })}
+        </ul>
+        <ul class="product-list product-list-supermarket">
+          <h3 class="product-card-header">附近热卖推荐</h3>
+          {this.cardList.map((item) => {
+            return (
+              <li class="product-card-wrapper">
+                <product-card></product-card>
+              </li>
+            )
+          })}
+        </ul>
+        <ul class="product-list product-list-fruit">
+          <h3 class="product-card-header">附近热卖推荐</h3>
+          {this.cardList.map((item) => {
+            return (
+              <li class="product-card-wrapper">
+                <product-card></product-card>
+              </li>
+            )
+          })}
+        </ul>
+        <ul class="product-list product-list-vegettables">
+          <h3 class="product-card-header">附近热卖推荐</h3>
+          {this.cardList.map((item) => {
+            return (
+              <li class="product-card-wrapper">
+                <product-card></product-card>
+              </li>
+            )
+          })}
+        </ul>
+        <ul class="product-list product-list-medicine">
+          <h3 class="product-card-header">附近热卖推荐</h3>
+          {this.cardList.map((item) => {
+            return (
+              <li class="product-card-wrapper">
+                <product-card></product-card>
+              </li>
+            )
+          })}
+        </ul>
       </div>
     )
   }
 }
 </script>
 <style scoped lang="scss">
+.product {
+  .product-list {
+    padding-top: 50px;
+    margin-top: 15px;
+    position: relative;
+    &::after {
+      content: '';
+      clear: both;
+      display: block;
+    }
+    .product-card-header {
+      position: absolute;
+      left: 0;
+      top: -10px;
+      width: 100%;
+      height: 40px;
+      border-top-right-radius: 5px;
+      border-top-left-radius: 5px;
+      font-family: 'MFShangHei-Regular' !important;
+      line-height: 40px;
+      box-sizing: border-box;
+      padding-left: 20px;
+      font-size: 18px;
+      font-weight: 500;
+    }
+    .product-card-wrapper {
+      padding: 5px 11px;
+      float: left;
+    }
+    &-recommend {
+      .product-card-header {
+        background: linear-gradient(to right, rgb(243, 182, 74) 2%, rgb(242, 197, 69) 97%) rgb(243, 182, 74);
+        color: white;
+      }
+    }
+    &-find {
+      .product-card-header {
+        background: linear-gradient(to right, rgb(243, 182, 74) 2%, rgb(242, 197, 69) 97%) rgb(243, 182, 74);
+        color: white;
+      }
+    }
+    &-supermarket {
+      .product-card-header {
+        background: linear-gradient(to right, rgb(243, 182, 74) 2%, rgb(242, 197, 69) 97%) rgb(243, 182, 74);
+        color: white;
+      }
+    }
+    &-fruit {
+      .product-card-header {
+        background: linear-gradient(to right, rgb(243, 182, 74) 2%, rgb(242, 197, 69) 97%) rgb(243, 182, 74);
+        color: white;
+      }
+    }
+    &-vegettables {
+      .product-card-header {
+        background: linear-gradient(to right, rgb(243, 182, 74) 2%, rgb(242, 197, 69) 97%) rgb(243, 182, 74);
+        color: white;
+      }
+    }
+    &-medicine {
+      .product-card-header {
+        background: linear-gradient(to right, rgb(243, 182, 74) 2%, rgb(242, 197, 69) 97%) rgb(243, 182, 74);
+        color: white;
+      }
+    }
+  }
+}
 </style>
