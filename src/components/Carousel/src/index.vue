@@ -4,6 +4,7 @@
 -->
 <script lang="tsx">
 import { Component, Vue } from 'vue-property-decorator'
+import { FoodType, CarouselImg } from './index'
 
 @Component({
   components: {}
@@ -12,13 +13,13 @@ export default class Carousel extends Vue {
   avatarImg: string = require('@/assets/avatar.jpg')
   download: string = require('@/assets/download-qr.png')
 
-  imgAddress: Array<object> = [
-    { id: '1', address: 'https://p1.meituan.net/travelcube/01d2ab1efac6e2b7adcfcdf57b8cb5481085686.png' },
-    { id: '2', address: 'http://p1.meituan.net/codeman/826a5ed09dab49af658c34624d75491861404.jpg' },
-    { id: '3', address: 'http://p0.meituan.net/codeman/33ff80dc00f832d697f3e20fc030799560495.jpg' },
-    { id: '4', address: 'http://p0.meituan.net/codeman/a97baf515235f4c5a2b1323a741e577185048.jpg' }
+  carouselList: Array<CarouselImg> = [
+    { id: '1', url: 'https://p1.meituan.net/travelcube/01d2ab1efac6e2b7adcfcdf57b8cb5481085686.png' },
+    { id: '2', url: 'http://p1.meituan.net/codeman/826a5ed09dab49af658c34624d75491861404.jpg' },
+    { id: '3', url: 'http://p0.meituan.net/codeman/33ff80dc00f832d697f3e20fc030799560495.jpg' },
+    { id: '4', url: 'http://p0.meituan.net/codeman/a97baf515235f4c5a2b1323a741e577185048.jpg' }
   ]
-  foodType: Array<object> = [
+  foodTypeList: Array<FoodType> = [
     { id: '1', label: '便当简餐', icon: 'el-icon-tableware', color: '#ff8200' },
     { id: '2', label: '汉堡披萨', icon: 'el-icon-potato-strips', color: '#ffb500' },
     { id: '3', label: '奶茶果汁', icon: 'el-icon-ice-drink', color: '#ff4081' },
@@ -42,7 +43,7 @@ export default class Carousel extends Vue {
         <el-card class="carousel-card-left" shadow="never">
           <h2 class="carousel-card-left-title">美食分类</h2>
           <ul class="carousel-card-left-menu">
-            {this.foodType.map((item: any) => {
+            {this.foodTypeList.map((item) => {
               return (
                 <li class="food-type">
                   <i class={item.icon} style={'color:' + item.color + ';'}></i>
@@ -53,10 +54,10 @@ export default class Carousel extends Vue {
           </ul>
         </el-card>
         <el-carousel trigger="click" height="446px">
-          {this.imgAddress.map((item: any) => {
+          {this.carouselList.map((item) => {
             return (
               <el-carousel-item key={item.id}>
-                <img width="949" height="446" src={item.address} />
+                <img width="949" height="446" src={item.url} />
               </el-carousel-item>
             )
           })}
@@ -83,12 +84,9 @@ export default class Carousel extends Vue {
 }
 </script>
 <style scoped lang="scss">
-@import '@/styles/constant.scss';
 .carousel {
-  width: $bodyWidth;
   display: flex;
   justify-content: space-between;
-  padding: 0 $padding;
   margin-top: 10px;
   .el-carousel {
     width: 870px;

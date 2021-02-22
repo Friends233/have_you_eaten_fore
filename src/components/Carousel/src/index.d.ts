@@ -3,8 +3,14 @@
  * @Author: Friends233
  */
 
-export interface Nav {
+ export interface FoodType {
   id: string;
-  value: string;
-  children?: Array<Nav>;
+  label: string;
+  icon: string;
+  color: string;
+}
+
+export interface CarouselImg {
+  id: string;
+  url: string;
 }
