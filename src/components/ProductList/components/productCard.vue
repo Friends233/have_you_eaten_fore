@@ -4,24 +4,38 @@
 -->
 <script lang="tsx">
 import { Component, Vue } from 'vue-property-decorator'
+import { CardData } from '../src/index'
 
 @Component({
   components: {}
 })
 export default class ProductCard extends Vue {
+  card: CardData = {
+    id:'1',
+    name:'晓寿司（望京soho店）',
+    price:47.5,
+    rating:4.5,
+    imgUrl:'https://p0.meituan.net/merchant/5cfc2788fbec889cbf14e6a680a99e3d82463.jpg@214w_120h_1e_1c',
+    appraisalNumber:2164,
+    location:'望京'
+  }
+
   protected render() {
     return (
-      <el-card body-style={'padding: 10px;'}>
+      <el-card body-style={'padding: 0;'}>
         <img
-          width="213"
-          src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+          width="233"
+          src={this.card.imgUrl}
         />
-        <div>
-          <span>好吃的汉堡</span>
-          <div class="bottom clearfix">
-            <time class="time"></time>
+        <div class="el-card-text">
+          <span class="el-card-text-title">{this.card.name}</span>
+          <div>
+            <span>{this.card.appraisalNumber}个评价</span>
+          </div>
+          <div class="el-card-text-bottom">
             <el-button type="text" class="button">
-              操作按钮
+              <i class="el-icon-plus"></i>
+              加入购物车
             </el-button>
           </div>
         </div>
@@ -34,6 +48,11 @@ export default class ProductCard extends Vue {
 .el-card {
   width: 233px;
   cursor: pointer;
-  // float: left;
+  &-text {
+    padding-left: 10px;
+    &-title {
+      font-size: 16px;
+    }
+  }
 }
 </style>

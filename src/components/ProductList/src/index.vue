@@ -112,37 +112,37 @@ export default class ProductList extends Vue {
     }
     &-recommend {
       .product-card-header {
-        background: linear-gradient(to right, rgb(243, 182, 74) 2%, rgb(242, 197, 69) 97%) rgb(243, 182, 74);
+        background-color: rgb(248, 74, 44);
         color: white;
       }
     }
     &-find {
       .product-card-header {
-        background: linear-gradient(to right, rgb(243, 182, 74) 2%, rgb(242, 197, 69) 97%) rgb(243, 182, 74);
+        background-color: rgb(250, 60, 104);
         color: white;
       }
     }
     &-supermarket {
       .product-card-header {
-        background: linear-gradient(to right, rgb(243, 182, 74) 2%, rgb(242, 197, 69) 97%) rgb(243, 182, 74);
+        background-color: rgb(73, 221, 247);
         color: white;
       }
     }
     &-fruit {
       .product-card-header {
-        background: linear-gradient(to right, rgb(243, 182, 74) 2%, rgb(242, 197, 69) 97%) rgb(243, 182, 74);
+        background-color: rgb(155, 245, 52);
         color: white;
       }
     }
     &-vegettables {
       .product-card-header {
-        background: linear-gradient(to right, rgb(243, 182, 74) 2%, rgb(242, 197, 69) 97%) rgb(243, 182, 74);
+        background-color: rgb(105, 241, 64);
         color: white;
       }
     }
     &-medicine {
       .product-card-header {
-        background: linear-gradient(to right, rgb(243, 182, 74) 2%, rgb(242, 197, 69) 97%) rgb(243, 182, 74);
+        background-color: rgb(247, 191, 95);
         color: white;
       }
     }
