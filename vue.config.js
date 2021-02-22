@@ -2,8 +2,9 @@
  * @Description: 
  * @Author: Friends233
  */
+
 module.exports = {
-  publicPath:'./', // 设置静态打包路径
+  publicPath: './', // 设置静态打包路径
   // devServer 选项单独配置
   devServer: {
     https: false,

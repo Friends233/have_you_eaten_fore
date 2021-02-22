@@ -1,3 +1,11 @@
+// 1. 关闭段落校验
+// /* eslint-disable */
+// /* eslint-enable */
+// 2. 关闭当前行校验
+// // eslint-disable-line
+// 3. 关闭下一行校验
+// // eslint-disable-next-line
+
 module.exports = {
   root: true,
   env: {
