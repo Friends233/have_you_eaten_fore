@@ -11,7 +11,7 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 export default class Star extends Vue {
   // 星星数量
   @Prop({ default: 5.0, type: Number }) readonly num?: number
-  // 星星大小,16、24、32
+  // 星星大小,13、16、24、32
   @Prop({ default: '24', type: String }) readonly size?: string
 
   get getStar(): Array<string> {
@@ -45,6 +45,11 @@ export default class Star extends Vue {
   .star {
     display: inline-block;
     margin-right: 4px;
+  }
+  .star13 {
+    width: 13px;
+    height: 13px;
+    background-size: 13px 13px;
   }
   .star16 {
     width: 16px;

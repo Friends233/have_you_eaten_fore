@@ -8,36 +8,33 @@ import Star from '@/components/Star/index'
 import { CardData } from '../src/index'
 
 @Component({
-  components: {Star}
+  components: { Star }
 })
 export default class ProductCard extends Vue {
   card: CardData = {
-    id:'1',
-    name:'晓寿司（望京soho店）',
-    price:47.5,
-    rating:4.5,
-    imgUrl:'https://p0.meituan.net/merchant/5cfc2788fbec889cbf14e6a680a99e3d82463.jpg@214w_120h_1e_1c',
-    appraisalNumber:2164,
-    location:'望京'
+    id: '1',
+    name: '晓寿司（望京soho店）',
+    price: 47.5,
+    rating: 4.5,
+    imgUrl: 'https://p0.meituan.net/merchant/5cfc2788fbec889cbf14e6a680a99e3d82463.jpg@214w_120h_1e_1c',
+    appraisalNumber: 2164,
+    location: '望京'
   }
 
   protected render() {
     return (
       <el-card body-style={'padding: 0;'}>
-        <img
-          width="233"
-          src={this.card.imgUrl}
-        />
+        <img width="233" src={this.card.imgUrl} />
         <div class="el-card-text">
           <span class="el-card-text-title">{this.card.name}</span>
           <div class="el-card-text-rating">
-            <star num={this.card.rating} size={'16'}></star>
+            <star num={this.card.rating} size={'13'}></star>
             <span>{this.card.appraisalNumber}个评价</span>
           </div>
           <div class="el-card-text-location">{this.card.location}</div>
-          <div class="el-card-text-price">{this.card.price}起</div>
+          <div class="el-card-text-price">￥{this.card.price}起</div>
           <div class="el-card-text-bottom">
-            <el-button type="text" class="button">
+            <el-button type="text">
               <i class="el-icon-plus"></i>
               加入购物车
             </el-button>
@@ -54,12 +51,36 @@ export default class ProductCard extends Vue {
   cursor: pointer;
   &-text {
     padding-left: 10px;
+    margin-top: 10px;
     &-title {
-      font-size: 16px;
+      font-size: 18px;
     }
     &-rating {
       display: flex;
       margin-top: 5px;
+      font-size: 12px;
+      color: #999;
+      height: 24px;
+      line-height: 24px;
+    }
+    &-location {
+      font-size: 12px;
+      color: #999999;
+      width: 100%;
+      height: 18px;
+      line-height: 18px;
+    }
+    &-price {
+      margin-top: 5px;
+      color: #ff6600;
+      font-size: 16px;
+      font-weight: 700;
+    }
+    &-bottom {
+      text-align: right;
+      .el-button {
+        padding: 10px 15px;
+      }
     }
   }
 }
