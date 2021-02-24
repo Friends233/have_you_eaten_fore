@@ -4,10 +4,11 @@
 -->
 <script lang="tsx">
 import { Component, Vue } from 'vue-property-decorator'
+import Star from '@/components/Star/index'
 import { CardData } from '../src/index'
 
 @Component({
-  components: {}
+  components: {Star}
 })
 export default class ProductCard extends Vue {
   card: CardData = {
@@ -29,9 +30,12 @@ export default class ProductCard extends Vue {
         />
         <div class="el-card-text">
           <span class="el-card-text-title">{this.card.name}</span>
-          <div>
+          <div class="el-card-text-rating">
+            <star num={this.card.rating} size={'16'}></star>
             <span>{this.card.appraisalNumber}个评价</span>
           </div>
+          <div class="el-card-text-location">{this.card.location}</div>
+          <div class="el-card-text-price">{this.card.price}起</div>
           <div class="el-card-text-bottom">
             <el-button type="text" class="button">
               <i class="el-icon-plus"></i>
@@ -52,6 +56,10 @@ export default class ProductCard extends Vue {
     padding-left: 10px;
     &-title {
       font-size: 16px;
+    }
+    &-rating {
+      display: flex;
+      margin-top: 5px;
     }
   }
 }
