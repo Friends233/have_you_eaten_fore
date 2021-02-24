@@ -208,10 +208,9 @@ export default class EatenHeader extends Vue {
   }
   &-mid {
     width: $bodyWidth;
-    padding: 30px $padding;
+    margin: 30px auto;
     display: flex;
     &-logo {
-      position: absolute;
       img {
         width: 126px;
         height: 46px;
@@ -222,6 +221,7 @@ export default class EatenHeader extends Vue {
       width: 550px;
       margin: 6px auto;
       ::v-deep .el-input {
+        margin-left: -46px;
         input {
           border-radius: 0;
         }

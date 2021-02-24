@@ -30,7 +30,6 @@ export default class HelloWorld extends Vue {
 .home-wrapper {
   .home-content {
     width: $bodyWidth;
-    padding: 0 $padding;
     margin: 0 auto;
   }
 }
