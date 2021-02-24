@@ -7,9 +7,10 @@ import { Component, Vue } from 'vue-property-decorator'
 import EatenHeader from '@/components/EatenHeader/index'
 import Carousel from '@/components/Carousel/index'
 import ProductList from '@/components/ProductList/index'
+import EatenFooter from '@/components/EatenFooter/index'
 
 @Component({
-  components: { EatenHeader, Carousel, ProductList }
+  components: { EatenHeader, Carousel, ProductList,EatenFooter }
 })
 export default class HelloWorld extends Vue {
   protected render() {
@@ -20,6 +21,7 @@ export default class HelloWorld extends Vue {
           <carousel></carousel>
           <product-list></product-list>
         </div>
+        <eaten-footer></eaten-footer>
       </div>
     )
   }
