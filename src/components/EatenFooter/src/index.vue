@@ -1,5 +1,5 @@
 <!--
- * @Description: 
+ * @Description: 页脚
  * @Author: Friends233
 -->
 <script lang="tsx">
@@ -44,6 +44,7 @@ export default class EatenFooter extends Vue {
   p {
     &:first-child {
       font-size: 14px;
+      text-align: center;
     }
     font-size: 12px;
     color: #999aaa;
