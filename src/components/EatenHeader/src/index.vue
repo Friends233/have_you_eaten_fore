@@ -4,14 +4,14 @@
 -->
 <script lang="tsx">
 import { Component, Vue } from 'vue-property-decorator'
+import Logo from '@/components/logo/index'
 import { createRandomId } from '@/utils/index'
 import { Nav } from './index'
 
 @Component({
-  components: {}
+  components: {Logo}
 })
 export default class EatenHeader extends Vue {
-  logoImg: string = require('@/assets/logo.png')
   // 顶部的菜单
   topNavMenu: Array<Nav> = [
     {
@@ -109,7 +109,7 @@ export default class EatenHeader extends Vue {
         </div>
         <div class="eaten-header-mid">
           <div class="eaten-header-mid-logo">
-            <img src={this.logoImg} />
+            <logo></logo>
           </div>
           <div class="eaten-header-mid-search">
             <el-input v-model={this.searchContent} placeholder="搜索店铺、美食或者标签"></el-input>

@@ -4,6 +4,7 @@
 -->
 <script lang="tsx">
 import { Component, Vue } from 'vue-property-decorator'
+import Logo from '@/components/logo/index'
 
 interface Form {
   password?: string;
@@ -11,10 +12,9 @@ interface Form {
 }
 
 @Component({
-  components: {}
+  components: {Logo}
 })
 export default class Login extends Vue {
-  logoImg: string = require('@/assets/logo.png')
   ruleForm: Form = {}
 
   submitForm() {
@@ -25,7 +25,7 @@ export default class Login extends Vue {
     return (
       <div class="login-form-wrapper">
         <div class="login-top">
-          <img src={this.logoImg} />
+          <logo></logo>
           <router-link to={{ name: 'register' }}>注册</router-link>
         </div>
         <div class="top-line"></div>
