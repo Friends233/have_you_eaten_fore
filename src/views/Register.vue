@@ -1,19 +1,24 @@
 <!--
- * @Description: 登录
+ * @Description: 注册
  * @Author: Friends233
 -->
 <script lang="tsx">
+import { Button } from 'element-ui'
 import { Component, Vue } from 'vue-property-decorator'
 
 interface Form {
   password?: string;
+  checkPass?: string;
+  phoneNumber?: number;
   userName?: string;
+  verificationCode?: string;
+  checked?: boolean;
 }
 
 @Component({
   components: {}
 })
-export default class Login extends Vue {
+export default class Register extends Vue {
   logoImg: string = require('@/assets/logo.png')
   ruleForm: Form = {}
 
@@ -26,11 +31,11 @@ export default class Login extends Vue {
       <div class="login-form-wrapper">
         <div class="login-top">
           <img src={this.logoImg} />
-          <router-link to={{ name: 'register' }}>注册</router-link>
+          <router-link to={{ name: 'login' }}>登录</router-link>
         </div>
         <div class="top-line"></div>
         <div class="login-form">
-          <h2>登录</h2>
+          <h2>注册</h2>
           <el-form
             {...{
               props: {
@@ -43,15 +48,25 @@ export default class Login extends Vue {
             <el-form-item label="用户名" prop="userName">
               <el-input v-model={this.ruleForm.userName}></el-input>
             </el-form-item>
+            <el-form-item label="手机号" prop="phoneNumber">
+              <el-input v-model={this.ruleForm.phoneNumber}></el-input>
+              <Button>获取验证码</Button>
+            </el-form-item>
+            <el-form-item label="短信动态码" prop="verificationCode">
+              <el-input v-model={this.ruleForm.verificationCode}></el-input>
+            </el-form-item>
             <el-form-item label="密码" prop="password">
               <el-input type="password" v-model={this.ruleForm.password} autocomplete="off"></el-input>
             </el-form-item>
-            <el-form-item>
-              <router-link to={{name:'register'}}>忘记密码?</router-link>
+            <el-form-item label="确认密码" prop="checkPass">
+              <el-input type="password" v-model={this.ruleForm.checkPass} autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item prop="checked">
+              <el-checkbox v-model={this.ruleForm.checked}>同意 hxd吃了吗用户服务协议</el-checkbox>
             </el-form-item>
             <el-form-item>
               <el-button type="primary" onClick={this.submitForm}>
-                登录
+                注册
               </el-button>
             </el-form-item>
           </el-form>
@@ -93,6 +108,10 @@ export default class Login extends Vue {
     margin: 0 auto;
     .el-form-item {
       margin-bottom: 15px;
+      ::v-deep label{
+        width: 100%;
+        text-align: left;
+      }
       &:last-child {
         ::v-deep .el-form-item__content {
           button {
@@ -100,8 +119,10 @@ export default class Login extends Vue {
           }
         }
       }
-      &:nth-child(3) {
-        text-align: right;
+      &:nth-child(2) {
+        ::v-deep .el-input {
+          width: 77%;
+        }
       }
     }
     h2 {

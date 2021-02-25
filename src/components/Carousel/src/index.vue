@@ -66,10 +66,10 @@ export default class Carousel extends Vue {
           <el-card shadow="never">
             <img class="avatar" src={this.avatarImg} />
             <p>Hi！你好</p>
-            <router-link class="a-button" to={{ name: 'login', params: { status: 'register' } }}>
+            <router-link class="a-button" to={{ name: 'register'}}>
               注册
             </router-link>
-            <router-link class="a-button" to={{ name: 'login', params: { status: 'login' } }}>
+            <router-link class="a-button" to={{ name: 'login'}}>
               立即登录
             </router-link>
           </el-card>
