@@ -16,7 +16,7 @@ export default class HelloWorld extends Vue {
   protected render() {
     return (
       <div class="home-wrapper">
-        <eaten-header></eaten-header>
+        <eaten-header show={true}></eaten-header>
         <div class="home-content">
           <carousel></carousel>
           <product-list></product-list>

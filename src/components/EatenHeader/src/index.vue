@@ -3,15 +3,16 @@
  * @Author: Friends233
 -->
 <script lang="tsx">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue, Prop } from 'vue-property-decorator'
 import Logo from '@/components/logo/index'
 import { createRandomId } from '@/utils/index'
 import { Nav } from './index'
 
 @Component({
-  components: {Logo}
+  components: { Logo }
 })
 export default class EatenHeader extends Vue {
+  @Prop({ default: false, type: Boolean }) readonly show: boolean | undefined
   // 顶部的菜单
   topNavMenu: Array<Nav> = [
     {
@@ -116,7 +117,7 @@ export default class EatenHeader extends Vue {
             <el-button type="primary" icon="el-icon-search"></el-button>
           </div>
         </div>
-        <div class="eaten-header-nav">
+        <div v-show={this.show} class="eaten-header-nav">
           <ul>
             {this.headerNavMenu.map((item) => {
               return (

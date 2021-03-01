@@ -26,9 +26,9 @@ const routes: Array<RouteConfig> = [
     component: () => import('@/views/Goods.vue')
   },
   {
-    path: '/goodslist',
-    name: 'goodslist',
-    component: () => import('@/views/GoodsList.vue')
+    path: '/shoplist',
+    name: 'shoplist',
+    component: () => import('@/views/ShopList.vue')
   },
   {
     path: '/shop',
