@@ -21,9 +21,13 @@ export default class ProductCard extends Vue {
     location: '望京'
   }
 
+  goShop() {
+    this.$router.push({ name: 'shop', params: { id: this.card.id } })
+  }
+
   protected render() {
     return (
-      <el-card body-style={'padding: 0;'}>
+      <el-card nativeOnClick={this.goShop} body-style={'padding: 0;'}>
         <img width="233" src={this.card.imgUrl} />
         <div class="el-card-text">
           <span class="el-card-text-title">{this.card.name}</span>

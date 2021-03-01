@@ -3,7 +3,6 @@
  * @Author: Friends233
 -->
 <script lang="tsx">
-import router from '@/router'
 import { Component, Vue } from 'vue-property-decorator'
 
 @Component({
