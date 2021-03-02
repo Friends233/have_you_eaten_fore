@@ -20,12 +20,13 @@ interface Goods {
   components: { EatenHeader, EatenFooter, Star }
 })
 export default class Shop extends Vue {
+  // 卡片的图片列表
   srcList: Array<string> = [
     'https://p1.meituan.net/merchant/5cfc2788fbec889cbf14e6a680a99e3d82463.jpg@380w_214h_1e_1c',
     'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
     'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg'
   ]
-
+  // 点餐的商品列表
   goodsList: Array<Goods> = [
     { id: '1', name: '寿喜锅2-3人餐', desc: '清淡，好吃美味', sold: '月售104', price: 1.16 },
     { id: '2' },
@@ -38,6 +39,25 @@ export default class Shop extends Vue {
     { id: '9' },
     { id: '10' }
   ]
+  // 评价的排序标签
+  appraisalTags: Array<string> = [
+    '味道赞(85)',
+    '性价比高(70)',
+    '菜品不错(50)',
+    '上菜快(70)',
+    '到店自提(70)',
+    '分量足(68)',
+    '回头客(44)',
+    '朋友聚餐(20)',
+    '价格实惠(7)'
+  ]
+  // 评价的图片列表
+  appraisalImg: Array<string> = [
+    'https://p0.meituan.net/shaitu/c1c9fcf5b6105e68aa3eab70ac27ef03884501.jpg',
+    'https://p0.meituan.net/shaitu/b47d954c79fb2ac797bb71226170d0995057150.jpg',
+    'https://p0.meituan.net/shaitu/bb45ac8e7fbf4016028030f42acb6c1e799653.jpg'
+  ]
+  checkboxGroup1 = []
 
   protected render() {
     return (
@@ -117,26 +137,64 @@ export default class Shop extends Vue {
                     })}
                   </ul>
                 </el-tab-pane>
-                <el-tab-pane label="优惠">
-                </el-tab-pane>
+                <el-tab-pane label="优惠"></el-tab-pane>
                 <el-tab-pane label="单人套餐">
                   <span slot="label">
                     <i class="el-icon-fork-spoon"></i>单人套餐
                   </span>
                 </el-tab-pane>
-                <el-tab-pane label="团队订餐">
-                </el-tab-pane>
+                <el-tab-pane label="团队订餐"></el-tab-pane>
                 <el-tab-pane label="小吃饮料">
                   <span slot="label">
                     <i class="el-icon-cold-drink"></i>小吃饮料
                   </span>
                 </el-tab-pane>
-                <el-tab-pane label="超值满减">
-
-                </el-tab-pane>
+                <el-tab-pane label="超值满减"></el-tab-pane>
               </el-tabs>
             </el-tab-pane>
-            <el-tab-pane label="评价">评价</el-tab-pane>
+            <el-tab-pane class="shop-card-appraisal" label="评价">
+              <h2 class="shop-card-appraisal-total">2158条网友点评</h2>
+              <ul class="shop-card-appraisal-tag">
+                {this.appraisalTags.map((item) => {
+                  return <li>{item}</li>
+                })}
+              </ul>
+              <ul class="shop-card-appraisal-content">
+                <li>
+                  <div>
+                    <img width="60" src="https://www.dpfile.com/ugc/user/anonymous.png" />
+                  </div>
+                  <div>
+                    <p class="user-name">a***1</p>
+                    <div class="mid-line">
+                      <star num={4.8} size={'13'}></star>
+                      <span class="time">2021年2月21日</span>
+                    </div>
+                    <span class="appraisal-content">
+                      吃的很饱，寿司很好吃，海带丝也很好吃， 凑字数
+                      孟子曰：天将降大任于斯人也，必先苦其心志，劳其筋骨，饿其体肤，空乏其身，行拂乱其所为，所以动心忍性，增益其所不能。太史公曰：古者富贵而名摩灭，不可胜记，唯倜傥非常之人称焉。盖文王拘而演《周易》；仲尼厄而作《春秋》；屈原放逐，乃赋《离骚》；左丘失明，厥有《国语》；孙子膑脚，《兵法》修列；不韦迁蜀，世传《吕览》；韩非囚秦，《说难》《孤愤》；《诗》三百篇，大底圣贤发愤之所为作也。
+                    </span>
+                    <div class="img-list">
+                      {this.appraisalImg.map((i) => {
+                        return (
+                          <el-image
+                            style="width: 140px; height: 140px"
+                            src={i}
+                            preview-src-list={this.appraisalImg}></el-image>
+                        )
+                      })}
+                    </div>
+                    <div class="like">
+                      <el-checkbox text-color="">
+                        <span>
+                          <i class="el-icon-thumb"></i>点赞
+                        </span>
+                      </el-checkbox>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </el-tab-pane>
             <el-tab-pane label="商家信息">商家信息</el-tab-pane>
             <el-tab-pane label="店铺管理">店铺管理</el-tab-pane>
           </el-tabs>
@@ -259,6 +317,68 @@ export default class Shop extends Vue {
             align-self: center;
             border-radius: 15px;
             margin-left: 50px;
+          }
+        }
+      }
+      &-appraisal {
+        padding: 10px;
+        &-tag {
+          &::after {
+            content: '';
+            display: block;
+            clear: both;
+          }
+          li {
+            padding: 5px 10px;
+            float: left;
+            font-size: 14px;
+            line-height: 34px;
+            padding: 0 10px;
+            border: 1px solid #e5e5e5;
+            border-radius: 2px;
+            margin: 0 10px 10px 0;
+            cursor: pointer;
+          }
+        }
+        &-content {
+          margin-top: 30px;
+          li {
+            display: flex;
+            & > div {
+              .user-name {
+                margin: 5px 0;
+                font-size: 16px;
+              }
+              .mid-line {
+                display: flex;
+                justify-content: space-between;
+                .time {
+                  font-size: 12px;
+                  line-height: 20px;
+                  color: #999;
+                }
+              }
+              .img-list {
+                margin: 15px 0;
+                .el-image {
+                  margin-right: 15px;
+                }
+              }
+              .like {
+                text-align: right;
+                margin: 50px 20px 20px 0;
+                cursor: pointer;
+                ::v-deep .el-checkbox__input {
+                  display: none;
+                }
+              }
+              &:first-child {
+                width: 250px;
+              }
+              &:last-child {
+                border-bottom: 1px solid #e5e5e5;
+              }
+            }
           }
         }
       }
