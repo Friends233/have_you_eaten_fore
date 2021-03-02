@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
-import Home from '../views/Home.vue'
+import Home from '@/views/home'
 
 Vue.use(VueRouter)
 
@@ -13,27 +13,27 @@ const routes: Array<RouteConfig> = [
   {
     path: '/login',
     name: 'login',
-    component: () => import('@/views/Login.vue')
+    component: () => import('@/views/login')
   },
   {
     path: '/register',
     name: 'register',
-    component: () => import('@/views/Register.vue')
+    component: () => import('@/views/register')
   },
   {
     path: '/goods',
     name: 'goods',
-    component: () => import('@/views/Goods.vue')
+    component: () => import('@/views/goods')
   },
   {
     path: '/shoplist',
     name: 'shoplist',
-    component: () => import('@/views/ShopList.vue')
+    component: () => import('@/views/shoplist')
   },
   {
     path: '/shop',
     name: 'shop',
-    component: () => import('@/views/Shop.vue')
+    component: () => import('@/views/shop')
   }
 ]
 
