@@ -4,7 +4,7 @@
 -->
 <script lang="tsx">
 import { Component, Vue } from 'vue-property-decorator'
-import {Clf} from './index'
+import { Clf, Shop } from './index'
 import EatenHeader from '@/components/EatenHeader/index'
 import EatenFooter from '@/components/EatenFooter/index'
 
@@ -35,6 +35,16 @@ export default class ShopList extends Vue {
       ]
     }
   ]
+  shoplist: Array<Shop> = [
+    {
+      id: '1001',
+      label: '望京三姐·地桌烤肉（望京店）',
+      imgUrl: 'https://img.meituan.net/msmerchant/1f6bfaff2a4651ddef09c408b9b7267778400.jpg@220w_125h_1e_1c',
+      rating:4.6,
+      desc:'朝阳区望京西园四区420号楼420-5南侧部分',
+      price:110
+    }
+  ]
   protected render() {
     return (
       <div class="shoplist-wrapper">
@@ -44,12 +54,31 @@ export default class ShopList extends Vue {
             <el-breadcrumb-item to={{ name: 'Home' }}>首页</el-breadcrumb-item>
             <el-breadcrumb-item to={{ name: 'shoplist' }}>店铺列表</el-breadcrumb-item>
           </el-breadcrumb>
-        </div>
-        <div class="shoplist-classification">
-          <div>
-            <p>美食分类</p>
-            <ul>
-              <li>全部</li>
+          <div class="shoplist-classification">
+            {this.classification.map((item) => {
+              return (
+                <div>
+                  <p>{item.label}</p>
+                  <ul>
+                    <li>全部</li>
+                    {item.content &&
+                      item.content.map((i) => {
+                        return <li>{i.label}</li>
+                      })}
+                  </ul>
+                </div>
+              )
+            })}
+          </div>
+          <div class="shoplist-list">
+            <div class="shoplist-list-sort">
+              <a href="#">默认</a>
+              <a href="#">销量</a>
+              <a href="#">价格</a>
+              <a href="#">好评最多</a>
+            </div>
+            <ul class="shoplist-list-content">
+              <li>1</li>
             </ul>
           </div>
         </div>
@@ -65,6 +94,16 @@ export default class ShopList extends Vue {
   .shoplist {
     width: $bodyWidth;
     margin: 20px auto;
+    &-classification {
+      border: 1px solid #e5e5e5;
+      background: #fff;
+    }
+    &-list {
+      background: #fff;
+      border: 1px solid #e5e5e5;
+      margin-top: 15px;
+      padding: 0 20px;
+    }
   }
 }
 </style>
