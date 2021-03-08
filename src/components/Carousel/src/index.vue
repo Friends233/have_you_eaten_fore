@@ -45,7 +45,7 @@ export default class Carousel extends Vue {
           <ul class="carousel-card-left-menu">
             {this.foodTypeList.map((item) => {
               return (
-                <li class="food-type">
+                <li class="food-type" onClick={() => this.$router.push({ name: 'shoplist' })}>
                   <i class={item.icon} style={'color:' + item.color + ';'}></i>
                   <a href="#">{item.label}</a>
                 </li>
@@ -56,9 +56,11 @@ export default class Carousel extends Vue {
         <el-carousel trigger="click" height="446px">
           {this.carouselList.map((item) => {
             return (
-              <el-carousel-item key={item.id}>
-                <img width="949" height="446" src={item.url} />
-              </el-carousel-item>
+              <li key={item.id} onClick={() => this.$router.push({ name: 'shop' })}>
+                <el-carousel-item>
+                  <img width="949" height="446" src={item.url} />
+                </el-carousel-item>
+              </li>
             )
           })}
         </el-carousel>
@@ -66,10 +68,10 @@ export default class Carousel extends Vue {
           <el-card shadow="never">
             <img class="avatar" src={this.avatarImg} />
             <p>Hi！你好</p>
-            <router-link class="a-button" to={{ name: 'register'}}>
+            <router-link class="a-button" to={{ name: 'register' }}>
               注册
             </router-link>
-            <router-link class="a-button" to={{ name: 'login'}}>
+            <router-link class="a-button" to={{ name: 'login' }}>
               立即登录
             </router-link>
           </el-card>

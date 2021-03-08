@@ -13,6 +13,8 @@ export default class Star extends Vue {
   @Prop({ default: 5.0, type: Number }) readonly num?: number
   // 星星大小,13、16、24、32
   @Prop({ default: '24', type: String }) readonly size?: string
+  // 是否显示后面的文案
+  @Prop({ default: false, type: Boolean }) readonly showText?: boolean
 
   get getStar(): Array<string> {
     const ary: Array<string> = []
@@ -34,6 +36,7 @@ export default class Star extends Vue {
         {this.getStar.map((item) => {
           return <span class={`star star${this.size} star${item}`}></span>
         })}
+        <span v-show={this.showText}>{this.num}分</span>
       </div>
     )
   }
