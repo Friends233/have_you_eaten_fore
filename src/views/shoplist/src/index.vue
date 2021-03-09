@@ -269,12 +269,11 @@ export default class ShopList extends Vue {
         li {
           display: flex;
           position: relative;
-          padding: 18px 0;
+          padding: 18px 10px;
           border-bottom: 1px solid #e5e5e5!important;
-          background-color: #fbfbfb;
           cursor: pointer;
           &:hover {
-            opacity: 0.8;
+            background-color: #fbfbfb;
           }
           .top {
             background: #fb6433;

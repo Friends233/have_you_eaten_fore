@@ -7,6 +7,7 @@ import { Component, Vue } from 'vue-property-decorator'
 import Star from '@/components/Star/index'
 import EatenHeader from '@/components/EatenHeader/index'
 import EatenFooter from '@/components/EatenFooter/index'
+import Food from '@/views/food'
 
 interface Goods {
   id?: string;
@@ -27,7 +28,7 @@ interface UserApp {
 }
 
 @Component({
-  components: { EatenHeader, EatenFooter, Star }
+  components: { EatenHeader, EatenFooter, Star, Food }
 })
 export default class Shop extends Vue {
   // 卡片的图片列表
@@ -106,10 +107,24 @@ export default class Shop extends Vue {
     }
   ]
 
+  visible = false
+
   protected render() {
     return (
       <div class="shop-wrapper">
         <eaten-header></eaten-header>
+        <el-dialog
+          lock-scroll={false}
+          custom-class="food-dialog"
+          modal-append-to-body={false}
+          visible={this.visible}
+          {...{ on: { 'update:visible': (e: any) => (this.visible = e) } }}
+          width="600px">
+          <div class="img-backgorund">
+            <img src="https://img.meituan.net/msmerchant/c344e8b9ab73f43596eac885b790f175148974.jpg@600w_600h_1l" />
+          </div>
+          <el-button>加入购物车</el-button>
+        </el-dialog>
         <div class="shop">
           <el-breadcrumb class="shop-breadcrumb" separator-class="el-icon-arrow-right">
             <el-breadcrumb-item to={{ name: 'Home' }}>首页</el-breadcrumb-item>
@@ -168,7 +183,7 @@ export default class Shop extends Vue {
                   <ul class="shop-card-list">
                     {this.goodsList.map((item) => {
                       return (
-                        <li key={item.id}>
+                        <li onClick={() => (this.visible = true)} key={item.id}>
                           <img src="https://p0.meituan.net/208.126/deal/b1e92804330780f5e84044a8ba94033c53272.jpg@100w_100h_1e_1c" />
                           <div class="shop-card-list-text">
                             <p class="shop-card-list-name">{item.name}</p>
@@ -216,7 +231,7 @@ export default class Shop extends Vue {
                       <div>
                         <p class="user-name">{item.name}</p>
                         <div class="mid-line">
-                          <star num={item.rating} size={'13'}></star>
+                          <star showText={true} num={item.rating} size={'13'}></star>
                           <span class="time">{item.time}</span>
                         </div>
                         <span class="appraisal-content">{item.content}</span>
@@ -257,6 +272,14 @@ export default class Shop extends Vue {
 <style scoped lang="scss">
 @import '@/styles/constant.scss';
 .shop-wrapper {
+  ::v-deep .food-dialog {
+    .el-dialog__body {
+      padding: 0;
+      .img-backgorund {
+        margin-top: -30px;
+      }
+    }
+  }
   .shop {
     width: $bodyWidth;
     margin: 20px auto;
@@ -361,6 +384,10 @@ export default class Shop extends Vue {
           display: flex;
           border-bottom: 1px solid #e5e5e5;
           padding: 10px 5px;
+          cursor: pointer;
+          &:hover {
+            background-color: #fbfbfb;
+          }
           button {
             height: 40px;
             align-self: center;

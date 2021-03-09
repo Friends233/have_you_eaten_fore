@@ -11,6 +11,11 @@ const routes: Array<RouteConfig> = [
     component: Home
   },
   {
+    path: '/404',
+    name: '404',
+    component: () => import('@/views/404')
+  },
+  {
     path: '/login',
     name: 'login',
     component: () => import('@/views/login')
@@ -21,9 +26,9 @@ const routes: Array<RouteConfig> = [
     component: () => import('@/views/register')
   },
   {
-    path: '/goods',
-    name: 'goods',
-    component: () => import('@/views/goods')
+    path: '/food',
+    name: 'food',
+    component:() => import('@/views/food')
   },
   {
     path: '/shoplist',
