@@ -107,8 +107,8 @@ export default class Shop extends Vue {
     }
   ]
 
-  visible = false
-
+  visible = true
+  elTabIndex = 'first'
   protected render() {
     return (
       <div class="shop-wrapper">
@@ -123,7 +123,71 @@ export default class Shop extends Vue {
           <div class="img-backgorund">
             <img src="https://img.meituan.net/msmerchant/c344e8b9ab73f43596eac885b790f175148974.jpg@600w_600h_1l" />
           </div>
-          <el-button>加入购物车</el-button>
+          <div class="food-dialog-mid">
+            <div>
+              <span>月售 4071</span>
+              <span>好评率 98%</span>
+            </div>
+            <div>5.7折</div>
+            <div>
+              <span class="pri">15.9</span>
+              <span class="del">￥27.9</span>
+              <span class="other">包装费￥1/份</span>
+              <el-button type="primary" size="small" icon="el-icon-plus" round>
+                加入购物车
+              </el-button>
+            </div>
+          </div>
+          <el-tabs v-model={this.elTabIndex} class="food-dialog-footer">
+            <el-tab-pane label="商品信息" name="first">
+              商品信息
+            </el-tab-pane>
+            <el-tab-pane label="评价" class="shop-card-appraisal" name="second">
+              <h2 class="shop-card-appraisal-total">2158条网友点评</h2>
+              <ul class="shop-card-appraisal-tag">
+                {this.appraisalTags.map((item) => {
+                  return <li>{item}</li>
+                })}
+              </ul>
+              <ul class="shop-card-appraisal-content">
+                {this.appraisals.map((item: UserApp) => {
+                  return (
+                    <li key={item.id}>
+                      <div>
+                        <img width="60" src={item.avatar} />
+                      </div>
+                      <div>
+                        <p class="user-name">{item.name}</p>
+                        <div class="mid-line">
+                          <star showText={true} num={item.rating} size={'13'}></star>
+                          <span class="time">{item.time}</span>
+                        </div>
+                        <span class="appraisal-content">{item.content}</span>
+                        <div class="img-list">
+                          {item.imgUrl &&
+                            item.imgUrl.map((i: string) => {
+                              return (
+                                <el-image
+                                  style="width: 140px; height: 140px"
+                                  src={i}
+                                  preview-src-list={item.imgUrl}></el-image>
+                              )
+                            })}
+                        </div>
+                        <div class="like">
+                          <el-checkbox text-color="">
+                            <span>
+                              <i class="el-icon-thumb"></i>点赞
+                            </span>
+                          </el-checkbox>
+                        </div>
+                      </div>
+                    </li>
+                  )
+                })}
+              </ul>
+            </el-tab-pane>
+          </el-tabs>
         </el-dialog>
         <div class="shop">
           <el-breadcrumb class="shop-breadcrumb" separator-class="el-icon-arrow-right">
@@ -273,10 +337,156 @@ export default class Shop extends Vue {
 @import '@/styles/constant.scss';
 .shop-wrapper {
   ::v-deep .food-dialog {
+    background-color: #f8f8f8;
+    .el-dialog__headerbtn {
+      left: 20px;
+      .el-dialog__close {
+        font-size: 25px;
+        &::before {
+          content: '<';
+          display: inline-block;
+          width: 28px;
+          height: 28px;
+          background-color: rgba($color: #000000, $alpha: 0.3);
+          border-radius: 50%;
+        }
+      }
+    }
     .el-dialog__body {
       padding: 0;
       .img-backgorund {
         margin-top: -30px;
+      }
+      .food-dialog-footer {
+        width: 550px;
+        background-color: white;
+        margin: 20px auto;
+        border-radius: 6px;
+        padding: 0 15px;
+        .shop-card-appraisal {
+          padding: 10px;
+          &-tag {
+            &::after {
+              content: '';
+              display: block;
+              clear: both;
+            }
+            li {
+              padding: 5px 10px;
+              float: left;
+              font-size: 14px;
+              line-height: 34px;
+              padding: 0 10px;
+              border: 1px solid #e5e5e5;
+              border-radius: 2px;
+              margin: 0 10px 10px 0;
+              cursor: pointer;
+            }
+          }
+          &-content {
+            margin-top: 30px;
+            li {
+              display: flex;
+              & > div {
+                .user-name {
+                  margin: 5px 0;
+                  font-size: 16px;
+                }
+                .mid-line {
+                  display: flex;
+                  justify-content: space-between;
+                  .time {
+                    font-size: 12px;
+                    line-height: 20px;
+                    color: #999;
+                  }
+                }
+                .img-list {
+                  margin: 15px 0;
+                  .el-image {
+                    margin-right: 15px;
+                  }
+                }
+                .like {
+                  text-align: right;
+                  margin: 50px 20px 20px 0;
+                  cursor: pointer;
+                  ::v-deep .el-checkbox__input {
+                    display: none;
+                  }
+                }
+                &:first-child {
+                  width: 250px;
+                }
+                &:last-child {
+                  border-bottom: 1px solid #e5e5e5;
+                }
+              }
+            }
+          }
+        }
+      }
+      .food-dialog-mid {
+        width: 550px;
+        background-color: white;
+        margin: 10px auto;
+        border-radius: 6px;
+        padding: 15px;
+        & > div {
+          &:nth-child(1) {
+            span {
+              font-size: 13px;
+              color: #868a8a;
+              &:last-child {
+                margin-left: 10px;
+              }
+            }
+          }
+          &:nth-child(2) {
+            margin: 10px 0;
+            color: #f60;
+            font-size: 13px;
+            border: 1px solid #f60;
+            padding: 2px;
+            display: inline-block;
+            border-radius: 5px;
+          }
+          &:nth-child(3) {
+            & > span {
+              margin-right: 6px;
+            }
+            .pri {
+              color: rgb(255, 38, 0);
+              font-size: 18px;
+              font-weight: 700;
+              &::before {
+                content: '￥';
+                display: inline-block;
+                font-size: 13px;
+              }
+            }
+            .del {
+              position: relative;
+              &::after {
+                content: '';
+                display: inline-block;
+                position: absolute;
+                width: 50px;
+                border-top: 1px solid #868a8a;
+                width: 100%;
+                top: 10px;
+                left: 2px;
+              }
+            }
+            .other .del {
+              font-size: 13px;
+              color: #868a8a;
+            }
+            .el-button {
+              float: right;
+            }
+          }
+        }
       }
     }
   }
