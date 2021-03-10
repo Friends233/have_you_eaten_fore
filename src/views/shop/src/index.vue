@@ -7,28 +7,12 @@ import { Component, Vue } from 'vue-property-decorator'
 import Star from '@/components/Star/index'
 import EatenHeader from '@/components/EatenHeader/index'
 import EatenFooter from '@/components/EatenFooter/index'
+import Appraisal from '@/components/Appraisal/index'
 import Food from '@/views/food'
-
-interface Goods {
-  id?: string;
-  name?: string;
-  desc?: string;
-  sold?: string;
-  price?: number;
-}
-
-interface UserApp {
-  id?: string;
-  name?: string;
-  avatar?: string;
-  rating?: number;
-  content?: string;
-  time?: string;
-  imgUrl?: Array<string>;
-}
+import { Goods, UserApp } from './index'
 
 @Component({
-  components: { EatenHeader, EatenFooter, Star, Food }
+  components: { EatenHeader, EatenFooter, Star, Food, Appraisal }
 })
 export default class Shop extends Vue {
   // 卡片的图片列表
@@ -143,49 +127,7 @@ export default class Shop extends Vue {
               商品信息
             </el-tab-pane>
             <el-tab-pane label="评价" class="shop-card-appraisal" name="second">
-              <h2 class="shop-card-appraisal-total">2158条网友点评</h2>
-              <ul class="shop-card-appraisal-tag">
-                {this.appraisalTags.map((item) => {
-                  return <li>{item}</li>
-                })}
-              </ul>
-              <ul class="shop-card-appraisal-content">
-                {this.appraisals.map((item: UserApp) => {
-                  return (
-                    <li key={item.id}>
-                      <div>
-                        <img width="60" src={item.avatar} />
-                      </div>
-                      <div>
-                        <p class="user-name">{item.name}</p>
-                        <div class="mid-line">
-                          <star showText={true} num={item.rating} size={'13'}></star>
-                          <span class="time">{item.time}</span>
-                        </div>
-                        <span class="appraisal-content">{item.content}</span>
-                        <div class="img-list">
-                          {item.imgUrl &&
-                            item.imgUrl.map((i: string) => {
-                              return (
-                                <el-image
-                                  style="width: 140px; height: 140px"
-                                  src={i}
-                                  preview-src-list={item.imgUrl}></el-image>
-                              )
-                            })}
-                        </div>
-                        <div class="like">
-                          <el-checkbox text-color="">
-                            <span>
-                              <i class="el-icon-thumb"></i>点赞
-                            </span>
-                          </el-checkbox>
-                        </div>
-                      </div>
-                    </li>
-                  )
-                })}
-              </ul>
+              <appraisal></appraisal>
             </el-tab-pane>
           </el-tabs>
         </el-dialog>
@@ -363,68 +305,6 @@ export default class Shop extends Vue {
         margin: 20px auto;
         border-radius: 6px;
         padding: 0 15px;
-        .shop-card-appraisal {
-          padding: 10px;
-          &-tag {
-            &::after {
-              content: '';
-              display: block;
-              clear: both;
-            }
-            li {
-              padding: 5px 10px;
-              float: left;
-              font-size: 14px;
-              line-height: 34px;
-              padding: 0 10px;
-              border: 1px solid #e5e5e5;
-              border-radius: 2px;
-              margin: 0 10px 10px 0;
-              cursor: pointer;
-            }
-          }
-          &-content {
-            margin-top: 30px;
-            li {
-              display: flex;
-              & > div {
-                .user-name {
-                  margin: 5px 0;
-                  font-size: 16px;
-                }
-                .mid-line {
-                  display: flex;
-                  justify-content: space-between;
-                  .time {
-                    font-size: 12px;
-                    line-height: 20px;
-                    color: #999;
-                  }
-                }
-                .img-list {
-                  margin: 15px 0;
-                  .el-image {
-                    margin-right: 15px;
-                  }
-                }
-                .like {
-                  text-align: right;
-                  margin: 50px 20px 20px 0;
-                  cursor: pointer;
-                  ::v-deep .el-checkbox__input {
-                    display: none;
-                  }
-                }
-                &:first-child {
-                  width: 250px;
-                }
-                &:last-child {
-                  border-bottom: 1px solid #e5e5e5;
-                }
-              }
-            }
-          }
-        }
       }
       .food-dialog-mid {
         width: 550px;
