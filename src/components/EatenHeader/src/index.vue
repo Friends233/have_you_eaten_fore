@@ -95,10 +95,12 @@ export default class EatenHeader extends Vue {
             </div>
             <div class="eaten-header-top-left-user">
               <div>
-                <a href="#" class="orange">
+                <router-link class="orange" to={{ name: 'login' }}>
                   立即登录
-                </a>
-                <a href="#">注册</a>
+                </router-link>
+                <router-link to={{ name: 'register' }}>
+                  注册
+                </router-link>
               </div>
             </div>
           </div>
