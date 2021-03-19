@@ -6,7 +6,7 @@
 import { Button } from 'element-ui'
 import { Component, Vue } from 'vue-property-decorator'
 import Logo from '@/components/logo/index'
-
+import { getUserAll } from './api'
 
 interface Form {
   password?: string;
@@ -18,13 +18,15 @@ interface Form {
 }
 
 @Component({
-  components: {Logo}
+  components: { Logo }
 })
 export default class Register extends Vue {
   ruleForm: Form = {}
 
-  submitForm() {
-    console.log('submit')
+  async submitForm() {
+    getUserAll().then(res => {
+      console.log(res)
+    })
   }
 
   protected render() {
@@ -109,7 +111,7 @@ export default class Register extends Vue {
     margin: 0 auto;
     .el-form-item {
       margin-bottom: 15px;
-      ::v-deep label{
+      ::v-deep label {
         width: 100%;
         text-align: left;
       }
