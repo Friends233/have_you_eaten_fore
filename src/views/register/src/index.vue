@@ -6,27 +6,63 @@
 import { Button } from 'element-ui'
 import { Component, Vue } from 'vue-property-decorator'
 import Logo from '@/components/logo/index'
-import { getUserAll } from './api'
-
-interface Form {
-  password?: string;
-  checkPass?: string;
-  phoneNumber?: number;
-  userName?: string;
-  verificationCode?: string;
-  checked?: boolean;
-}
+import { Form, User } from './index'
+import { userLogin, userRegister } from '@/api'
 
 @Component({
   components: { Logo }
 })
 export default class Register extends Vue {
+  // $refs: {
+  //   ruleForm: any;
+  // }
+
   ruleForm: Form = {}
 
-  async submitForm() {
-    getUserAll().then(res => {
-      console.log(res)
-    })
+  rules = {
+    userName: [
+      { required: true, message: '请输入用户名', trigger: 'blur' },
+      { min: 3, max: 12, message: '长度在 3 到 12 个字符', trigger: 'change' }
+    ],
+    // phoneNumber: [{ type: 'phoneNumber', required: true, message: '请输入手机号码', trigger: 'change' }],
+    checkPass: [
+      { required: true, message: '请再次输入密码', trigger: 'blur' },
+      { min: 6, max: 12, message: '密码长度在 6 到 12 个字符', trigger: 'change' }
+    ],
+    checked: [{ required: true, message: '请勾选服务协议', trigger: 'blur' }],
+    password: [
+      { required: true, message: '请输入密码', trigger: 'blur' },
+      { min: 6, max: 12, message: '密码长度在 6 到 12 个字符', trigger: 'change' }
+    ]
+  }
+
+  submitForm() {
+    try {
+      this.$refs.ruleForm.validate(async (status: boolean) => {
+        const params: User = {
+          userName: this.ruleForm.userName || '',
+          userPass: this.ruleForm.password || ''
+        }
+        if (status) {
+          const res = await userRegister(params)
+          if (res.data.code == '1') {
+            this.$message({
+              showClose: true,
+              message: res.data.message,
+              type: 'success'
+            })
+          } else {
+            this.$message({
+              showClose: true,
+              message: res.data.message,
+              type: 'error'
+            })
+          }
+        }
+      })
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   protected render() {
@@ -45,6 +81,7 @@ export default class Register extends Vue {
                 model: this.ruleForm
               }
             }}
+            rules={this.rules}
             status-icon
             ref="ruleForm"
             class="ruleForm">
@@ -116,6 +153,7 @@ export default class Register extends Vue {
         text-align: left;
       }
       &:last-child {
+        margin-top: 25px;
         ::v-deep .el-form-item__content {
           button {
             width: 100%;

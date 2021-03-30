@@ -1,55 +1,20 @@
 /*
- * @Description: 接口
+ * @Description: 
  * @Author: Friends233
  */
-import axios, { AxiosPromise } from 'axios'
+import api from './api'
 
-enum httpMethods {
-  GET = 'get',
-  POST = 'post',
-  DELETE = 'delete',
-  PUT = 'put'
+/** 测试 */
+export function getUserAll() {
+  return api.get('/user/all')
 }
 
-const request = axios.create({
-  baseURL: '/api',
-  timeout: 2000
-});
+/** 登录 */
+export function userLogin(params = {}){
+  return api.post('/user/login',params)
+}
 
-
-export default {
-  get(url: string,params: any = {}): AxiosPromise {
-    return request({
-      method:httpMethods.GET,
-      params: {
-        ...params,
-        time: new Date().getTime()
-      },
-      url,
-    })
-  },
-  post(url: string,params: any = {}): AxiosPromise {
-    return request({
-      method:httpMethods.POST,
-      data:JSON.stringify(params),
-      url,
-    })
-  },
-  delete(url: string,params: any = {}): AxiosPromise {
-    return request({
-      method:httpMethods.DELETE,
-      params: {
-        ...params,
-        time: new Date().getTime()
-      },
-      url,
-    })
-  },
-  put(url: string,params: any = {}): AxiosPromise {
-    return request({
-      method:httpMethods.PUT,
-      data:JSON.stringify(params),
-      url,
-    })
-  }
+/** 注册 */
+export function userRegister(params = {}) {
+  return api.post('/user/register',params)
 }
