@@ -12,13 +12,54 @@ interface Form {
 }
 
 @Component({
-  components: {Logo}
+  components: { Logo }
 })
 export default class Login extends Vue {
+  $refs!: {
+    ruleForm: any;
+  }
+
   ruleForm: Form = {}
 
+  rules = {
+    userName: [{ required: true, trigger: 'blur', validator: this.vUserName }],
+    password: [{ required: true, trigger: 'blur', validator: this.vPassWord }]
+  }
+
+  vUserName(rule: any, value: string, callback: Function) {
+    const reg = /^[0-9a-zA-Z_]{3,12}$/
+    if (!value || !reg.test(value)) {
+      callback('用户名错误')
+    }
+  }
+
+  vPassWord(rule: any, value: string, callback: Function) {
+    const reg = /^[0-9a-zA-Z_]{6,12}$/
+    if (!value || !reg.test(value)) {
+      callback('密码错误')
+    }
+  }
   submitForm() {
-    console.log('submit')
+    try {
+      this.$refs.ruleForm.validate(async (res: boolean) => {
+        console.log(res)
+        if (res) {
+          const msg = await this.$store.dispatch('Login', {
+            userName: this.ruleForm.userName,
+            userPass: this.ruleForm.password
+          })
+          this.$message({
+            type: 'success',
+            message: msg
+          })
+        }
+      })
+    } catch (err) {
+      this.$message({
+        type: 'error',
+        message: err || '登录失败'
+      })
+    }
   }
 
   protected render() {
@@ -38,16 +79,17 @@ export default class Login extends Vue {
               }
             }}
             status-icon
+            rules={this.rules}
             ref="ruleForm"
             class="ruleForm">
             <el-form-item label="用户名" prop="userName">
-              <el-input v-model={this.ruleForm.userName}></el-input>
+              <el-input clearable v-model={this.ruleForm.userName}></el-input>
             </el-form-item>
             <el-form-item label="密码" prop="password">
-              <el-input type="password" v-model={this.ruleForm.password} autocomplete="off"></el-input>
+              <el-input clearable type="password" v-model={this.ruleForm.password} autocomplete="off"></el-input>
             </el-form-item>
             <el-form-item>
-              <router-link to={{name:'register'}}>忘记密码?</router-link>
+              <router-link to={{ name: 'register' }}>忘记密码?</router-link>
             </el-form-item>
             <el-form-item>
               <el-button type="primary" onClick={this.submitForm}>

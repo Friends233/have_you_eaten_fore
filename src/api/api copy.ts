@@ -2,13 +2,18 @@
  * @Description: 接口
  * @Author: Friends233
  */
-import axios from 'axios'
+import axios, { AxiosPromise } from 'axios'
 
 enum httpMethods {
   GET = 'get',
   POST = 'post',
   DELETE = 'delete',
   PUT = 'put'
+}
+interface UserResponse<T = any> {
+  code: number;
+  data?: T;
+  message: string;
 }
 
 const request = axios.create({
@@ -19,7 +24,7 @@ const request = axios.create({
 // 拦截器
 request.interceptors.response.use(
   res => {
-    if (res.status == 200 || res.status == 201) {
+    if(res.status == 200 || res.status == 201){
       return res.data
     }
   },
@@ -29,7 +34,7 @@ request.interceptors.response.use(
 )
 
 export default {
-  get(url: string, params = {}) {
+  get(url: string, params = {}): AxiosPromise<UserResponse> {
     return request({
       method: httpMethods.GET,
       params: {
@@ -39,14 +44,14 @@ export default {
       url,
     })
   },
-  post(url: string, params = {}) {
+  post(url: string, params = {}): AxiosPromise<UserResponse> {
     return request({
       method: httpMethods.POST,
       data: params,
       url,
     })
   },
-  delete(url: string, params = {}) {
+  delete(url: string, params = {}): AxiosPromise<UserResponse> {
     return request({
       method: httpMethods.DELETE,
       params: {
@@ -56,7 +61,7 @@ export default {
       url,
     })
   },
-  put(url: string, params = {}) {
+  put(url: string, params = {}): AxiosPromise<UserResponse> {
     return request({
       method: httpMethods.PUT,
       data: params,
