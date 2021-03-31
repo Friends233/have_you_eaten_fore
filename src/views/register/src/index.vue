@@ -13,9 +13,9 @@ import { userLogin, userRegister } from '@/api'
   components: { Logo }
 })
 export default class Register extends Vue {
-  // $refs: {
-  //   ruleForm: any;
-  // }
+  $refs!: {
+    ruleForm: any;
+  }
 
   ruleForm: Form = {}
 
