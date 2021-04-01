@@ -70,6 +70,7 @@ export default class EatenHeader extends Vue {
 
   logOut(){
     this.$store.dispatch('Logout')
+    this.$router.go(0)
   }
 
   renderTopNavMenu(ary: Array<Nav>) {
@@ -113,7 +114,7 @@ export default class EatenHeader extends Vue {
                 <router-link class="orange" to={{ name: 'login' }}>
                   用户名
                 </router-link>
-                <a onClick={this.logOut}>注销</a>
+                <a href="#" onClick={this.logOut}>注销</a>
               </div>
             </div>
           </div>
