@@ -5,7 +5,7 @@
 import { User } from '@/config'
 import { Module } from 'vuex'
 import storage from '@/storage'
-import { userLogin } from '@/api'
+import { userLogin,refreshUser } from '@/api'
 
 interface State {
   userInfo: User;
@@ -13,7 +13,7 @@ interface State {
 }
 
 enum UserModule {
-  ACESS_TOKEN = 'accessToken',
+  ACESS_TOKEN = 'hxdAccessToken',
   USER_INFO = 'userInfo'
 }
 
@@ -26,7 +26,14 @@ export default {
     userName: state => state.userInfo.userName,
     userLevel: state => state.userInfo.userLevel,
     userAddress: state => state.userInfo.userAddress,
-    token: state => state.accessToken
+    token: state => state.accessToken,
+    loginStatus: state => {
+      if (state.accessToken != '') {
+        return true
+      } else {
+        return false
+      }
+    }
   },
   mutations: {
     setToken(state, token) {
@@ -38,7 +45,7 @@ export default {
       }
     },
     setUserInfo(state, userInfo) {
-      state.accessToken = userInfo
+      state.userInfo = userInfo
       if (userInfo) {
         storage.set(UserModule.USER_INFO, userInfo)
       } else {
@@ -56,6 +63,36 @@ export default {
         return Promise.resolve(res.message)
       } else {
         return Promise.reject(res.message)
+      }
+    },
+    Logout({ commit, state }) {
+      [state.accessToken, state.userInfo] = ['', {}]
+      commit('setToken')
+      commit('setUserInfo')
+    },
+    async refreshUserInfo({ commit, state }) {
+      enum UserModule {
+        ACESS_TOKEN = 'hxdAccessToken',
+        USER_INFO = 'userInfo'
+      }
+      try {
+        const res: any = await refreshUser({ token: storage.get(UserModule.ACESS_TOKEN) })
+        if (res.code == 1) {
+          const userInfo: User = {
+            _id:res.data.userInfo._id,
+            userName:res.data.userInfo.user_name,
+            userAddress:res.data.userInfo.user_address,
+            userLevel:res.data.userInfo.user_level,
+            userPass:res.data.userInfo.user_pass
+          }
+          commit('setToken', res.data.access_token)
+          commit('setUserInfo', userInfo)
+        }else {
+          commit('setToken', '')
+          commit('setUserInfo', {})
+        }
+      } catch (err) {
+        console.log(err)
       }
     }
   }

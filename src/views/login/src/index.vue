@@ -31,6 +31,7 @@ export default class Login extends Vue {
     if (!value || !reg.test(value)) {
       callback('用户名错误')
     }
+    callback()
   }
 
   vPassWord(rule: any, value: string, callback: Function) {
@@ -38,20 +39,30 @@ export default class Login extends Vue {
     if (!value || !reg.test(value)) {
       callback('密码错误')
     }
+    callback()
   }
   submitForm() {
     try {
-      this.$refs.ruleForm.validate(async (res: boolean) => {
-        console.log(res)
+      this.$refs.ruleForm.validate((res: boolean) => {
         if (res) {
-          const msg = await this.$store.dispatch('Login', {
-            userName: this.ruleForm.userName,
-            userPass: this.ruleForm.password
-          })
-          this.$message({
-            type: 'success',
-            message: msg
-          })
+          this.$store
+            .dispatch('Login', {
+              userName: this.ruleForm.userName,
+              userPass: this.ruleForm.password
+            })
+            .then((msg) => {
+              this.$message({
+                type: 'success',
+                message: msg
+              })
+              this.$router.push({name:'Home'})
+            })
+            .catch((err) => {
+              this.$message({
+                type: 'error',
+                message: err || '登录失败'
+              })
+            })
         }
       })
     } catch (err) {
@@ -86,7 +97,7 @@ export default class Login extends Vue {
               <el-input clearable v-model={this.ruleForm.userName}></el-input>
             </el-form-item>
             <el-form-item label="密码" prop="password">
-              <el-input clearable type="password" v-model={this.ruleForm.password} autocomplete="off"></el-input>
+              <el-input clearable type="password" v-model={this.ruleForm.password}></el-input>
             </el-form-item>
             <el-form-item>
               <router-link to={{ name: 'register' }}>忘记密码?</router-link>

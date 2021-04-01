@@ -59,8 +59,17 @@ export default class EatenHeader extends Vue {
 
   searchContent = ''
 
+  // 登陆状态
+  get isLogin(){
+    return this.$store.getters.loginStatus
+  }
+
   handleSelect(key: string, keyPath: Array<number>) {
     console.log(key, keyPath)
+  }
+
+  logOut(){
+    this.$store.dispatch('Logout')
   }
 
   renderTopNavMenu(ary: Array<Nav>) {
@@ -94,13 +103,17 @@ export default class EatenHeader extends Vue {
               <span>[门头沟区 大厂回族自治县 廊坊]</span>
             </div>
             <div class="eaten-header-top-left-user">
-              <div>
+              <div v-show={!this.isLogin} class="isLoginF">
                 <router-link class="orange" to={{ name: 'login' }}>
                   立即登录
                 </router-link>
-                <router-link to={{ name: 'register' }}>
-                  注册
+                <router-link to={{ name: 'register' }}>注册</router-link>
+              </div>
+              <div v-show={this.isLogin} class="isLoginT">
+                <router-link class="orange" to={{ name: 'login' }}>
+                  用户名
                 </router-link>
+                <a onClick={this.logOut}>注销</a>
               </div>
             </div>
           </div>

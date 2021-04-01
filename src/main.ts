@@ -12,7 +12,12 @@ import 'element-ui/lib/theme-chalk/index.css'
 
 Vue.use(ElementUI)
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
+
+// 根据token刷新用户信息到store
+(function refreshUserInfo() {
+  store.dispatch('refreshUserInfo')
+})();
 
 new Vue({
   router,

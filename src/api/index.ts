@@ -18,3 +18,8 @@ export function userLogin(params = {}){
 export function userRegister(params = {}) {
   return api.post('/user/register',params)
 }
+
+/** 根据token拿到userInfo */
+export function refreshUser(params = {}) {
+  return api.post('/user/refresh',params)
+}
