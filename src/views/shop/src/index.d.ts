@@ -20,3 +20,15 @@ export interface UserApp {
   time?: string;
   imgUrl?: Array<string>;
 }
+
+export interface GoodDetails {
+  desc?: string;
+  material?: string;
+  taste?: string;
+  priceDescription?: string;
+  monthlySale?: string | number;
+  favorableRate?: string | number;
+  discount?: string |number;
+  price?: number;
+  packagingCosts: ?number;
+}

@@ -96,7 +96,7 @@ export default class Appraisal extends Vue {
                       item.imgUrl.map((i: string) => {
                         return (
                           <el-image
-                            style="width: 140px; height: 140px"
+                            style="width: 130px; height: 130px"
                             src={i}
                             preview-src-list={item.imgUrl}></el-image>
                         )
@@ -161,7 +161,7 @@ export default class Appraisal extends Vue {
         .img-list {
           margin: 15px 0;
           .el-image {
-            margin-right: 15px;
+            margin-right: 10px;
           }
         }
         .like {
@@ -172,10 +172,8 @@ export default class Appraisal extends Vue {
             display: none;
           }
         }
-        &:first-child {
-          width: 250px;
-        }
         &:last-child {
+          margin-left: 15px;
           border-bottom: 1px solid #e5e5e5;
         }
       }

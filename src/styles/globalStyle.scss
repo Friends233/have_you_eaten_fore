@@ -8,3 +8,7 @@
      min-width: 100px;
    }
  }
+
+ .el-image-viewer__wrapper {
+   z-index: 2003 !important;
+ }
