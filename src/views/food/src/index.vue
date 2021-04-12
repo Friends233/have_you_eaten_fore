@@ -3,21 +3,28 @@
  * @Author: Friends233
 -->
 <script lang="tsx">
-import { Component, Vue, VModel } from 'vue-property-decorator'
+import { Component, Vue, VModel, Prop } from 'vue-property-decorator'
 import EatenHeader from '@/components/EatenHeader/index'
 import EatenFooter from '@/components/EatenFooter/index'
 import Appraisal from '@/components/Appraisal/index'
 import { UserApp, GoodDetails } from './index'
 
 @Component({
-  components: { EatenHeader, EatenFooter,Appraisal }
+  components: { EatenHeader, EatenFooter, Appraisal }
 })
 export default class Food extends Vue {
   // 评价的排序标签
   @VModel({ default: {} }) readonly foodVal: any
-  visible = true
+  @Prop({ default: false, type: Boolean }) readonly show?: boolean
   elTabIndex = 'first'
 
+  get visible() {
+    return this.show
+  }
+
+  hideView(e: any) {
+    this.$emit('hideView', e)
+  }
 
   protected render() {
     return (
@@ -26,7 +33,7 @@ export default class Food extends Vue {
         custom-class="food-dialog"
         modal-append-to-body={false}
         visible={this.visible}
-        {...{ on: { 'update:visible': (e: any) => (this.visible = e) } }}
+        {...{ on: { 'update:visible': this.hideView } }}
         width="600px">
         <div class="img-backgorund">
           <img src="https://img.meituan.net/msmerchant/c344e8b9ab73f43596eac885b790f175148974.jpg@600w_600h_1l" />
