@@ -14,7 +14,13 @@ export default class Carousel extends Vue {
   download: string = require('@/assets/download-qr.png')
 
   get isLogin() {
-    return true
+    return this.$store.getters.loginStatus
+  }
+
+  goView(name = '') {
+    if (name !== '') {
+      this.$router.push({ name })
+    }
   }
 
   carouselList: Array<CarouselImg> = [
@@ -83,13 +89,13 @@ export default class Carousel extends Vue {
           )}
           {this.isLogin && (
             <el-card shadow="never">
-              <div class="top">
+              <div class="top" onClick={() => this.goView('userInfo')}>
                 <i class="el-icon-setting"></i>
               </div>
               <img class="avatar" src="//s0.meituan.net/bs/fe-web-meituan/e3064a3/img/head-img.png" />
               <p class="user-name-small">用户名</p>
               <ul class="user-nav">
-                <li>
+                <li onClick={() => this.goView('order')}>
                   <i class="el-icon-s-order"></i>
                   <span>我的订单</span>
                 </li>
@@ -97,7 +103,7 @@ export default class Carousel extends Vue {
                   <i class="el-icon-star-on"></i>
                   <span>我的收藏</span>
                 </li>
-                <li>
+                <li onClick={() => this.goView('shoppingCart')}>
                   <i class="el-icon-shopping-cart-2"></i>
                   <span>购物车</span>
                 </li>
@@ -105,7 +111,7 @@ export default class Carousel extends Vue {
                   <i class="el-icon-coin"></i>
                   <span>抵用券</span>
                 </li>
-                <li>
+                <li onClick={() => this.goView('userInfo')}>
                   <i class="el-icon-more"></i>
                   <span>更多</span>
                 </li>

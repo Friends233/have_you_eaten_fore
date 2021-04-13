@@ -7,4 +7,5 @@ export interface Nav {
   id: string;
   value: string;
   children?: Array<Nav>;
+  routerLink?: string;
 }

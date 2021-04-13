@@ -17,28 +17,32 @@ export default class EatenHeader extends Vue {
   topNavMenu: Array<Nav> = [
     {
       id: '1',
+      routerLink: 'test1',
       value: '个人中心',
       children: [
-        { id: '1-1', value: '我的订单' },
-        { id: '1-3', value: '我的收藏' },
-        { id: '1-2', value: '抵用券' },
-        { id: '1-4', value: '账户设置' }
+        { id: '1-1', value: '我的订单', routerLink: 'order' },
+        { id: '1-3', value: '我的收藏', routerLink: 'test2' },
+        { id: '1-2', value: '抵用券', routerLink: 'test3' },
+        { id: '1-4', value: '账户设置', routerLink: 'userInfo' }
       ]
     },
     {
       id: '2',
-      value: '手机访问'
+      value: '手机访问',
+      routerLink: 'test4'
     },
     {
       id: '3',
-      value: '购物车'
+      value: '购物车',
+      routerLink: 'shoppingCart'
     },
     {
       id: '4',
       value: '网站导航',
+      routerLink: 'test5',
       children: [
-        { id: '3-1', value: '美团外卖' },
-        { id: '3-2', value: '饿了么外卖' }
+        { id: '3-1', value: '美团外卖', routerLink: 'test6' },
+        { id: '3-2', value: '饿了么外卖', routerLink: 'test7' }
       ]
     }
   ]
@@ -54,32 +58,41 @@ export default class EatenHeader extends Vue {
   searchContent = ''
 
   // 登陆状态
-  get isLogin(){
+  get isLogin() {
     return this.$store.getters.loginStatus
   }
 
-  handleSelect(key: string, keyPath: Array<number>) {
-    console.log(key, keyPath)
+  handleSelect(key: string) {
+    if(!key.includes('test')) {
+      this.$router.push({ name: key })
+    }
   }
 
-  logOut(){
+  logOut() {
     this.$store.dispatch('Logout')
     this.$router.go(0)
+  }
+
+  goView(name = '') {
+    if (name !== '') {
+      console.log(name)
+      this.$router.push({ name: name })
+    }
   }
 
   renderTopNavMenu(ary: Array<Nav>) {
     return ary.map((item: Nav) => {
       if (item.children) {
         return (
-          <el-submenu index={item.id}>
+          <el-submenu index={item.routerLink}>
             <template slot="title">{item.value}</template>
             {item.children.map((i: Nav) => {
-              return <el-menu-item index={i.id}>{i.value}</el-menu-item>
+              return <el-menu-item index={i.routerLink}>{i.value}</el-menu-item>
             })}
           </el-submenu>
         )
       } else {
-        return <el-menu-item index={item.id}>{item.value}</el-menu-item>
+        return <el-menu-item index={item.routerLink}>{item.value}</el-menu-item>
       }
     })
   }
@@ -108,7 +121,9 @@ export default class EatenHeader extends Vue {
                 <router-link class="orange" to={{ name: 'login' }}>
                   用户名
                 </router-link>
-                <a href="#" onClick={this.logOut}>注销</a>
+                <a href="#" onClick={this.logOut}>
+                  注销
+                </a>
               </div>
             </div>
           </div>
