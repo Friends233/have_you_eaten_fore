@@ -20,32 +20,26 @@ export default class EatenHeader extends Vue {
       value: '个人中心',
       children: [
         { id: '1-1', value: '我的订单' },
-        { id: '1-2', value: '我的购物车' },
         { id: '1-3', value: '我的收藏' },
+        { id: '1-2', value: '抵用券' },
         { id: '1-4', value: '账户设置' }
       ]
     },
     {
       id: '2',
-      value: '菜单2',
-      children: [
-        { id: '2-1', value: '菜单1' },
-        { id: '2-2', value: '菜单2' },
-        { id: '2-3', value: '菜单3' }
-      ]
+      value: '手机访问'
     },
     {
       id: '3',
-      value: '菜单3',
-      children: [
-        { id: '3-1', value: '菜单1' },
-        { id: '3-2', value: '菜单2' },
-        { id: '3-3', value: '菜单3' }
-      ]
+      value: '购物车'
     },
     {
       id: '4',
-      value: '菜单4'
+      value: '网站导航',
+      children: [
+        { id: '3-1', value: '美团外卖' },
+        { id: '3-2', value: '饿了么外卖' }
+      ]
     }
   ]
   // 轮播旁的菜单
