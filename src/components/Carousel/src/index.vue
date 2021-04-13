@@ -13,6 +13,10 @@ export default class Carousel extends Vue {
   avatarImg: string = require('@/assets/avatar.jpg')
   download: string = require('@/assets/download-qr.png')
 
+  get isLogin() {
+    return true
+  }
+
   carouselList: Array<CarouselImg> = [
     { id: '1', url: 'https://p1.meituan.net/travelcube/01d2ab1efac6e2b7adcfcdf57b8cb5481085686.png' },
     { id: '2', url: 'http://p1.meituan.net/codeman/826a5ed09dab49af658c34624d75491861404.jpg' },
@@ -65,16 +69,49 @@ export default class Carousel extends Vue {
           })}
         </el-carousel>
         <div class="carousel-card-right">
-          <el-card shadow="never">
-            <img class="avatar" src={this.avatarImg} />
-            <p>Hi！你好</p>
-            <router-link class="a-button" to={{ name: 'register' }}>
-              注册
-            </router-link>
-            <router-link class="a-button" to={{ name: 'login' }}>
-              立即登录
-            </router-link>
-          </el-card>
+          {!this.isLogin && (
+            <el-card shadow="never">
+              <img class="avatar" src={this.avatarImg} />
+              <p class="user-name-mid">Hi！你好</p>
+              <router-link class="a-button" to={{ name: 'register' }}>
+                注册
+              </router-link>
+              <router-link class="a-button" to={{ name: 'login' }}>
+                立即登录
+              </router-link>
+            </el-card>
+          )}
+          {this.isLogin && (
+            <el-card shadow="never">
+              <div class="top">
+                <i class="el-icon-setting"></i>
+              </div>
+              <img class="avatar" src="//s0.meituan.net/bs/fe-web-meituan/e3064a3/img/head-img.png" />
+              <p class="user-name-small">用户名</p>
+              <ul class="user-nav">
+                <li>
+                  <i class="el-icon-s-order"></i>
+                  <span>我的订单</span>
+                </li>
+                <li>
+                  <i class="el-icon-star-on"></i>
+                  <span>我的收藏</span>
+                </li>
+                <li>
+                  <i class="el-icon-shopping-cart-2"></i>
+                  <span>购物车</span>
+                </li>
+                <li>
+                  <i class="el-icon-coin"></i>
+                  <span>抵用券</span>
+                </li>
+                <li>
+                  <i class="el-icon-more"></i>
+                  <span>更多</span>
+                </li>
+              </ul>
+            </el-card>
+          )}
           <el-card shadow="never">
             <img width="95" src={this.download}></img>
             <p class="download-label">扫码手机访问</p>
@@ -134,9 +171,51 @@ export default class Carousel extends Vue {
   }
   &-card-right {
     width: 228px;
+    height: 278px;
     text-align: center;
-    .el-card:last-child {
-      margin-top: 5px;
+    .el-card {
+      position: relative;
+      &:first-child {
+        height: 100%;
+      }
+      &:last-child {
+        margin-top: 5px;
+      }
+    }
+    .top {
+      position: absolute;
+      right: 12px;
+      top: 10px;
+      cursor: pointer;
+      i {
+        font-size: 20px;
+        color: #666;
+        display: inline-block;
+      }
+    }
+    .user-name-small {
+      font-size: 16px;
+      color: #222;
+      margin: 0 auto;
+      cursor: pointer;
+    }
+    .user-nav {
+      display: flex;
+      flex-wrap: wrap;
+      li {
+        width: 60px;
+        margin-top: 10px;
+        cursor: pointer;
+        i {
+          color: #ffc300;
+          font-size: 24px;
+          display: block;
+        }
+        span {
+          font-size: 12px;
+          color: #222;
+        }
+      }
     }
     .avatar {
       width: 62px;
