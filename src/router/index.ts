@@ -28,7 +28,7 @@ const routes: Array<RouteConfig> = [
   {
     path: '/food',
     name: 'food',
-    component:() => import('@/views/food')
+    component: () => import('@/views/food')
   },
   {
     path: '/shoplist',
@@ -48,12 +48,19 @@ const routes: Array<RouteConfig> = [
   {
     path: '/userInfo',
     name: 'userInfo',
-    component: () => import('@/views/userInfo')
-  },
-  {
-    path: '/order',
-    name: 'order',
-    component: () => import('@/views/order')
+    component: () => import('@/views/userInfo'),
+    children: [
+      {
+        path: '/order',
+        name: 'order',
+        component: () => import('@/views/order')
+      },
+      {
+        path: '/account',
+        name: 'account',
+        component: () => import('@/views/account')
+      },
+    ]
   }
 ]
 
