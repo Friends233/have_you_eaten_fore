@@ -2,8 +2,16 @@
  * @Description: 响应式
  * @Author: Friends233
  */
+
+ .none {
+   display: none;
+ }
+
 @media screen and (max-width: 600px) {
   .none-600 {
     display: none !important;
+  }
+  .none {
+    display: block;
   }
 }

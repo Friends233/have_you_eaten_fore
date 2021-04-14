@@ -27,24 +27,44 @@ export default class ProductCard extends Vue {
 
   protected render() {
     return (
-      <el-card nativeOnClick={this.goShop} body-style={'padding: 0;'}>
-        <img width="233" src={this.card.imgUrl} />
-        <div class="el-card-text">
-          <span class="el-card-text-title">{this.card.name}</span>
-          <div class="el-card-text-rating">
-            <star num={this.card.rating} size={'13'}></star>
-            <span>{this.card.appraisalNumber}个评价</span>
+      <div>
+        <el-card class="none-600" nativeOnClick={this.goShop} body-style={'padding: 0;'}>
+          <img width="233" src={this.card.imgUrl} />
+          <div class="el-card-text">
+            <span class="el-card-text-title">{this.card.name}</span>
+            <div class="el-card-text-rating">
+              <star num={this.card.rating} size={'13'}></star>
+              <span>{this.card.appraisalNumber}个评价</span>
+            </div>
+            <div class="el-card-text-location">{this.card.location}</div>
+            <div class="el-card-text-price">￥{this.card.price}起</div>
+            <div class="el-card-text-bottom">
+              <el-button type="text">
+                <i class="el-icon-plus"></i>
+                加入购物车
+              </el-button>
+            </div>
           </div>
-          <div class="el-card-text-location">{this.card.location}</div>
-          <div class="el-card-text-price">￥{this.card.price}起</div>
-          <div class="el-card-text-bottom">
-            <el-button type="text">
-              <i class="el-icon-plus"></i>
-              加入购物车
-            </el-button>
+        </el-card>
+        <el-card class="none" nativeOnClick={this.goShop} body-style={'padding: 0;'}>
+          <img class="nav-img" width="80" src={this.card.imgUrl} />
+          <div class="el-card-text">
+            <span class="el-card-text-title">{this.card.name}</span>
+            <div class="el-card-text-rating">
+              <star num={this.card.rating} size={'13'}></star>
+              <span>{this.card.appraisalNumber}个评价</span>
+            </div>
+            <div class="el-card-text-location">{this.card.location}</div>
+            <div class="el-card-text-price">￥{this.card.price}起</div>
+            <div class="el-card-text-bottom">
+              <el-button type="text">
+                <i class="el-icon-plus"></i>
+                加入购物车
+              </el-button>
+            </div>
           </div>
-        </div>
-      </el-card>
+        </el-card>
+      </div>
     )
   }
 }
@@ -85,6 +105,19 @@ export default class ProductCard extends Vue {
       .el-button {
         padding: 10px 15px;
       }
+    }
+  }
+}
+@media screen and (max-width: 600px) {
+  .el-card {
+    width: 100%;
+    .nav-img {
+      vertical-align: top;
+      margin-top: 35px;
+      margin-left: 4px;
+    }
+    &-text {
+      display: inline-block;
     }
   }
 }

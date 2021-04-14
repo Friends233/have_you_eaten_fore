@@ -126,7 +126,8 @@ export default class ProductList extends Vue {
         font-weight: 500;
       }
       &-all {
-        margin-left: 86%;
+        float: right;
+        margin-right: 20px;
       }
     }
     .product-card-wrapper {
@@ -167,6 +168,17 @@ export default class ProductList extends Vue {
       .product-card-header {
         background-color: rgb(247, 191, 95);
         color: white;
+      }
+    }
+  }
+}
+@media screen and (max-width: 600px) {
+  .product {
+    .product-list {
+      .product-card-wrapper{
+        padding: 0;
+        width: 100%;
+        margin-top: 10px;
       }
     }
   }
