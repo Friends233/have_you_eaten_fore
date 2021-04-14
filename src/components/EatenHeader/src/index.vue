@@ -63,7 +63,7 @@ export default class EatenHeader extends Vue {
   }
 
   handleSelect(key: string) {
-    if(!key.includes('test')) {
+    if (!key.includes('test')) {
       this.$router.push({ name: key })
     }
   }
@@ -108,7 +108,7 @@ export default class EatenHeader extends Vue {
               <a class="eaten-header-top-left-btn" href="#">
                 切换城市
               </a>
-              <span>[门头沟区 大厂回族自治县 廊坊]</span>
+              <span class="none-600">[门头沟区 大厂回族自治县 廊坊]</span>
             </div>
             <div class="eaten-header-top-left-user">
               <div v-show={!this.isLogin} class="isLoginF">
@@ -127,7 +127,7 @@ export default class EatenHeader extends Vue {
               </div>
             </div>
           </div>
-          <div class="eaten-header-top-right">
+          <div class="eaten-header-top-right none-600">
             <el-menu default-active="activeIndex" mode="horizontal" onSelect={this.handleSelect}>
               {this.renderTopNavMenu(this.topNavMenu)}
             </el-menu>
@@ -161,14 +161,12 @@ export default class EatenHeader extends Vue {
 <style scoped lang="scss">
 @import '@/styles/constant.scss';
 .eaten-header {
-  width: 100%;
   min-height: 197px;
   background: #fff;
   box-shadow: 0 2px 27px 0 rgba(0, 0, 0, 0.1);
   &-top {
-    width: $bodyWidth;
-    background: #f8f8f8;
     width: 100%;
+    background: #f8f8f8;
     box-sizing: border-box;
     font-size: 12px;
     color: #999;
@@ -183,7 +181,6 @@ export default class EatenHeader extends Vue {
       &-address {
         display: flex;
         justify-content: space-between;
-        width: 274px;
         height: 20px;
         i {
           padding-top: 3px;
@@ -277,6 +274,24 @@ export default class EatenHeader extends Vue {
       &:hover {
         color: #fbc700;
       }
+    }
+  }
+}
+@media screen and (max-width: 600px) {
+  .eaten-header {
+    &-mid {
+      flex-wrap: wrap;
+      &-logo {
+        margin: 0 auto;
+      }
+      &-search {
+        ::v-deep .el-input {
+          margin-left: 0;
+        }
+      }
+    }
+    &-nav {
+      display: none;
     }
   }
 }

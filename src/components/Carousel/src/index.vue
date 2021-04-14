@@ -49,79 +49,81 @@ export default class Carousel extends Vue {
 
   protected render() {
     return (
-      <div class="carousel">
-        <el-card class="carousel-card-left" shadow="never">
-          <h2 class="carousel-card-left-title">美食分类</h2>
-          <ul class="carousel-card-left-menu">
-            {this.foodTypeList.map((item) => {
+      <div>
+        <div class="carousel none-600">
+          <el-card class="carousel-card-left" shadow="never">
+            <h2 class="carousel-card-left-title">美食分类</h2>
+            <ul class="carousel-card-left-menu">
+              {this.foodTypeList.map((item) => {
+                return (
+                  <li class="food-type" onClick={() => this.$router.push({ name: 'shoplist' })}>
+                    <i class={item.icon} style={'color:' + item.color + ';'}></i>
+                    <a href="#">{item.label}</a>
+                  </li>
+                )
+              })}
+            </ul>
+          </el-card>
+          <el-carousel trigger="click" height="446px">
+            {this.carouselList.map((item) => {
               return (
-                <li class="food-type" onClick={() => this.$router.push({ name: 'shoplist' })}>
-                  <i class={item.icon} style={'color:' + item.color + ';'}></i>
-                  <a href="#">{item.label}</a>
+                <li key={item.id} onClick={() => this.$router.push({ name: 'shop' })}>
+                  <el-carousel-item>
+                    <img width="949" height="446" src={item.url} />
+                  </el-carousel-item>
                 </li>
               )
             })}
-          </ul>
-        </el-card>
-        <el-carousel trigger="click" height="446px">
-          {this.carouselList.map((item) => {
-            return (
-              <li key={item.id} onClick={() => this.$router.push({ name: 'shop' })}>
-                <el-carousel-item>
-                  <img width="949" height="446" src={item.url} />
-                </el-carousel-item>
-              </li>
-            )
-          })}
-        </el-carousel>
-        <div class="carousel-card-right">
-          {!this.isLogin && (
+          </el-carousel>
+          <div class="carousel-card-right">
+            {!this.isLogin && (
+              <el-card shadow="never">
+                <img class="avatar" src={this.avatarImg} />
+                <p class="user-name-mid">Hi！你好</p>
+                <router-link class="a-button" to={{ name: 'register' }}>
+                  注册
+                </router-link>
+                <router-link class="a-button" to={{ name: 'login' }}>
+                  立即登录
+                </router-link>
+              </el-card>
+            )}
+            {this.isLogin && (
+              <el-card shadow="never">
+                <div class="top" onClick={() => this.goView('userInfo')}>
+                  <i class="el-icon-setting"></i>
+                </div>
+                <img class="avatar" src="//s0.meituan.net/bs/fe-web-meituan/e3064a3/img/head-img.png" />
+                <p class="user-name-small">用户名</p>
+                <ul class="user-nav">
+                  <li onClick={() => this.goView('order')}>
+                    <i class="el-icon-s-order"></i>
+                    <span>我的订单</span>
+                  </li>
+                  <li>
+                    <i class="el-icon-star-on"></i>
+                    <span>我的收藏</span>
+                  </li>
+                  <li onClick={() => this.goView('shoppingCart')}>
+                    <i class="el-icon-shopping-cart-2"></i>
+                    <span>购物车</span>
+                  </li>
+                  <li>
+                    <i class="el-icon-coin"></i>
+                    <span>抵用券</span>
+                  </li>
+                  <li onClick={() => this.goView('userInfo')}>
+                    <i class="el-icon-more"></i>
+                    <span>更多</span>
+                  </li>
+                </ul>
+              </el-card>
+            )}
             <el-card shadow="never">
-              <img class="avatar" src={this.avatarImg} />
-              <p class="user-name-mid">Hi！你好</p>
-              <router-link class="a-button" to={{ name: 'register' }}>
-                注册
-              </router-link>
-              <router-link class="a-button" to={{ name: 'login' }}>
-                立即登录
-              </router-link>
+              <img width="95" src={this.download}></img>
+              <p class="download-label">扫码手机访问</p>
             </el-card>
-          )}
-          {this.isLogin && (
-            <el-card shadow="never">
-              <div class="top" onClick={() => this.goView('userInfo')}>
-                <i class="el-icon-setting"></i>
-              </div>
-              <img class="avatar" src="//s0.meituan.net/bs/fe-web-meituan/e3064a3/img/head-img.png" />
-              <p class="user-name-small">用户名</p>
-              <ul class="user-nav">
-                <li onClick={() => this.goView('order')}>
-                  <i class="el-icon-s-order"></i>
-                  <span>我的订单</span>
-                </li>
-                <li>
-                  <i class="el-icon-star-on"></i>
-                  <span>我的收藏</span>
-                </li>
-                <li onClick={() => this.goView('shoppingCart')}>
-                  <i class="el-icon-shopping-cart-2"></i>
-                  <span>购物车</span>
-                </li>
-                <li>
-                  <i class="el-icon-coin"></i>
-                  <span>抵用券</span>
-                </li>
-                <li onClick={() => this.goView('userInfo')}>
-                  <i class="el-icon-more"></i>
-                  <span>更多</span>
-                </li>
-              </ul>
-            </el-card>
-          )}
-          <el-card shadow="never">
-            <img width="95" src={this.download}></img>
-            <p class="download-label">扫码手机访问</p>
-          </el-card>
+          </div>
         </div>
       </div>
     )

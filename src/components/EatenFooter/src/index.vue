@@ -37,17 +37,24 @@ export default class EatenFooter extends Vue {
   width: $bodyWidth;
   margin: 0 auto;
   box-sizing: border-box;
-  padding: 0 277px;
   cursor: pointer;
   border-top: 1px solid #E5E5E5;
   margin-top: 50px;
   p {
+    text-align: center;
     &:first-child {
       font-size: 14px;
       text-align: center;
     }
     font-size: 12px;
     color: #999aaa;
+  }
+}
+@media screen and (max-width: 600px) {
+  .eaten-footer {
+    p {
+      font-size: 10px !important;
+    }
   }
 }
 </style>
