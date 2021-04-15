@@ -28,12 +28,12 @@ export default class ProductCard extends Vue {
   protected render() {
     return (
       <div>
-        <el-card class="none-600" nativeOnClick={this.goShop} body-style={'padding: 0;'}>
-          <img width="233" src={this.card.imgUrl} />
+        <el-card nativeOnClick={this.goShop} body-style={'padding: 0;'}>
+          <img src={this.card.imgUrl} />
           <div class="el-card-text">
             <span class="el-card-text-title">{this.card.name}</span>
             <div class="el-card-text-rating">
-              <star num={this.card.rating} size={'13'}></star>
+              
               <span>{this.card.appraisalNumber}个评价</span>
             </div>
             <div class="el-card-text-location">{this.card.location}</div>
@@ -41,25 +41,7 @@ export default class ProductCard extends Vue {
             <div class="el-card-text-bottom">
               <el-button type="text">
                 <i class="el-icon-plus"></i>
-                加入购物车
-              </el-button>
-            </div>
-          </div>
-        </el-card>
-        <el-card class="none" nativeOnClick={this.goShop} body-style={'padding: 0;'}>
-          <img class="nav-img" width="80" src={this.card.imgUrl} />
-          <div class="el-card-text">
-            <span class="el-card-text-title">{this.card.name}</span>
-            <div class="el-card-text-rating">
-              <star num={this.card.rating} size={'13'}></star>
-              <span>{this.card.appraisalNumber}个评价</span>
-            </div>
-            <div class="el-card-text-location">{this.card.location}</div>
-            <div class="el-card-text-price">￥{this.card.price}起</div>
-            <div class="el-card-text-bottom">
-              <el-button type="text">
-                <i class="el-icon-plus"></i>
-                加入购物车
+                查看详情
               </el-button>
             </div>
           </div>
@@ -71,53 +53,46 @@ export default class ProductCard extends Vue {
 </script>
 <style scoped lang="scss">
 .el-card {
-  width: 233px;
+  // width: 233px;
+  width: 100%;
   cursor: pointer;
+  ::v-deep .el-card__body {
+    > img {
+      width: 14.56rem;
+    }
+  }
   &-text {
-    padding-left: 10px;
-    margin-top: 10px;
+    padding-left: 0.63rem;
+    margin-top: 0.63rem;
     &-title {
-      font-size: 18px;
+      font-size: 1.13rem;
     }
     &-rating {
       display: flex;
       margin-top: 5px;
-      font-size: 12px;
+      font-size: 0.75rem;
       color: #999;
-      height: 24px;
-      line-height: 24px;
+      height: 1.5rem;
+      line-height: 1.5rem;
     }
     &-location {
-      font-size: 12px;
+      font-size: 0.75rem;
       color: #999999;
       width: 100%;
-      height: 18px;
-      line-height: 18px;
+      height: 1.13rem;
+      line-height: 1.13rem;
     }
     &-price {
       margin-top: 5px;
       color: #ff6600;
-      font-size: 16px;
+      font-size: 1rem;
       font-weight: 700;
     }
     &-bottom {
       text-align: right;
       .el-button {
-        padding: 10px 15px;
+        padding: 0.63rem 0.94rem;
       }
-    }
-  }
-}
-@media screen and (max-width: 600px) {
-  .el-card {
-    width: 100%;
-    .nav-img {
-      vertical-align: top;
-      margin-top: 35px;
-      margin-left: 4px;
-    }
-    &-text {
-      display: inline-block;
     }
   }
 }

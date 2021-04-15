@@ -52,6 +52,7 @@ export default class EatenFooter extends Vue {
 }
 @media screen and (max-width: 600px) {
   .eaten-footer {
+    width:$bodyMiniWidth;
     p {
       font-size: 10px !important;
     }

@@ -35,4 +35,9 @@ export default class HelloWorld extends Vue {
     margin: 0 auto;
   }
 }
+@media screen and (max-width: 600px) {
+  .home-content {
+    width: $bodyMiniWidth !important;
+  }
+}
 </style>

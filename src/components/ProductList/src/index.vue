@@ -101,9 +101,12 @@ export default class ProductList extends Vue {
 <style scoped lang="scss">
 .product {
   .product-list {
-    padding-top: 50px;
-    margin-top: 15px;
+    padding-top: 3.13rem;
+    margin-top: 0.93rem;
     position: relative;
+    // display: flex;
+    // flex-wrap: wrap;
+    // justify-content: space-around;
     &::after {
       content: '';
       clear: both;
@@ -112,26 +115,27 @@ export default class ProductList extends Vue {
     .product-card-header {
       position: absolute;
       left: 0;
-      top: 8px;
+      top: 0.5rem;
       width: 100%;
-      height: 40px;
+      height: 2.5rem;
       border-top-right-radius: 5px;
       border-top-left-radius: 5px;
       font-family: 'MFShangHei-Regular' !important;
-      line-height: 40px;
+      line-height: 2.5rem;
       box-sizing: border-box;
-      padding-left: 20px;
+      padding-left: 1.25rem;
       &-title {
-        font-size: 18px;
+        font-size: 1.13rem;
         font-weight: 500;
       }
       &-all {
         float: right;
-        margin-right: 20px;
+        margin-right: 1.25rem;
       }
     }
     .product-card-wrapper {
-      padding: 5px 11px;
+      margin: 0.31rem 0.70rem;
+      // padding: 5px 11px;
       float: left;
     }
     &-recommend {
@@ -172,15 +176,15 @@ export default class ProductList extends Vue {
     }
   }
 }
-@media screen and (max-width: 600px) {
-  .product {
-    .product-list {
-      .product-card-wrapper{
-        padding: 0;
-        width: 100%;
-        margin-top: 10px;
-      }
-    }
-  }
-}
+// @media screen and (max-width: 600px) {
+//   .product {
+//     .product-list {
+//       .product-card-wrapper{
+//         padding: 0;
+//         width: 100%;
+//         margin-top: 10px;
+//       }
+//     }
+//   }
+// }
 </style>

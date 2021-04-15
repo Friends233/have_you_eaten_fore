@@ -281,6 +281,7 @@ export default class EatenHeader extends Vue {
   .eaten-header {
     &-mid {
       flex-wrap: wrap;
+      width: $bodyMiniWidth;
       &-logo {
         margin: 0 auto;
       }
