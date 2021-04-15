@@ -171,4 +171,21 @@ export default class Register extends Vue {
     }
   }
 }
+@media screen and (max-width: 600px) {
+  .login-form-wrapper {
+    .login-top {
+      width: $bodyMiniWidth;
+    }
+    .login-form {
+      width: $bodyMiniWidth;
+      .el-form-item {
+        &:nth-child(2) {
+        ::v-deep .el-input {
+          width: 65%;
+        }
+      }
+      }
+    }
+  }
+}
 </style>

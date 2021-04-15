@@ -55,7 +55,7 @@ export default class Login extends Vue {
                 type: 'success',
                 message: msg
               })
-              this.$router.push({name:'Home'})
+              this.$router.push({ name: 'Home' })
             })
             .catch((err) => {
               this.$message({
@@ -159,6 +159,16 @@ export default class Login extends Vue {
     }
     h2 {
       text-align: center;
+    }
+  }
+}
+@media screen and (max-width: 600px) {
+  .login-form-wrapper {
+    .login-top {
+      width: $bodyMiniWidth;
+    }
+    .login-form {
+      width: $bodyMiniWidth;
     }
   }
 }

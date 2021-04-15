@@ -44,30 +44,30 @@ export default class Star extends Vue {
 </script>
 <style scoped lang="scss">
 .star-wrapper {
-  height: 24px;
+  height: 1.5rem;
   .star {
     display: inline-block;
     margin-right: 4px;
   }
   .star13 {
-    width: 13px;
-    height: 13px;
-    background-size: 13px 13px;
+    width: 0.81rem;
+    height: 0.81rem;
+    background-size: 0.81rem 0.81rem;
   }
   .star16 {
-    width: 16px;
-    height: 16px;
-    background-size: 16px 16px;
+    width: 1rem;
+    height: 1rem;
+    background-size: 1rem 1rem;
   }
   .star24 {
-    width: 24px;
-    height: 24px;
-    background-size: 24px 24px;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-size: 1.5rem 1.5rem;
   }
   .star32 {
-    width: 32px;
-    height: 32px;
-    background-size: 32px 32px;
+    width: 2rem;
+    height: 2rem;
+    background-size: 2rem 2rem;
   }
   .staron {
     background-image: url('./icon/star36_on@3x.png');

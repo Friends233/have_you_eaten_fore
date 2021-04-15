@@ -176,15 +176,4 @@ export default class ProductList extends Vue {
     }
   }
 }
-// @media screen and (max-width: 600px) {
-//   .product {
-//     .product-list {
-//       .product-card-wrapper{
-//         padding: 0;
-//         width: 100%;
-//         margin-top: 10px;
-//       }
-//     }
-//   }
-// }
 </style>
