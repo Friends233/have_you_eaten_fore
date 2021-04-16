@@ -33,7 +33,7 @@ export default class ProductCard extends Vue {
           <div class="el-card-text">
             <span class="el-card-text-title">{this.card.name}</span>
             <div class="el-card-text-rating">
-              <star num={this.card.rating} size={16}></star>
+              <star num={this.card.rating} size='16'></star>
               <span>{this.card.appraisalNumber}个评价</span>
             </div>
             <div class="el-card-text-location">{this.card.location}</div>

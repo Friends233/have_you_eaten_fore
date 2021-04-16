@@ -50,8 +50,8 @@ export default class Carousel extends Vue {
   protected render() {
     return (
       <div>
-        <div class="carousel none-600">
-          <el-card class="carousel-card-left" shadow="never">
+        <div class="carousel">
+          <el-card class="carousel-card-left none-600" shadow="never">
             <h2 class="carousel-card-left-title">美食分类</h2>
             <ul class="carousel-card-left-menu">
               {this.foodTypeList.map((item) => {
@@ -64,18 +64,18 @@ export default class Carousel extends Vue {
               })}
             </ul>
           </el-card>
-          <el-carousel trigger="click" height="446px">
+          <el-carousel trigger="click">
             {this.carouselList.map((item) => {
               return (
                 <li key={item.id} onClick={() => this.$router.push({ name: 'shop' })}>
                   <el-carousel-item>
-                    <img width="949" height="446" src={item.url} />
+                    <img width="100%" height="100%" src={item.url} />
                   </el-carousel-item>
                 </li>
               )
             })}
           </el-carousel>
-          <div class="carousel-card-right">
+          <div class="carousel-card-right none-600">
             {!this.isLogin && (
               <el-card shadow="never">
                 <img class="avatar" src={this.avatarImg} />
@@ -137,6 +137,11 @@ export default class Carousel extends Vue {
   margin-top: 10px;
   .el-carousel {
     width: 870px;
+    height: 27.88rem;
+    ::v-deep .el-carousel__container {
+      width: 100%;
+      height: 100%;
+    }
   }
   &-card-left {
     width: 170px;
@@ -250,6 +255,14 @@ export default class Carousel extends Vue {
     }
     .download-label {
       margin: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .carousel {
+    .el-carousel {
+      width: 100%;
     }
   }
 }
