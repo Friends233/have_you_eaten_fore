@@ -117,7 +117,7 @@ export default class ShopList extends Vue {
             {this.classification.map((item) => {
               return (
                 <div class="shoplist-classification-module">
-                  <p>{item.label}</p>
+                  <p class="none-600">{item.label}</p>
                   <p class="select is-checked">全部</p>
                   <el-checkbox-group v-model={this.selectContent}>
                     {item.content &&
@@ -135,7 +135,9 @@ export default class ShopList extends Vue {
           </div>
           <div class="shoplist-list">
             <div class="shoplist-list-sort">
-              <a class="is-active" href="#">默认</a>
+              <a class="is-active" href="#">
+                默认
+              </a>
               <a href="#">销量</a>
               <a href="#">价格</a>
               <a href="#">好评最多</a>
@@ -143,7 +145,7 @@ export default class ShopList extends Vue {
             <ul class="shoplist-list-content">
               {this.shoplist.map((item, index) => {
                 return (
-                  <li key={item.id} onClick={() => this.$router.push({name:'shop'})}>
+                  <li key={item.id} onClick={() => this.$router.push({ name: 'shop' })}>
                     <div class="top">{index + 1}</div>
                     <div class="left">
                       <img src={item.imgUrl} />
@@ -171,52 +173,56 @@ export default class ShopList extends Vue {
 .shoplist-wrapper {
   .shoplist {
     width: $bodyWidth;
-    margin: 20px auto;
+    margin: 1.25rem auto;
     &-classification {
-      margin-top: 20px;
+      margin-top: 1.25rem;
       border: 1px solid #e5e5e5;
       background: #fff;
-      padding: 0 20px;
+      padding: 0 1.25rem;
 
       &-select {
         display: flex;
         cursor: pointer;
-        padding: 10px 0 10px 20px;
+        padding: 0.63rem 0 0.63rem 1.25rem;
         border-bottom: 1px solid #e5e5e5;
-        font-size: 12px;
+        font-size: 0.75rem;
         .tag-title {
-          width: 65px;
-          padding-top: 10px;
+          width: 4.06rem;
+          padding-top: 0.63rem;
         }
         .tag-list {
-          width: 1152px;
+          width: 72rem;
           &-clear {
-            margin-left: 10px;
+            margin-left: 0.63rem;
             color: #999;
           }
         }
         .el-tag {
-          margin-left: 12px;
-          margin-top: 10px;
+          margin-left: 0.75rem;
+          margin-top: 0.63rem;
+          height: 2rem;
+          padding: 0 0.63rem;
+          line-height: 1.88rem;
+          font-size: 0.75rem;
         }
       }
       &-module {
         display: flex;
-        font-size: 14px;
-        margin-bottom: 20px;
+        font-size: 0.88rem;
+        margin-bottom: 1.25rem;
         p {
-          height: 19px;
-          margin: 20px 10px;
+          height: 1.19rem;
+          margin: 1.25rem 0.63rem;
           text-align: center;
           &:first-child {
-            width: 65px;
+            width: 4.06rem;
           }
         }
         .select {
           color: #666;
           cursor: pointer;
-          padding: 0 15px;
-          border-radius: 10px;
+          padding: 0 0.94rem;
+          border-radius: 0.63rem;
         }
         ::v-deep .is-checked {
           background: #409eff;
@@ -228,17 +234,18 @@ export default class ShopList extends Vue {
         .el-checkbox-group {
           display: flex;
           flex-wrap: wrap;
-          width: 1004px;
-          margin-left: 10px;
+          width: 62.75rem;
+          margin-left: 0.63rem;
           border-bottom: 1px solid #e5e5e5;
-          padding-bottom: 15px;
+          padding-bottom: 0.94rem;
           .select {
-            margin: 20px 0 0 20px;
+            margin: 1.25rem 0 0 1.25rem;
             ::v-deep .el-checkbox__input {
               display: none;
             }
             ::v-deep .el-checkbox__label {
               padding: 0;
+              font-size: 0.88rem;
             }
           }
         }
@@ -247,8 +254,8 @@ export default class ShopList extends Vue {
     &-list {
       background: #fff;
       border: 1px solid #e5e5e5;
-      margin-top: 15px;
-      padding: 0 20px;
+      margin-top: 0.94rem;
+      padding: 0 1.25rem;
       &-sort {
         width: 100%;
         border-bottom: 1px solid #e5e5e5;
@@ -258,8 +265,8 @@ export default class ShopList extends Vue {
         a {
           display: inline-block;
           text-align: center;
-          font-size: 14px;
-          padding: 15px 25px;
+          font-size: 0.88rem;
+          padding: 0.94rem 1.56rem;
           &:hover {
             color: cadetblue;
           }
@@ -269,8 +276,8 @@ export default class ShopList extends Vue {
         li {
           display: flex;
           position: relative;
-          padding: 18px 10px;
-          border-bottom: 1px solid #e5e5e5!important;
+          padding: 1.13rem 0.63rem;
+          border-bottom: 1px solid #e5e5e5 !important;
           cursor: pointer;
           &:hover {
             background-color: #fbfbfb;
@@ -279,32 +286,53 @@ export default class ShopList extends Vue {
             background: #fb6433;
             border-radius: 2px;
             position: absolute;
-            line-height: 13px;
-            width: 20px;
+            line-height: 0.81rem;
+            width: 1.25rem;
             margin-left: -3px;
             margin-top: 3px;
             text-align: center;
-            font-size: 12px;
+            font-size: 0.75rem;
             color: #fff;
           }
+          .left {
+            width: 19%;
+            img {
+              width: 100%;
+            }
+          }
           .right {
-            margin-left: 20px;
+            margin-left: 1.25rem;
             .label {
-              font-size: 16px;
+              font-size: 1rem;
               color: #222;
             }
             .desc,
             .price {
               color: #666;
-              font-size: 12px;
+              font-size: 0.75rem;
             }
             p {
-              margin: 10px 0;
+              margin: 0.63rem 0;
               &:first-child {
                 margin-top: 0;
               }
             }
           }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 600px) {
+  .shoplist-wrapper {
+    .shoplist {
+      width: $bodyMiniWidth;
+      .tag-title {
+        width: 9.06rem !important;
+      }
+      .shoplist-list-content {
+        .left {
+          width: 134px !important;
         }
       }
     }
