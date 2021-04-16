@@ -163,11 +163,17 @@ export default class Shop extends Vue {
   ]
   visible = false
   elTabIndex = 'first'
+
+  addShoppingCart(item: any, e: any) {
+    console.log(item, e, '加入购物车')
+    e.stopPropagation()
+  }
+
   protected render() {
     return (
       <div class="shop-wrapper">
         <eaten-header></eaten-header>
-        <food v-model={this.foodVal} show={this.visible} onHideView={(e: any)=>this.visible = e}></food>
+        <food v-model={this.foodVal} show={this.visible} onHideView={(e: any) => (this.visible = e)}></food>
         <div class="shop">
           <el-breadcrumb class="shop-breadcrumb" separator-class="el-icon-arrow-right">
             <el-breadcrumb-item to={{ name: 'Home' }}>首页</el-breadcrumb-item>
@@ -203,7 +209,7 @@ export default class Shop extends Vue {
                 </ul>
               </div>
             </div>
-            <div class="shop-header-right">
+            <div class="shop-header-right none-600">
               <div>
                 <img src="https://p1.meituan.net/merchant/5cfc2788fbec889cbf14e6a680a99e3d82463.jpg@380w_214h_1e_1c" />
               </div>
@@ -234,7 +240,13 @@ export default class Shop extends Vue {
                             <p class="shop-card-list-sold">{item.sold}</p>
                           </div>
                           <p class="shop-card-list-price">￥{item.price}</p>
-                          <el-button type="primary" icon="el-icon-plus" plain>
+                          <a class="none" onClick={(e: any) => this.addShoppingCart(item, e)}>加入购物车</a>
+                          <el-button
+                            onClick={(e: any) => this.addShoppingCart(item, e)}
+                            class="none-600"
+                            type="primary"
+                            icon="el-icon-plus"
+                            plain>
                             加入购物车
                           </el-button>
                         </li>
@@ -283,7 +295,7 @@ export default class Shop extends Vue {
                             item.imgUrl.map((i: string) => {
                               return (
                                 <el-image
-                                  style="width: 140px; height: 140px"
+                                  style="width: 12.5rem; height: 12.5rem"
                                   src={i}
                                   preview-src-list={item.imgUrl}></el-image>
                               )
@@ -317,42 +329,43 @@ export default class Shop extends Vue {
 .shop-wrapper {
   .shop {
     width: $bodyWidth;
-    margin: 20px auto;
+    margin: 1.25rem auto;
     &-header {
-      margin-top: 20px;
+      margin-top: 1.25rem;
       display: flex;
       justify-content: space-between;
-      font-size: 12px;
+      font-size: 0.75rem;
       color: #666;
       background-color: #fff;
-      border-radius: 10px;
-      padding: 20px 20px 33px;
+      border-radius: 0.63rem;
+      padding: 1.25rem 1.25rem 2.06rem;
       border: 1px solid #e5e5e5;
-      box-shadow: 0 5px 14px 0 rgb(0 0 0 / 10%);
+      box-shadow: 0 5px 0.88rem 0 rgb(0 0 0 / 10%);
       &-left {
-        flex: 0 0 852px;
+        flex: 0 0 53.25rem;
         &-title {
-          font-size: 26px;
-          line-height: 37px;
+          font-size: 1.63rem;
+          line-height: 2.31rem;
           margin: 0;
         }
         & > div {
           border-bottom: 1px solid #e5e5e5;
-          margin-top: 25px;
+          margin-top: 1.56rem;
+          width: 90%;
           &:nth-child(1) {
-            margin-top: 10px;
+            margin-top: 0.63rem;
             & > div {
               display: flex;
-              margin: 10px 0;
+              margin: 0.63rem 0;
               p {
                 margin: 0;
-                font-size: 16px;
+                font-size: 1rem;
               }
             }
           }
           &:nth-child(2) {
             p {
-              font-size: 14px;
+              font-size: 0.88rem;
             }
           }
           &:nth-child(3) {
@@ -360,79 +373,93 @@ export default class Shop extends Vue {
           }
           ul {
             display: flex;
-            margin-top: 10px;
+            margin-top: 0.63rem;
             li {
-              margin-right: 20px;
+              margin-right: 1.25rem;
               text-align: center;
               img {
-                width: 24px;
-                height: 24px;
+                width: 1.5rem;
+                height: 1.5rem;
               }
             }
           }
         }
       }
       &-right {
-        flex: 0 0 214px;
+        flex: 0 0 20.88rem;
       }
     }
     &-card {
-      margin-top: 20px;
+      margin-top: 1.25rem;
       ::v-deep .el-tabs__header .el-tabs__item {
         text-align: center;
-        width: 120px;
-        line-height: 60px;
-        height: 60px;
-        font-size: 17px;
+        width: 11.25rem;
+        line-height: 3.75rem;
+        height: 3.75rem;
+        font-size: 1.06rem;
       }
       ::v-deep .el-tabs__content .el-tabs__item {
-        height: 75px;
-        line-height: 75px;
-        font-size: 16px;
+        height: 4.69rem;
+        line-height: 4.69rem;
+        font-size: 1rem;
       }
       &-list {
-        height: 847px;
+        height: 52.94rem;
         overflow-y: scroll;
+        img {
+          width: 6.25rem;
+        }
+        li {
+          position: relative;
+          > a {
+            position: absolute;
+            right: 8px;
+            bottom: 20px;
+            font-size: 9px;
+            color: #409eff;
+          }
+        }
         &-name {
-          font-size: 16px;
+          font-size: 1rem;
           margin-top: 0;
         }
         &-desc {
-          font-size: 14px;
+          font-size: 0.88rem;
           color: #868a8a;
         }
         &-sold {
-          font-size: 12px;
+          font-size: 0.75rem;
           color: #666;
         }
         &-price {
-          font-size: 30px;
+          font-size: 1.88rem;
           color: #f60;
-          width: 300px;
+          width: 18.75rem;
+          position: relative;
         }
         &-text {
-          margin: 0 30px;
-          width: 350px;
+          margin: 0 1.88rem;
+          width: 33.13rem;
         }
         li {
-          height: 100px;
+          height: 6.25rem;
           display: flex;
           border-bottom: 1px solid #e5e5e5;
-          padding: 10px 5px;
+          padding: 0.63rem 5px;
           cursor: pointer;
           &:hover {
             background-color: #fbfbfb;
           }
           button {
-            height: 40px;
+            height: 2.5rem;
             align-self: center;
-            border-radius: 15px;
-            margin-left: 50px;
+            border-radius: 0.94rem;
+            margin-left: 3.13rem;
           }
         }
       }
       &-appraisal {
-        padding: 10px;
+        padding: 0.63rem;
         &-tag {
           &::after {
             content: '';
@@ -440,56 +467,86 @@ export default class Shop extends Vue {
             clear: both;
           }
           li {
-            padding: 5px 10px;
+            padding: 5px 0.63rem;
             float: left;
-            font-size: 14px;
-            line-height: 34px;
-            padding: 0 10px;
+            font-size: 0.88rem;
+            line-height: 2.13rem;
+            padding: 0 0.63rem;
             border: 1px solid #e5e5e5;
             border-radius: 2px;
-            margin: 0 10px 10px 0;
+            margin: 0 0.63rem 0.63rem 0;
             cursor: pointer;
           }
         }
         &-content {
-          margin-top: 30px;
+          margin-top: 1.88rem;
           li {
             display: flex;
             & > div {
               .user-name {
                 margin: 5px 0;
-                font-size: 16px;
+                font-size: 1rem;
               }
               .mid-line {
                 display: flex;
                 justify-content: space-between;
                 .time {
-                  font-size: 12px;
-                  line-height: 20px;
+                  font-size: 0.75rem;
+                  line-height: 1.25rem;
                   color: #999;
                 }
               }
               .img-list {
-                margin: 15px 0;
+                margin: 0.94rem 0;
                 .el-image {
-                  margin-right: 15px;
+                  margin-right: 0.94rem;
                 }
               }
               .like {
                 text-align: right;
-                margin: 50px 20px 20px 0;
+                margin: 3.13rem 1.25rem 1.25rem 0;
                 cursor: pointer;
                 ::v-deep .el-checkbox__input {
                   display: none;
                 }
               }
               &:first-child {
-                width: 250px;
+                width: 23.13rem;
               }
               &:last-child {
                 border-bottom: 1px solid #e5e5e5;
               }
             }
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 600px) {
+  .shop-wrapper {
+    .shop {
+      width: $bodyMiniWidth;
+      &-header {
+        &-left {
+          flex: 1;
+        }
+      }
+      &-card {
+        margin-top: 1.25rem;
+        ::v-deep .el-tabs__header .el-tabs__item {
+          text-align: center;
+          width: 8.25rem !important;
+        }
+        &-list {
+          img {
+            width: 5.25rem;
+            height: 5.25rem;
+          }
+          &-price {
+            font-size: 1rem;
+            color: #f60;
+            width: 18.75rem;
           }
         }
       }
