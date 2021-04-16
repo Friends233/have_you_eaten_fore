@@ -82,7 +82,7 @@ export default class Appraisal extends Vue {
             return (
               <li key={item.id}>
                 <div>
-                  <img width="60" src={item.avatar} />
+                  <img src={item.avatar} />
                 </div>
                 <div>
                   <p class="user-name">{item.name}</p>
@@ -96,7 +96,6 @@ export default class Appraisal extends Vue {
                       item.imgUrl.map((i: string) => {
                         return (
                           <el-image
-                            style="width: 130px; height: 130px"
                             src={i}
                             preview-src-list={item.imgUrl}></el-image>
                         )
@@ -121,7 +120,7 @@ export default class Appraisal extends Vue {
 </script>
 <style scoped lang="scss">
 .shop-card-appraisal {
-  padding: 10px;
+  padding: 0.63rem;
   &-tag {
     &::after {
       content: '';
@@ -129,51 +128,56 @@ export default class Appraisal extends Vue {
       clear: both;
     }
     li {
-      padding: 5px 10px;
+      padding: 5px 0.63rem;
       float: left;
-      font-size: 14px;
-      line-height: 34px;
-      padding: 0 10px;
+      font-size: 0.88rem;
+      line-height: 2.13rem;
+      padding: 0 0.63rem;
       border: 1px solid #e5e5e5;
       border-radius: 2px;
-      margin: 0 10px 10px 0;
+      margin: 0 0.63rem 0.63rem 0;
       cursor: pointer;
     }
   }
   &-content {
-    margin-top: 30px;
+    margin-top: 1.88rem;
     li {
       display: flex;
       & > div {
+        img {
+          width: 3.75rem;
+        }
         .user-name {
           margin: 5px 0;
-          font-size: 16px;
+          font-size: 1rem;
         }
         .mid-line {
           display: flex;
           justify-content: space-between;
           .time {
-            font-size: 12px;
-            line-height: 20px;
+            font-size: 0.75rem;
+            line-height: 1.25rem;
             color: #999;
           }
         }
         .img-list {
-          margin: 15px 0;
+          margin: 0.94rem 0;
           .el-image {
-            margin-right: 10px;
+            margin-right: 0.63rem;
+            width: 10.3rem;
+            height: 10.3rem;
           }
         }
         .like {
           text-align: right;
-          margin: 50px 20px 20px 0;
+          margin: 3.13rem 1.25rem 1.25rem 0;
           cursor: pointer;
           ::v-deep .el-checkbox__input {
             display: none;
           }
         }
         &:last-child {
-          margin-left: 15px;
+          margin-left: 0.94rem;
           border-bottom: 1px solid #e5e5e5;
         }
       }

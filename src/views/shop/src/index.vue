@@ -240,7 +240,9 @@ export default class Shop extends Vue {
                             <p class="shop-card-list-sold">{item.sold}</p>
                           </div>
                           <p class="shop-card-list-price">￥{item.price}</p>
-                          <a class="none" onClick={(e: any) => this.addShoppingCart(item, e)}>加入购物车</a>
+                          <a class="none" onClick={(e: any) => this.addShoppingCart(item, e)}>
+                            加入购物车
+                          </a>
                           <el-button
                             onClick={(e: any) => this.addShoppingCart(item, e)}
                             class="none-600"
@@ -270,49 +272,7 @@ export default class Shop extends Vue {
               </el-tabs>
             </el-tab-pane>
             <el-tab-pane class="shop-card-appraisal" label="评价">
-              <h2 class="shop-card-appraisal-total">2158条网友点评</h2>
-              <ul class="shop-card-appraisal-tag">
-                {this.appraisalTags.map((item) => {
-                  return <li>{item}</li>
-                })}
-              </ul>
-              <ul class="shop-card-appraisal-content">
-                {this.appraisals.map((item: UserApp) => {
-                  return (
-                    <li key={item.id}>
-                      <div>
-                        <img width="60" src={item.avatar} />
-                      </div>
-                      <div>
-                        <p class="user-name">{item.name}</p>
-                        <div class="mid-line">
-                          <star showText={true} num={item.rating} size={'13'}></star>
-                          <span class="time">{item.time}</span>
-                        </div>
-                        <span class="appraisal-content">{item.content}</span>
-                        <div class="img-list">
-                          {item.imgUrl &&
-                            item.imgUrl.map((i: string) => {
-                              return (
-                                <el-image
-                                  style="width: 12.5rem; height: 12.5rem"
-                                  src={i}
-                                  preview-src-list={item.imgUrl}></el-image>
-                              )
-                            })}
-                        </div>
-                        <div class="like">
-                          <el-checkbox text-color="">
-                            <span>
-                              <i class="el-icon-thumb"></i>点赞
-                            </span>
-                          </el-checkbox>
-                        </div>
-                      </div>
-                    </li>
-                  )
-                })}
-              </ul>
+            <Appraisal></Appraisal>
             </el-tab-pane>
             <el-tab-pane label="商家信息">商家信息</el-tab-pane>
             <el-tab-pane label="店铺管理">店铺管理</el-tab-pane>
