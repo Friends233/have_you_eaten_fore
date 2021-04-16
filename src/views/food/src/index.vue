@@ -33,8 +33,7 @@ export default class Food extends Vue {
         custom-class="food-dialog"
         modal-append-to-body={false}
         visible={this.visible}
-        {...{ on: { 'update:visible': this.hideView } }}
-        width="600px">
+        {...{ on: { 'update:visible': this.hideView } }}>
         <div class="img-backgorund">
           <img src="https://img.meituan.net/msmerchant/c344e8b9ab73f43596eac885b790f175148974.jpg@600w_600h_1l" />
         </div>
@@ -86,6 +85,7 @@ export default class Food extends Vue {
 <style scoped lang="scss">
 ::v-deep .food-dialog {
   background-color: #f8f8f8;
+  width: 600px;
   .el-dialog__headerbtn {
     left: 20px;
     .el-dialog__close {
@@ -104,9 +104,11 @@ export default class Food extends Vue {
     padding: 0;
     .img-backgorund {
       margin-top: -30px;
+      img {
+        width: 100%;
+      }
     }
     .food-dialog-footer {
-      width: 550px;
       background-color: white;
       margin: 20px auto;
       border-radius: 6px;
@@ -131,7 +133,6 @@ export default class Food extends Vue {
       }
     }
     .food-dialog-mid {
-      width: 550px;
       background-color: white;
       margin: 10px auto;
       border-radius: 6px;
@@ -192,6 +193,11 @@ export default class Food extends Vue {
         }
       }
     }
+  }
+}
+@media screen and (max-width: 600px) {
+  ::v-deep .food-dialog {
+    width: 90%;
   }
 }
 </style>
