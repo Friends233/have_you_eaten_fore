@@ -60,6 +60,16 @@ const routes: Array<RouteConfig> = [
         name: 'account',
         component: () => import('@/views/account')
       },
+      {
+        path: '/coupon',
+        name: 'coupon',
+        component: () => import('@/views/coupon')
+      },
+      {
+        path: '/favorites',
+        name: 'favorites',
+        component: () => import('@/views/favorites')
+      },
     ]
   }
 ]

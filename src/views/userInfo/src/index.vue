@@ -17,12 +17,12 @@ export default class UserInfo extends Vue {
     { label: '待付款', type: 'mid', routLink: { name: 'order', index: 2 } },
     { label: '待评价', type: 'mid', routLink: { name: 'order', index: 3 } },
     { label: '退款/售后', type: 'mid', routLink: { name: 'order', index: 4 } },
-    { label: '我的收藏', type: 'big', routLink: { name: '', index: 0 } },
-    { label: '收藏的商家', type: 'mid', routLink: { name: '', index: 0 } },
-    { label: '收藏的团购', type: 'mid', routLink: { name: '', index: 0 } },
-    { label: '抵用券', type: 'big', routLink: { name: '', index: 0 } },
-    { label: '可用卷', type: 'mid', routLink: { name: '', index: 0 } },
-    { label: '失效卷', type: 'mid', routLink: { name: '', index: 0 } },
+    { label: '我的收藏', type: 'big', routLink: { name: 'favorites', index: 1 } },
+    { label: '收藏的商家', type: 'mid', routLink: { name: 'favorites', index: 1 } },
+    { label: '收藏的团购', type: 'mid', routLink: { name: 'favorites', index: 2 } },
+    { label: '抵用券', type: 'big', routLink: { name: 'coupon', index: 1 } },
+    { label: '可用卷', type: 'mid', routLink: { name: 'coupon', index: 1 } },
+    { label: '失效卷', type: 'mid', routLink: { name: 'coupon', index: 2 } },
     { label: '个人信息', type: 'big', routLink: { name: 'account', index: 1 } },
     { label: '账户设置', type: 'mid', routLink: { name: 'account', index: 1 } }
   ]
