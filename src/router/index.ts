@@ -1,6 +1,10 @@
 import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import Home from '@/views/home'
+import Order from '@/views/order'
+import Account from '@/views/account'
+import Coupon from '@/views/coupon'
+import Favorites from '@/views/favorites'
 
 Vue.use(VueRouter)
 
@@ -53,22 +57,22 @@ const routes: Array<RouteConfig> = [
       {
         path: '/order',
         name: 'order',
-        component: () => import('@/views/order')
+        component: Order
       },
       {
         path: '/account',
         name: 'account',
-        component: () => import('@/views/account')
+        component: Account
       },
       {
         path: '/coupon',
         name: 'coupon',
-        component: () => import('@/views/coupon')
+        component: Coupon
       },
       {
         path: '/favorites',
         name: 'favorites',
-        component: () => import('@/views/favorites')
+        component: Favorites
       },
     ]
   }

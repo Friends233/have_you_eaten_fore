@@ -29,8 +29,9 @@ export default class UserInfo extends Vue {
 
   goView(link: any) {
     const { name, index } = link
-    if (index !== 0 && name !== '' && this.$route.name !== name) {
-      this.$router.push({ name: name, params: { index } })
+    if (index !== 0 && name !== '') {
+      this.$router.push({name:'Home'})
+      this.$router.push({ path:`/${name}?index=${index}`})
     }
   }
 
@@ -50,7 +51,7 @@ export default class UserInfo extends Vue {
             })}
           </ul>
           <div class="userInfo-mid-right">
-            <router-view></router-view>
+            <router-view key={this.$route.path}></router-view>
           </div>
         </div>
         <eaten-footer></eaten-footer>

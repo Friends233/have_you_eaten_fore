@@ -19,6 +19,7 @@ Vue.config.productionTip = false;
   store.dispatch('refreshUserInfo')
 })();
 
+
 new Vue({
   router,
   store,

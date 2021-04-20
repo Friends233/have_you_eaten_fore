@@ -3,10 +3,12 @@
  * @Author: Friends233
 -->
 <script lang="tsx">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue, Watch } from 'vue-property-decorator'
 
 const typeToText = ['', '待付款', '待使用', '待评价', '售后']
-const typeToPrompt = ['总价','需付款','','','']
+const typeToPrompt = ['总价', '需付款', '', '', '']
+
+const indexToView = ['', 'first', 'second', 'third', 'fourth']
 
 @Component({
   components: {}
@@ -80,6 +82,12 @@ export default class Order extends Vue {
     ]
   }
 
+
+  @Watch('$route', { deep: true })
+  listenersRouter(val: any) {
+    this.activeName = indexToView[Number(val.query.index)] || 'first'
+  }
+
   protected render() {
     return (
       <el-tabs v-model={this.activeName}>
@@ -95,7 +103,9 @@ export default class Order extends Vue {
                     <span class="desc">{item.desc}</span>
                     <span class="date">{item.date}</span>
                   </div>
-                  <p class="price">{typeToPrompt[item.type]}：{item.price}</p>
+                  <p class="price">
+                    {typeToPrompt[item.type]}：{item.price}
+                  </p>
                   <p class="news">{typeToText[item.type]}</p>
                 </li>
               )
@@ -114,33 +124,16 @@ export default class Order extends Vue {
                     <span class="desc">{item.desc}</span>
                     <span class="date">{item.date}</span>
                   </div>
-                  <p class="price">{typeToPrompt[item.type]}：{item.price}</p>
+                  <p class="price">
+                    {typeToPrompt[item.type]}：{item.price}
+                  </p>
                   <p class="news">{typeToText[item.type]}</p>
                 </li>
               )
             })}
           </ul>
         </el-tab-pane>
-        <el-tab-pane label="待使用" name="third">
-          <ul class="order-list">
-            {this.orderData.third.map((item) => {
-              return (
-                <li>
-                  <img src={item.url} />
-                  <div>
-                    <span class="label">{item.label}</span>
-                    <span class="num">{item.num} 间，</span>
-                    <span class="desc">{item.desc}</span>
-                    <span class="date">{item.date}</span>
-                  </div>
-                  <p class="price">{typeToPrompt[item.type]}：{item.price}</p>
-                  <p class="news">{typeToText[item.type]}</p>
-                </li>
-              )
-            })}
-          </ul>
-        </el-tab-pane>
-        <el-tab-pane label="待评价" name="fourth">
+        <el-tab-pane label="待评价" name="third">
           <ul class="order-list">
             {this.orderData.fourth.map((item) => {
               return (
@@ -152,14 +145,16 @@ export default class Order extends Vue {
                     <span class="desc">{item.desc}</span>
                     <span class="date">{item.date}</span>
                   </div>
-                  <p class="price">{typeToPrompt[item.type]}：{item.price}</p>
+                  <p class="price">
+                    {typeToPrompt[item.type]}：{item.price}
+                  </p>
                   <p class="news">{typeToText[item.type]}</p>
                 </li>
               )
             })}
           </ul>
         </el-tab-pane>
-        <el-tab-pane label="退款/售后" name="fifth">
+        <el-tab-pane label="退款/售后" name="fourth">
           <ul class="order-list">
             {this.orderData.firest.map((item) => {
               return (
@@ -171,7 +166,9 @@ export default class Order extends Vue {
                     <span class="desc">{item.desc}</span>
                     <span class="date">{item.date}</span>
                   </div>
-                  <p class="price">{typeToPrompt[item.type]}：{item.price}</p>
+                  <p class="price">
+                    {typeToPrompt[item.type]}：{item.price}
+                  </p>
                   <p class="news">{typeToText[item.type]}</p>
                 </li>
               )

@@ -3,7 +3,9 @@
  * @Author: Friends233
 -->
 <script lang="tsx">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue, Watch } from 'vue-property-decorator'
+
+const indexToView = ['', 'first', 'second', 'third', 'fourth']
 
 @Component({
   components: {}
@@ -11,6 +13,10 @@ import { Component, Vue } from 'vue-property-decorator'
 export default class Order extends Vue {
   activeName = 'first'
 
+  @Watch('$route', { deep: true })
+  listenersRouter(val: any) {
+    this.activeName = indexToView[Number(val.query.index)] || 'first'
+  }
   protected render() {
     return (
       <el-tabs v-model={this.activeName}>
