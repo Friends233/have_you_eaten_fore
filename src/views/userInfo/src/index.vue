@@ -87,6 +87,10 @@ export default class UserInfo extends Vue {
         font-size: 16px;
         color: #222222;
         font-weight: 500;
+        margin-top: 28px;
+        &:first-child {
+          margin-top: 0;
+        }
         &:hover {
           color: #fe8c00;
         }
