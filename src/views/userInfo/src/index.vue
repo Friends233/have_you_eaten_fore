@@ -29,7 +29,7 @@ export default class UserInfo extends Vue {
 
   goView(link: any) {
     const { name, index } = link
-    if (index !== 0 && name !== '') {
+    if (index !== 0 && name !== '' && this.$route.name !== name) {
       this.$router.push({ name: name, params: { index } })
     }
   }
