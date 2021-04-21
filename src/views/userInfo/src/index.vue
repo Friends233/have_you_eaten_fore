@@ -65,6 +65,7 @@ export default class UserInfo extends Vue {
 .userInfo {
   &-mid {
     width: $bodyWidth;
+    min-height: 710px;
     margin: 30px auto;
     display: flex;
     &-left {

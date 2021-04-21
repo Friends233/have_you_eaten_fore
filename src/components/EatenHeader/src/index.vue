@@ -21,8 +21,8 @@ export default class EatenHeader extends Vue {
       value: '个人中心',
       children: [
         { id: '1-1', value: '我的订单', routerLink: 'order' },
-        { id: '1-3', value: '我的收藏', routerLink: 'test2' },
-        { id: '1-2', value: '抵用券', routerLink: 'test3' },
+        { id: '1-3', value: '我的收藏', routerLink: 'favorites' },
+        { id: '1-2', value: '抵用券', routerLink: 'coupon' },
         { id: '1-4', value: '账户设置', routerLink: 'userInfo' }
       ]
     },
