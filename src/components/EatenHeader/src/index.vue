@@ -6,13 +6,15 @@
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import Logo from '@/components/logo/index'
 import { createRandomId } from '@/utils/index'
+import ShoppingCart from '@/components/Shoppingcart'
 import { Nav } from './index'
 
 @Component({
-  components: { Logo }
+  components: { Logo, ShoppingCart }
 })
 export default class EatenHeader extends Vue {
   @Prop({ default: false, type: Boolean }) readonly show: boolean | undefined
+
   // 顶部的菜单
   topNavMenu: Array<Nav> = [
     {
@@ -34,7 +36,8 @@ export default class EatenHeader extends Vue {
     {
       id: '3',
       value: '购物车',
-      routerLink: 'shoppingCart'
+      routerLink: 'test7',
+      onClick: this.showShoppingCart
     },
     {
       id: '4',
@@ -60,6 +63,11 @@ export default class EatenHeader extends Vue {
   // 登陆状态
   get isLogin() {
     return this.$store.getters.loginStatus
+  }
+
+  showShoppingCart() {
+    const ref: any = this.$refs
+    ref.spc.showDialog()
   }
 
   handleSelect(key: string) {
@@ -92,7 +100,11 @@ export default class EatenHeader extends Vue {
           </el-submenu>
         )
       } else {
-        return <el-menu-item index={item.routerLink}>{item.value}</el-menu-item>
+        return (
+          <el-menu-item index={item.routerLink}>
+            <span onClick={() => item.onClick && item.onClick()}>{item.value}</span>
+          </el-menu-item>
+        )
       }
     })
   }
@@ -100,6 +112,7 @@ export default class EatenHeader extends Vue {
   protected render() {
     return (
       <div class="eaten-header">
+        <ShoppingCart ref="spc"></ShoppingCart>
         <div class="eaten-header-top">
           <div class="eaten-header-top-left">
             <div class="eaten-header-top-left-address">

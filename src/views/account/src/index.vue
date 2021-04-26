@@ -56,7 +56,6 @@ export default class Account extends Vue {
             <div class="avatar account-content-text">
               <img src={this.avatar} />
             </div>
-            <el-button onClick={this.editAvatar}>{this.getText(0)}</el-button>
           </li>
           <li>
             <span class="account-content-label">昵称</span>
