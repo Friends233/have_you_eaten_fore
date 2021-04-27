@@ -82,7 +82,6 @@ export default class Order extends Vue {
     ]
   }
 
-
   @Watch('$route', { deep: true })
   listenersRouter(val: any) {
     this.activeName = indexToView[Number(val.query.index)] || 'first'
@@ -106,7 +105,7 @@ export default class Order extends Vue {
                   <p class="price">
                     {typeToPrompt[item.type]}：{item.price}
                   </p>
-                  <p class="news">{typeToText[item.type]}</p>
+                  <p class="news none-600">{typeToText[item.type]}</p>
                 </li>
               )
             })}
@@ -127,7 +126,7 @@ export default class Order extends Vue {
                   <p class="price">
                     {typeToPrompt[item.type]}：{item.price}
                   </p>
-                  <p class="news">{typeToText[item.type]}</p>
+                  <p class="news none-600">{typeToText[item.type]}</p>
                 </li>
               )
             })}
@@ -148,7 +147,7 @@ export default class Order extends Vue {
                   <p class="price">
                     {typeToPrompt[item.type]}：{item.price}
                   </p>
-                  <p class="news">{typeToText[item.type]}</p>
+                  <p class="news none-600">{typeToText[item.type]}</p>
                 </li>
               )
             })}
@@ -169,7 +168,7 @@ export default class Order extends Vue {
                   <p class="price">
                     {typeToPrompt[item.type]}：{item.price}
                   </p>
-                  <p class="news">{typeToText[item.type]}</p>
+                  <p class="news none-600">{typeToText[item.type]}</p>
                 </li>
               )
             })}
@@ -240,6 +239,27 @@ export default class Order extends Vue {
       }
       .news {
         flex: 0 0 6.26rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .el-tabs {
+    ::v-deep .el-tabs__nav-scroll {
+      .el-tabs__item {
+        font-size: 8px;
+        padding: 0 5px;
+        height: 30px;
+        line-height: 30px;
+      }
+    }
+    .order-list {
+      > li {
+        padding-right: 0;
+        .price {
+          flex: 0 0 4.5rem;
+        }
       }
     }
   }

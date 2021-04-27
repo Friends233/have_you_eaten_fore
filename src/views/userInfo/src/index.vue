@@ -30,8 +30,8 @@ export default class UserInfo extends Vue {
   goView(link: any) {
     const { name, index } = link
     if (index !== 0 && name !== '') {
-      this.$router.push({name:'Home'})
-      this.$router.push({ path:`/${name}?index=${index}`})
+      this.$router.push({ name: 'Home' })
+      this.$router.push({ path: `/${name}?index=${index}` })
     }
   }
 
@@ -69,26 +69,26 @@ export default class UserInfo extends Vue {
     margin: 30px auto;
     display: flex;
     &-left {
-      padding: 15px 20px;
+      padding: 0.94rem 1.25rem;
       background: #ffffff;
       border: 1px solid #e5e5e5;
       border-radius: 4px;
-      width: 230px;
+      width: 14.38rem;
       box-sizing: border-box;
       li {
-        margin-bottom: 15px;
+        margin-bottom: 0.94rem;
         cursor: pointer;
         i {
-          font-size: 12px;
+          font-size: 0.75rem;
           font-weight: 700;
           float: right;
         }
       }
       .big {
-        font-size: 16px;
+        font-size: 1rem;
         color: #222222;
         font-weight: 500;
-        margin-top: 28px;
+        margin-top: 1.75rem;
         &:first-child {
           margin-top: 0;
         }
@@ -97,18 +97,32 @@ export default class UserInfo extends Vue {
         }
       }
       .mid {
-        font-size: 14px;
+        font-size: 0.88rem;
         color: #666;
       }
     }
     &-right {
-      width: 908px;
-      padding: 15px 20px;
+      width: 56.75rem;
+      padding: 0.94rem 1.25rem;
       background: #ffffff;
       border: 1px solid #e5e5e5;
       border-radius: 4px;
       box-sizing: border-box;
-      margin-left: 10px;
+      margin-left: 0.63rem;
+    }
+  }
+}
+@media screen and (max-width: 600px) {
+  .userInfo {
+    &-mid {
+      width: $bodyMiniWidth;
+      min-height: 400px;
+      &-left {
+        width: 25%;
+      }
+      &-right {
+        width: 70%;
+      }
     }
   }
 }

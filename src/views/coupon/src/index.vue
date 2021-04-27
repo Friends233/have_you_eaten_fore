@@ -3,7 +3,7 @@
  * @Author: Friends233
 -->
 <script lang="tsx">
-import { Component, Vue,Watch } from 'vue-property-decorator'
+import { Component, Vue, Watch } from 'vue-property-decorator'
 
 const indexToView = ['', 'first', 'second', 'third', 'fourth']
 
@@ -34,6 +34,16 @@ export default class Order extends Vue {
 </script>
 <style scoped lang="scss">
 @import '@/styles/constant.scss';
-.el-tabs {
+@media screen and (max-width: 600px) {
+  .el-tabs {
+    ::v-deep .el-tabs__nav-scroll {
+      .el-tabs__item {
+        font-size: 8px;
+        padding: 0 5px;
+        height: 30px;
+        line-height: 30px;
+      }
+    }
+  }
 }
 </style>

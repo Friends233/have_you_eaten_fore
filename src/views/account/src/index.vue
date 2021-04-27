@@ -22,27 +22,27 @@ export default class Account extends Vue {
 
   // 修改头像
   editAvatar() {
-    this.$set(this.edit,0,!this.edit[0])
+    this.$set(this.edit, 0, !this.edit[0])
   }
 
   // 修改用户名
   editName() {
-    this.$set(this.edit,1,!this.edit[1])
+    this.$set(this.edit, 1, !this.edit[1])
   }
 
   // 修改地址
   editAddress() {
-    this.$set(this.edit,2,!this.edit[2])
+    this.$set(this.edit, 2, !this.edit[2])
   }
 
   // 修改电话
   editPhoneNumber() {
-    this.$set(this.edit,3,!this.edit[3])
+    this.$set(this.edit, 3, !this.edit[3])
   }
 
   // 修改密码
   editPassword() {
-    this.$set(this.edit,4,!this.edit[4])
+    this.$set(this.edit, 4, !this.edit[4])
   }
 
   protected render() {
@@ -109,38 +109,61 @@ export default class Account extends Vue {
   &-content {
     li {
       border-top: 1px solid #e5e5e5;
-      padding: 30px 0;
+      padding: 1.88rem 0;
       display: flex;
       align-items: center;
       .avatar {
         display: inline-block;
         img {
-          width: 48px;
-          height: 48px;
-          border-radius: 48px;
+          width: 3rem;
+          height: 3rem;
+          border-radius: 3rem;
         }
       }
       .el-button {
-        border-radius: 13px;
+        border-radius: 0.81rem;
       }
     }
     &-label {
-      width: 90px;
-      font-size: 18px;
-      padding-right: 15px;
+      width: 5.63rem;
+      font-size: 1.13rem;
+      padding-right: 0.94rem;
       display: inline-block;
       text-align: right;
       border-right: 1px solid #e5e5e5;
     }
     &-text {
-      margin-left: 30px;
+      margin-left: 1.88rem;
       flex: 1;
       span {
-        font-size: 12px;
+        font-size: 0.75rem;
         color: #666666;
       }
       .el-input {
-        width: 250px;
+        width: 15.63rem;
+        font-size: 0.88rem;
+      }
+    }
+  }
+}
+@media screen and (max-width: 600px) {
+  .account-content {
+    > li {
+      height: 30px;
+      .el-button {
+        font-size: 8px !important;
+        padding: 5px !important;
+      }
+      .el-input {
+        width: 80%;
+        ::v-deep input {
+          height: 28px !important;
+          line-height: 28px !important;
+          padding: 0 5px !important;
+        }
+        ::v-deep span i {
+          line-height: 28px !important;
+        }
       }
     }
   }
