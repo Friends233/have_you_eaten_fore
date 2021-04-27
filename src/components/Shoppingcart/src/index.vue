@@ -10,9 +10,11 @@ import { ShoppingCartConifg } from './index'
   components: {}
 })
 export default class ShoppingCart extends Vue {
+  @Prop({ default: true, type: Boolean }) showCart?: boolean
+
   private visible = false
   private foodCheckbox: boolean[] = []
-  private data: ShoppingCartConifg[] = [
+  data: ShoppingCartConifg[] = [
     {
       name: '黄金甲.泡椒牛肉米线.',
       img:
@@ -96,12 +98,12 @@ export default class ShoppingCart extends Vue {
   ]
 
   created() {
-    this.init()
+    this.init(false)
   }
 
-  init() {
+  init(bl: boolean) {
     this.data.forEach((item) => {
-      this.foodCheckbox.push(false)
+      this.foodCheckbox.push(bl)
     })
   }
 
@@ -128,13 +130,9 @@ export default class ShoppingCart extends Vue {
 
   checkAll() {
     if (this.foodCheckbox.includes(false)) {
-      this.foodCheckbox = this.foodCheckbox.map(() => {
-        return true
-      })
+      this.init(true)
     } else {
-      this.foodCheckbox = this.foodCheckbox.map(() => {
-        return false
-      })
+      this.init(false)
     }
   }
 
@@ -149,6 +147,14 @@ export default class ShoppingCart extends Vue {
   protected render() {
     return (
       <div class="shoppingcart">
+        {this.showCart && (
+          <div class="top-cart" onClick={this.showDialog}>
+            <el-badge value={this.data.length}>
+              <i class="el-icon-shopping-cart-1"></i>
+            </el-badge>
+          </div>
+        )}
+
         <el-drawer
           title="购物车"
           visible={this.visible}
@@ -180,7 +186,10 @@ export default class ShoppingCart extends Vue {
               )
             })}
           </ul>
-          <el-button type="primary" disabled={this.isDisabled} onClick={this.submint}>
+          <el-button
+            type="primary"
+            disabled={this.isDisabled || (this.data && this.data.length !== 0)}
+            onClick={this.submint}>
             去结算
           </el-button>
         </el-drawer>
@@ -201,6 +210,26 @@ export default class ShoppingCart extends Vue {
     }
     .el-drawer__body {
       position: relative;
+    }
+  }
+  .top-cart {
+    position: fixed;
+    right: 50px;
+    bottom: 80px;
+    border: 1px solid #000;
+    border-radius: 50%;
+    padding: 5px;
+    cursor: pointer;
+    z-index: 99;
+    &:hover {
+      border-color: #409eff;
+      i {
+        color: #409eff;
+      }
+    }
+    i {
+      font-size: 35px;
+      color: #000;
     }
   }
   &-btn {

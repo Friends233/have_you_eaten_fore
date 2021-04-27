@@ -112,7 +112,7 @@ export default class EatenHeader extends Vue {
   protected render() {
     return (
       <div class="eaten-header">
-        <shopping-cart ref="spc"></shopping-cart>
+        <shopping-cart ref="spc" showCart={false}></shopping-cart>
         <div class="eaten-header-top">
           <div class="eaten-header-top-left">
             <div class="eaten-header-top-left-address">
