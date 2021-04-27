@@ -3,7 +3,7 @@
  * @Author: Friends233
 -->
 <script lang="tsx">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue,Prop } from 'vue-property-decorator'
 import { ShoppingCartConifg } from './index'
 
 @Component({
