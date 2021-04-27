@@ -140,6 +140,9 @@ export default class EatenHeader extends Vue {
               </div>
             </div>
           </div>
+          <div class="user-ico none" onClick={() => this.$router.push({ name: 'account' })}>
+            <i class="el-icon-user"></i>
+          </div>
           <div class="eaten-header-top-right none-600">
             <el-menu default-active="activeIndex" mode="horizontal" onSelect={this.handleSelect}>
               {this.renderTopNavMenu(this.topNavMenu)}
@@ -187,6 +190,13 @@ export default class EatenHeader extends Vue {
     padding: 0 $padding;
     display: flex;
     justify-content: space-between;
+    .user-ico {
+      line-height: 40px;
+      cursor: pointer;
+      i {
+        font-size: 15px;
+      }
+    }
     &-left {
       padding-top: 12px;
       display: flex;
