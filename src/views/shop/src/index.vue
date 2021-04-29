@@ -10,6 +10,7 @@ import EatenFooter from '@/components/EatenFooter/index'
 import Appraisal from '@/components/Appraisal/index'
 import Food from '@/views/food'
 import { Goods, UserApp, GoodDetails, Shops } from './index'
+import { getShop } from '@/api/home'
 
 @Component({
   components: { EatenHeader, EatenFooter, Star, Food, Appraisal }
@@ -169,26 +170,18 @@ export default class Shop extends Vue {
     }
   ]
 
-  shop: Shops = {
-    name: '晓寿司（望京soho店)',
-    rating: 4.8,
-    price: 63,
-    address: '朝阳区望京街望京soho-T1楼2层1220铺',
-    phoneNumber: '010-57076520',
-    business: '周一至周日 10:00-21:00',
-    desc: ['wifi', 'stop'],
-    coverImg: [
-      'https://p1.meituan.net/merchant/5cfc2788fbec889cbf14e6a680a99e3d82463.jpg@380w_214h_1e_1c',
-      'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
-      'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg'
-    ]
-  }
+  shop: Shops = {}
   visible = false
   elTabIndex = 'first'
 
   addShoppingCart(item: any, e: any) {
     console.log(item, e, '加入购物车')
     e.stopPropagation()
+  }
+
+  async created() {
+    const data = await getShop(this.$route.params.id)
+    this.shop = data.data
   }
 
   protected render() {

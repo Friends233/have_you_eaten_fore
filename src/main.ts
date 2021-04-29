@@ -10,8 +10,10 @@ import '@/styles/index.scss'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
+// 购物车
 import shoppingCart from '@/components/Shoppingcart/src/global'
 
+// 购物车挂载到全局
 Vue.use(shoppingCart)
 Vue.use(ElementUI)
 

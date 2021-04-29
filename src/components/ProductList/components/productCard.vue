@@ -3,7 +3,7 @@
  * @Author: Friends233
 -->
 <script lang="tsx">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue, Prop } from 'vue-property-decorator'
 import Star from '@/components/Star/index'
 import { CardData } from '../src/index'
 
@@ -11,15 +11,7 @@ import { CardData } from '../src/index'
   components: { Star }
 })
 export default class ProductCard extends Vue {
-  card: CardData = {
-    id: '1',
-    name: '晓寿司（望京soho店）',
-    price: 47.5,
-    rating: 4.5,
-    imgUrl: 'https://p0.meituan.net/merchant/5cfc2788fbec889cbf14e6a680a99e3d82463.jpg@214w_120h_1e_1c',
-    appraisalNumber: 2164,
-    location: '望京'
-  }
+  @Prop() card!: CardData
 
   goShop() {
     this.$router.push({ name: 'shop', params: { id: this.card.id } })
@@ -33,7 +25,7 @@ export default class ProductCard extends Vue {
           <div class="el-card-text">
             <span class="el-card-text-title">{this.card.name}</span>
             <div class="el-card-text-rating">
-              <star num={this.card.rating} size='16'></star>
+              <star num={this.card.rating} size="16"></star>
               <span>{this.card.appraisalNumber}个评价</span>
             </div>
             <div class="el-card-text-location">{this.card.location}</div>

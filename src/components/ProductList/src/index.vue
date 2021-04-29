@@ -5,12 +5,18 @@
 <script lang="tsx">
 import { Component, Vue } from 'vue-property-decorator'
 import ProductCard from '../components/productCard.vue'
+import { getHome } from '@/api/home'
 
 @Component({
   components: { ProductCard }
 })
 export default class ProductList extends Vue {
   cardList: Array<number> = [1, 2, 3, 4, 5, 6]
+  cardData: any = {}
+  async created() {
+    const data = await getHome()
+    this.cardData = data.data
+  }
 
   protected render() {
     return (
@@ -18,12 +24,14 @@ export default class ProductList extends Vue {
         <ul class="product-list product-list-recommend">
           <div class="product-card-header">
             <span class="product-card-header-title">附近热卖推荐</span>
-            <span class="product-card-header-all">全部<i class="el-icon-arrow-right"></i></span>
+            <span class="product-card-header-all">
+              全部<i class="el-icon-arrow-right"></i>
+            </span>
           </div>
-          {this.cardList.map((item) => {
+          {this.cardData.recommend && this.cardData.recommend.map((item: any) => {
             return (
               <li class="product-card-wrapper">
-                <product-card></product-card>
+                <product-card card={item}></product-card>
               </li>
             )
           })}
@@ -31,12 +39,14 @@ export default class ProductList extends Vue {
         <ul class="product-list product-list-find">
           <div class="product-card-header">
             <span class="product-card-header-title">附近热卖推荐</span>
-            <span class="product-card-header-all">全部<i class="el-icon-arrow-right"></i></span>
+            <span class="product-card-header-all">
+              全部<i class="el-icon-arrow-right"></i>
+            </span>
           </div>
-          {this.cardList.map((item) => {
+          {this.cardData.find && this.cardData.find.map((item: any) => {
             return (
               <li class="product-card-wrapper">
-                <product-card></product-card>
+                <product-card card={item}></product-card>
               </li>
             )
           })}
@@ -44,12 +54,14 @@ export default class ProductList extends Vue {
         <ul class="product-list product-list-supermarket">
           <div class="product-card-header">
             <span class="product-card-header-title">附近热卖推荐</span>
-            <span class="product-card-header-all">全部<i class="el-icon-arrow-right"></i></span>
+            <span class="product-card-header-all">
+              全部<i class="el-icon-arrow-right"></i>
+            </span>
           </div>
-          {this.cardList.map((item) => {
+          {this.cardData.supermarket && this.cardData.supermarket.map((item: any) => {
             return (
               <li class="product-card-wrapper">
-                <product-card></product-card>
+                <product-card card={item}></product-card>
               </li>
             )
           })}
@@ -57,12 +69,14 @@ export default class ProductList extends Vue {
         <ul class="product-list product-list-fruit">
           <div class="product-card-header">
             <span class="product-card-header-title">附近热卖推荐</span>
-            <span class="product-card-header-all">全部<i class="el-icon-arrow-right"></i></span>
+            <span class="product-card-header-all">
+              全部<i class="el-icon-arrow-right"></i>
+            </span>
           </div>
-          {this.cardList.map((item) => {
+          {this.cardData.fruit && this.cardData.fruit.map((item: any) => {
             return (
               <li class="product-card-wrapper">
-                <product-card></product-card>
+                <product-card card={item}></product-card>
               </li>
             )
           })}
@@ -70,12 +84,14 @@ export default class ProductList extends Vue {
         <ul class="product-list product-list-vegettables">
           <div class="product-card-header">
             <span class="product-card-header-title">附近热卖推荐</span>
-            <span class="product-card-header-all">全部<i class="el-icon-arrow-right"></i></span>
+            <span class="product-card-header-all">
+              全部<i class="el-icon-arrow-right"></i>
+            </span>
           </div>
-          {this.cardList.map((item) => {
+          {this.cardData.vegettables && this.cardData.vegettables.map((item: any) => {
             return (
               <li class="product-card-wrapper">
-                <product-card></product-card>
+                <product-card card={item}></product-card>
               </li>
             )
           })}
@@ -83,12 +99,14 @@ export default class ProductList extends Vue {
         <ul class="product-list product-list-medicine">
           <div class="product-card-header">
             <span class="product-card-header-title">附近热卖推荐</span>
-            <span class="product-card-header-all">全部<i class="el-icon-arrow-right"></i></span>
+            <span class="product-card-header-all">
+              全部<i class="el-icon-arrow-right"></i>
+            </span>
           </div>
-          {this.cardList.map((item) => {
+          {this.cardData.medicine && this.cardData.medicine.map((item: any) => {
             return (
               <li class="product-card-wrapper">
-                <product-card></product-card>
+                <product-card card={item}></product-card>
               </li>
             )
           })}
@@ -134,7 +152,7 @@ export default class ProductList extends Vue {
       }
     }
     .product-card-wrapper {
-      margin: 0.31rem 0.70rem;
+      margin: 0.31rem 0.7rem;
       // padding: 5px 11px;
       float: left;
     }
