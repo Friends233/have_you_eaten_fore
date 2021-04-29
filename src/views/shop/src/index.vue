@@ -9,7 +9,7 @@ import EatenHeader from '@/components/EatenHeader/index'
 import EatenFooter from '@/components/EatenFooter/index'
 import Appraisal from '@/components/Appraisal/index'
 import Food from '@/views/food'
-import { Goods, UserApp, GoodDetails } from './index'
+import { Goods, UserApp, GoodDetails, Shops } from './index'
 
 @Component({
   components: { EatenHeader, EatenFooter, Star, Food, Appraisal }
@@ -23,7 +23,14 @@ export default class Shop extends Vue {
   ]
   // 点餐的商品列表
   goodsList: Array<Goods> = [
-    { id: '1', name: '寿喜锅2-3人餐', desc: '清淡，好吃美味', sold: '月售104', price: 1.16 },
+    {
+      id: '1',
+      name: '寿喜锅2-3人餐',
+      desc: '清淡，好吃美味',
+      sold: '月售104',
+      price: 1.16,
+      url: '//p0.meituan.net/208.126/deal/b1e92804330780f5e84044a8ba94033c53272.jpg@100w_100h_1e_1c'
+    },
     { id: '2' },
     { id: '3' },
     { id: '4' },
@@ -161,6 +168,21 @@ export default class Shop extends Vue {
       ]
     }
   ]
+
+  shop: Shops = {
+    name: '晓寿司（望京soho店)',
+    rating: 4.8,
+    price: 63,
+    address: '朝阳区望京街望京soho-T1楼2层1220铺',
+    phoneNumber: '010-57076520',
+    business: '周一至周日 10:00-21:00',
+    desc: ['wifi', 'stop'],
+    coverImg: [
+      'https://p1.meituan.net/merchant/5cfc2788fbec889cbf14e6a680a99e3d82463.jpg@380w_214h_1e_1c',
+      'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
+      'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg'
+    ]
+  }
   visible = false
   elTabIndex = 'first'
 
@@ -183,45 +205,53 @@ export default class Shop extends Vue {
           <div class="shop-header">
             <div class="shop-header-left">
               <div>
-                <p class="shop-header-left-title">晓寿司（望京soho店)</p>
+                <p class="shop-header-left-title">{this.shop.name}</p>
                 <div>
-                  <star num={4.8} size={'16'}></star>
-                  <p>4.8分人均￥63</p>
+                  <star num={this.shop.rating} size={'16'}></star>
+                  <p>
+                    {this.shop.rating}分人均￥{this.shop.price}
+                  </p>
                 </div>
               </div>
               <div>
                 <p>
-                  地址：朝阳区望京街望京soho-T1楼2层1220铺<i class="el-icon-location-information"></i>
+                  地址：{this.shop.address}
+                  <i class="el-icon-location-information"></i>
                 </p>
-                <p>电话：010-57076520</p>
-                <p>营业时间：周一至周日 10:00-21:00)</p>
+                <p>电话：{this.shop.phoneNumber}</p>
+                <p>营业时间：{this.shop.business}</p>
               </div>
               <div>
                 <ul>
-                  <li>
-                    <img src="https://p0.meituan.net/codeman/551290739062eda37e52999e2315f50c1887.png" />
-                    <p>提供wifi</p>
-                  </li>
-                  <li>
-                    <img src="https://p1.meituan.net/codeman/4b1c5696fe5bf2c4d23fb01659b3e68b1960.png" />
-                    <p>停车位</p>
-                  </li>
+                  {this.shop.desc?.includes('wifi') && (
+                    <li>
+                      <img src="https://p0.meituan.net/codeman/551290739062eda37e52999e2315f50c1887.png" />
+                      <p>提供wifi</p>
+                    </li>
+                  )}
+                  {this.shop.desc?.includes('stop') && (
+                    <li>
+                      <img src="https://p1.meituan.net/codeman/4b1c5696fe5bf2c4d23fb01659b3e68b1960.png" />
+                      <p>停车位</p>
+                    </li>
+                  )}
                 </ul>
               </div>
             </div>
             <div class="shop-header-right none-600">
               <div>
-                <img src="https://p1.meituan.net/merchant/5cfc2788fbec889cbf14e6a680a99e3d82463.jpg@380w_214h_1e_1c" />
+                <img src={this.shop.coverImg && this.shop.coverImg[0]} />
               </div>
               <div>
-                <el-image
-                  style="width: 100px; height: 100px"
-                  src="https://p1.meituan.net/merchant/5cfc2788fbec889cbf14e6a680a99e3d82463.jpg@380w_214h_1e_1c"
-                  preview-src-list={this.srcList}></el-image>
-                <el-image
-                  style="width: 100px; height: 100px"
-                  src="https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg"
-                  preview-src-list={this.srcList}></el-image>
+                {this.shop.coverImg &&
+                  this.shop.coverImg.map((item) => {
+                    return (
+                      <el-image
+                        style="width: 100px; height: 100px"
+                        src={item}
+                        preview-src-list={this.srcList}></el-image>
+                    )
+                  })}
               </div>
             </div>
           </div>
@@ -233,7 +263,7 @@ export default class Shop extends Vue {
                     {this.goodsList.map((item) => {
                       return (
                         <li onClick={() => (this.visible = true)} key={item.id}>
-                          <img src="https://p0.meituan.net/208.126/deal/b1e92804330780f5e84044a8ba94033c53272.jpg@100w_100h_1e_1c" />
+                          <img src={item.url} />
                           <div class="shop-card-list-text">
                             <p class="shop-card-list-name">{item.name}</p>
                             <p class="shop-card-list-desc">{item.desc}</p>
@@ -272,7 +302,7 @@ export default class Shop extends Vue {
               </el-tabs>
             </el-tab-pane>
             <el-tab-pane class="shop-card-appraisal" label="评价">
-            <Appraisal></Appraisal>
+              <Appraisal></Appraisal>
             </el-tab-pane>
             <el-tab-pane label="商家信息">商家信息</el-tab-pane>
             <el-tab-pane label="店铺管理">店铺管理</el-tab-pane>

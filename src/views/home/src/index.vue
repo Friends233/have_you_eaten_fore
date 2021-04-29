@@ -23,7 +23,7 @@ export default class HelloWorld extends Vue {
     return (
       <div class="home-wrapper">
         <shopping-cart ref="spc"></shopping-cart>
-        <eaten-header show={true}></eaten-header>
+        <eaten-header show={false}></eaten-header>
         <div class="home-content">
           <carousel></carousel>
           <product-list></product-list>

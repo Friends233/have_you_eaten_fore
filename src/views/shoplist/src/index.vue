@@ -35,27 +35,6 @@ export default class ShopList extends Vue {
         { id: '14', label: '日韩料理', icon: 'el-icon-knife-fork', color: '#7bdefc' },
         { id: '15', label: '冬季暖汤', icon: 'el-icon-tableware', color: '#ffb500' }
       ]
-    },
-    {
-      id: '2',
-      label: '美食分类',
-      content: [
-        { id: '1', label: '便当简餐', icon: 'el-icon-tableware', color: '#ff8200' },
-        { id: '2', label: '汉堡披萨', icon: 'el-icon-potato-strips', color: '#ffb500' },
-        { id: '3', label: '奶茶果汁', icon: 'el-icon-ice-drink', color: '#ff4081' },
-        { id: '4', label: '粥食面点', icon: 'el-icon-food', color: '#ffb500' },
-        { id: '5', label: '米粉汤捞', icon: 'el-icon-food', color: '#03a9f4' },
-        { id: '6', label: '川湘菜', icon: 'el-icon-fork-spoon', color: 'red' },
-        { id: '7', label: '炸鸡炸串', icon: 'el-icon-chicken', color: '#ffb500' },
-        { id: '8', label: '地方菜', icon: 'el-icon-burger', color: '#00bf96' },
-        { id: '9', label: '美味面馆', icon: 'el-icon-food', color: '#ffb500' },
-        { id: '10', label: '特色小吃', icon: 'el-icon-ice-cream-square', color: '#ff4c52' },
-        { id: '11', label: '龙虾烧烤', icon: 'el-icon-watermelon', color: '#ff4c52' },
-        { id: '12', label: '香辣火锅', icon: 'el-icon-dish-1', color: 'red' },
-        { id: '13', label: '咖啡甜品', icon: 'el-icon-lollipop', color: '#ffb500' },
-        { id: '14', label: '日韩料理', icon: 'el-icon-knife-fork', color: '#7bdefc' },
-        { id: '15', label: '冬季暖汤', icon: 'el-icon-tableware', color: '#ffb500' }
-      ]
     }
   ]
   shoplist: Array<Shop> = [
@@ -136,7 +115,7 @@ export default class ShopList extends Vue {
           <div class="shoplist-list">
             <div class="shoplist-list-sort">
               <a class="is-active" href="#">
-                默认
+                综合
               </a>
               <a href="#">销量</a>
               <a href="#">价格</a>
