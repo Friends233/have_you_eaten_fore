@@ -10,7 +10,6 @@ import { ShoppingCartConifg } from './index'
   components: {}
 })
 export default class ShoppingCart extends Vue {
-  @Prop({ default: true, type: Boolean }) showCart?: boolean
 
   private visible = false
   private foodCheckbox: boolean[] = []
@@ -115,6 +114,10 @@ export default class ShoppingCart extends Vue {
     this.visible = true
   }
 
+  hideDialog() {
+    this.visible = false
+  }
+
   submint() {
     console.log('submint')
   }
@@ -147,14 +150,6 @@ export default class ShoppingCart extends Vue {
   protected render() {
     return (
       <div class="shoppingcart">
-        {this.showCart && (
-          <div class="top-cart" onClick={this.showDialog}>
-            <el-badge value={this.data.length}>
-              <i class="el-icon-shopping-cart-1"></i>
-            </el-badge>
-          </div>
-        )}
-
         <el-drawer
           title="购物车"
           visible={this.visible}
@@ -210,26 +205,6 @@ export default class ShoppingCart extends Vue {
     }
     .el-drawer__body {
       position: relative;
-    }
-  }
-  .top-cart {
-    position: fixed;
-    right: 50px;
-    bottom: 80px;
-    border: 1px solid #000;
-    border-radius: 50%;
-    padding: 5px;
-    cursor: pointer;
-    z-index: 99;
-    &:hover {
-      border-color: #409eff;
-      i {
-        color: #409eff;
-      }
-    }
-    i {
-      font-size: 35px;
-      color: #000;
     }
   }
   &-btn {

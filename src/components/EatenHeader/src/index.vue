@@ -13,6 +13,7 @@ import { Nav } from './index'
   components: { Logo, ShoppingCart }
 })
 export default class EatenHeader extends Vue {
+  [x: string]: any
   @Prop({ default: false, type: Boolean }) readonly show: boolean | undefined
 
   // 顶部的菜单
@@ -66,8 +67,7 @@ export default class EatenHeader extends Vue {
   }
 
   showShoppingCart() {
-    const ref: any = this.$refs
-    ref.spc.showDialog()
+    this.$showCart(true)
   }
 
   handleSelect(key: string) {
@@ -112,7 +112,6 @@ export default class EatenHeader extends Vue {
   protected render() {
     return (
       <div class="eaten-header">
-        <shopping-cart ref="spc" showCart={false}></shopping-cart>
         <div class="eaten-header-top">
           <div class="eaten-header-top-left">
             <div class="eaten-header-top-left-address">

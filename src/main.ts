@@ -10,6 +10,9 @@ import '@/styles/index.scss'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
+import shoppingCart from '@/components/Shoppingcart/src/global'
+
+Vue.use(shoppingCart)
 Vue.use(ElementUI)
 
 Vue.config.productionTip = false;
