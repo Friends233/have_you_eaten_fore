@@ -3,18 +3,19 @@
  * @Author: Friends233
 -->
 <script lang="tsx">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue, Watch } from 'vue-property-decorator'
 import { Clf, Shop } from './index'
 import Star from '@/components/Star/index'
 import EatenHeader from '@/components/EatenHeader/index'
 import EatenFooter from '@/components/EatenFooter/index'
 import { getSortAll } from '@/api/all'
+import { getShopList } from '@/api/home'
 
 @Component({
   components: { EatenHeader, EatenFooter, Star }
 })
 export default class ShopList extends Vue {
-  selectContent: Array<string> = []
+  selectContent: any[] = []
   classification: Array<Clf> = [
     {
       id: '1',
@@ -22,41 +23,47 @@ export default class ShopList extends Vue {
       content: []
     }
   ]
-  shoplist: Array<Shop> = [
-    {
-      id: '1001',
-      label: '望京三姐·地桌烤肉（望京店）',
-      imgUrl: 'https://img.meituan.net/msmerchant/1f6bfaff2a4651ddef09c408b9b7267778400.jpg@220w_125h_1e_1c',
-      rating: 4.6,
-      desc: '朝阳区望京西园四区420号楼420-5南侧部分',
-      price: 110
-    },
-    {
-      id: '1002',
-      label: '望京三姐·地桌烤肉（望京店）',
-      imgUrl: 'https://img.meituan.net/msmerchant/1f6bfaff2a4651ddef09c408b9b7267778400.jpg@220w_125h_1e_1c',
-      rating: 4.6,
-      desc: '朝阳区望京西园四区420号楼420-5南侧部分',
-      price: 110
-    },
-    {
-      id: '1003',
-      label: '望京三姐·地桌烤肉（望京店）',
-      imgUrl: 'https://img.meituan.net/msmerchant/1f6bfaff2a4651ddef09c408b9b7267778400.jpg@220w_125h_1e_1c',
-      rating: 4.6,
-      desc: '朝阳区望京西园四区420号楼420-5南侧部分',
-      price: 110
-    }
-  ]
+  shoplist: Array<Shop> = []
+  idToType: any = {}
 
-  async created() {
+  created() {
+    this.init()
+  }
+
+  @Watch('selectContent')
+  fn(val: any[]) {
+    const typeIds = val.map((item: string) => {
+      return this.idToType[item]
+    })
+    getShopList({ typeIds: typeIds.join(',') }).then((res) => {
+      this.shoplist = res.data.map((item: any) => {
+        return {
+          label: item.name,
+          desc: item.address,
+          ...item
+        }
+      })
+    })
+  }
+
+  async init() {
     const content = await getSortAll()
     this.classification[0].content = content.data
+    content.data.forEach((item: any) => {
+      this.$set(this.idToType, item.label, item.id)
+      this.$set(this.idToType, item.id, item.label)
+    })
+    if (this.$route.params.typeId) {
+      this.selectContent.push(this.idToType[this.$route.params.typeId])
+    } else {
+      this.selectContent = []
+    }
   }
 
   closeTag(index: number) {
     this.selectContent.splice(index, 1)
   }
+
   protected render() {
     return (
       <div class="shoplist-wrapper">
@@ -113,7 +120,7 @@ export default class ShopList extends Vue {
             <ul class="shoplist-list-content">
               {this.shoplist.map((item, index) => {
                 return (
-                  <li key={item.id} onClick={() => this.$router.push({ name: 'shop' })}>
+                  <li key={item.id} onClick={() => this.$router.push({ name: 'shop', params: { id: item.id } })}>
                     <div class="top">{index + 1}</div>
                     <div class="left">
                       <img src={item.imgUrl} />
@@ -141,6 +148,7 @@ export default class ShopList extends Vue {
 .shoplist-wrapper {
   .shoplist {
     width: $bodyWidth;
+    min-height: 700px;
     margin: 1.25rem auto;
     &-classification {
       margin-top: 1.25rem;
@@ -155,7 +163,7 @@ export default class ShopList extends Vue {
         border-bottom: 1px solid #e5e5e5;
         font-size: 0.75rem;
         .tag-title {
-          width: 4.06rem;
+          width: 5.06rem;
           padding-top: 0.63rem;
         }
         .tag-list {
@@ -296,7 +304,7 @@ export default class ShopList extends Vue {
     .shoplist {
       width: $bodyMiniWidth;
       .tag-title {
-        width: 9.06rem !important;
+        width: 9.5rem !important;
       }
       .shoplist-list-content {
         .left {

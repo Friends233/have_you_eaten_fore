@@ -23,4 +23,5 @@ export interface Shop {
   desc: string;
   price: number;
   content?: Array<string>;
+  [propName: string]: string;
 }

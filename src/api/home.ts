@@ -14,3 +14,8 @@ export function getHome() {
 export function getShop(id = '') {
   return api.get(`/shop/${id}`)
 }
+
+/** 店铺列表 */
+export function getShopList(params = {}) {
+  return api.post(`/shop/sort`,params)
+}

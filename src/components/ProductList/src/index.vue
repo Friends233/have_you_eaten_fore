@@ -18,13 +18,17 @@ export default class ProductList extends Vue {
     this.cardData = data.data
   }
 
+  goShop(label: string) {
+    this.$router.push({ name: 'shoplist', params: { label:label } })
+  }
+
   protected render() {
     return (
       <div class="product">
         <ul class="product-list product-list-recommend">
           <div class="product-card-header">
             <span class="product-card-header-title">附近热卖推荐</span>
-            <span class="product-card-header-all">
+            <span class="product-card-header-all" onClick={()=>this.goShop('recommend')}>
               全部<i class="el-icon-arrow-right"></i>
             </span>
           </div>
@@ -39,7 +43,7 @@ export default class ProductList extends Vue {
         <ul class="product-list product-list-find">
           <div class="product-card-header">
             <span class="product-card-header-title">附近热卖推荐</span>
-            <span class="product-card-header-all">
+            <span class="product-card-header-all" onClick={()=>this.goShop('find')}>
               全部<i class="el-icon-arrow-right"></i>
             </span>
           </div>
@@ -54,7 +58,7 @@ export default class ProductList extends Vue {
         <ul class="product-list product-list-supermarket">
           <div class="product-card-header">
             <span class="product-card-header-title">附近热卖推荐</span>
-            <span class="product-card-header-all">
+            <span class="product-card-header-all" onClick={()=>this.goShop('supermarket')}>
               全部<i class="el-icon-arrow-right"></i>
             </span>
           </div>
@@ -69,7 +73,7 @@ export default class ProductList extends Vue {
         <ul class="product-list product-list-fruit">
           <div class="product-card-header">
             <span class="product-card-header-title">附近热卖推荐</span>
-            <span class="product-card-header-all">
+            <span class="product-card-header-all" onClick={()=>this.goShop('fruit')}>
               全部<i class="el-icon-arrow-right"></i>
             </span>
           </div>
@@ -84,7 +88,7 @@ export default class ProductList extends Vue {
         <ul class="product-list product-list-vegettables">
           <div class="product-card-header">
             <span class="product-card-header-title">附近热卖推荐</span>
-            <span class="product-card-header-all">
+            <span class="product-card-header-all" onClick={()=>this.goShop('vegettables')}>
               全部<i class="el-icon-arrow-right"></i>
             </span>
           </div>
@@ -99,7 +103,7 @@ export default class ProductList extends Vue {
         <ul class="product-list product-list-medicine">
           <div class="product-card-header">
             <span class="product-card-header-title">附近热卖推荐</span>
-            <span class="product-card-header-all">
+            <span class="product-card-header-all" onClick={()=>this.goShop('medicine')}>
               全部<i class="el-icon-arrow-right"></i>
             </span>
           </div>
@@ -149,6 +153,7 @@ export default class ProductList extends Vue {
       &-all {
         float: right;
         margin-right: 1.25rem;
+        cursor: pointer;
       }
     }
     .product-card-wrapper {

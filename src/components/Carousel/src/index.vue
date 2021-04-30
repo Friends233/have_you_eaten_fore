@@ -25,10 +25,10 @@ export default class Carousel extends Vue {
   }
 
   carouselList: Array<CarouselImg> = [
-    { id: '1', url: 'https://p1.meituan.net/travelcube/01d2ab1efac6e2b7adcfcdf57b8cb5481085686.png' },
-    { id: '2', url: 'http://p1.meituan.net/codeman/826a5ed09dab49af658c34624d75491861404.jpg' },
-    { id: '3', url: 'http://p0.meituan.net/codeman/33ff80dc00f832d697f3e20fc030799560495.jpg' },
-    { id: '4', url: 'http://p0.meituan.net/codeman/a97baf515235f4c5a2b1323a741e577185048.jpg' }
+    { id: 'shop_001', url: 'https://p1.meituan.net/travelcube/01d2ab1efac6e2b7adcfcdf57b8cb5481085686.png' },
+    { id: 'shop_001', url: 'http://p1.meituan.net/codeman/826a5ed09dab49af658c34624d75491861404.jpg' },
+    { id: 'shop_001', url: 'http://p0.meituan.net/codeman/33ff80dc00f832d697f3e20fc030799560495.jpg' },
+    { id: 'shop_001', url: 'http://p0.meituan.net/codeman/a97baf515235f4c5a2b1323a741e577185048.jpg' }
   ]
   foodTypeList: Array<FoodType> = []
 
@@ -46,7 +46,9 @@ export default class Carousel extends Vue {
             <ul class="carousel-card-left-menu">
               {this.foodTypeList.map((item) => {
                 return (
-                  <li class="food-type" onClick={() => this.$router.push({ name: 'shoplist' })}>
+                  <li
+                    class="food-type"
+                    onClick={() => this.$router.push({ name: 'shoplist', params: { typeId: item.id } })}>
                     <i class={item.icon} style={'color:' + item.color + ';'}></i>
                     <a href="#">{item.label}</a>
                   </li>
@@ -55,9 +57,9 @@ export default class Carousel extends Vue {
             </ul>
           </el-card>
           <el-carousel trigger="click">
-            {this.carouselList.map((item) => {
+            {this.carouselList.map((item, index) => {
               return (
-                <li key={item.id} onClick={() => this.$router.push({ name: 'shop' })}>
+                <li key={index} onClick={() => this.$router.push({ name: 'shop', params: { id: item.id } })}>
                   <el-carousel-item>
                     <img width="100%" height="100%" src={item.url} />
                   </el-carousel-item>
