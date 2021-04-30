@@ -1,12 +1,44 @@
 <template>
-  <router-view id="app"></router-view>
+  <div>
+    <div class="top-cart" @click="() => this.$showCart(true)">
+      <el-badge :value="num">
+        <i class="el-icon-shopping-cart-1"></i>
+      </el-badge>
+    </div>
+    <router-view id="app"></router-view>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  computed: {
+    num() {
+      return 0
+    }
+  }
 }
 </script>
 
 <style lang="scss">
+.top-cart {
+  position: fixed;
+  right: 50px;
+  bottom: 80px;
+  border: 1px solid #000;
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+  z-index: 99;
+  &:hover {
+    border-color: #409eff;
+    i {
+      color: #409eff;
+    }
+  }
+  i {
+    font-size: 35px;
+    color: #000;
+  }
+}
 </style>
