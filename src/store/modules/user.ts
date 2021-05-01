@@ -28,6 +28,7 @@ export default {
     userAddress: state => state.userInfo.userAddress,
     userPhone: state => state.userInfo.userPhone,
     userPass: state => state.userInfo.userPass,
+    userAvatar: state => state.userInfo.userAvatar,
     userId: state => state.userInfo.id,
     token: state => state.accessToken,
     loginStatus: state => {
@@ -88,7 +89,8 @@ export default {
             userAddress: res.data.userInfo.user_address,
             userLevel: res.data.userInfo.user_level,
             userPass: res.data.userInfo.user_pass,
-            userPhone: res.data.userInfo.user_phone
+            userPhone: res.data.userInfo.user_phone,
+            userAvatar:res.data.userInfo.user_avatar
           }
           commit('setToken', res.data.access_token)
           commit('setUserInfo', userInfo)

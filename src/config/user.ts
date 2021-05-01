@@ -10,4 +10,5 @@ export interface User {
   userLevel?: number;
   userAddress?: string;
   userPhone?: string;
+  userAvatar?: string;
 }

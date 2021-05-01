@@ -10,7 +10,7 @@ import { userEdit } from '@/api/index'
   components: {}
 })
 export default class Account extends Vue {
-  avatar = 'https://p0.meituan.net/mmc/89bec9d64cde38d441cf976f751c482e3788.png@120w_120h_1e_1c'
+  avatar = ''
   name = ''
   address = ''
   phoneNumber = ''
@@ -30,6 +30,7 @@ export default class Account extends Vue {
     this.address = this.$store.getters.userAddress
     this.phoneNumber = this.$store.getters.userPhone
     this.password = this.$store.getters.userPass
+    this.avatar = this.$store.getters.userAvatar
   }
 
   refreshUserInfo() {

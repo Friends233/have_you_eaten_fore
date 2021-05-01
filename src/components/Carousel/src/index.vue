@@ -21,6 +21,9 @@ export default class Carousel extends Vue {
   get userName(){
     return this.$store.getters.userName
   }
+  get userAvatar() {
+    return this.$store.getters.userAvatar
+  }
 
   goView(name = '') {
     if (name !== '') {
@@ -89,7 +92,7 @@ export default class Carousel extends Vue {
                 <div class="top" onClick={() => this.goView('account')}>
                   <i class="el-icon-setting"></i>
                 </div>
-                <img class="avatar" src="//s0.meituan.net/bs/fe-web-meituan/e3064a3/img/head-img.png" />
+                <img class="avatar" src={this.userAvatar} />
                 <p class="user-name-small">{this.userName}</p>
                 <ul class="user-nav">
                   <li onClick={() => this.goView('order')}>
