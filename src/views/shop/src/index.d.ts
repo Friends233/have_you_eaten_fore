@@ -9,7 +9,7 @@ export interface Goods {
   desc?: string;
   sold?: string;
   price?: number;
-  url?:string;
+  url?: string;
 }
 
 export interface UserApp {
@@ -29,18 +29,19 @@ export interface GoodDetails {
   priceDescription?: string;
   monthlySale?: string | number;
   favorableRate?: string | number;
-  discount?: string |number;
+  discount?: string | number;
   price?: number;
   packagingCosts: ?number;
 }
 
 export interface Shops {
-  name?:string,
-  rating?:number,
-  price?:number,
-  address?:string,
-  phoneNumber?:string,
-  business?:string,
-  desc?:string[],
-  coverImg?:string[]
+  name?: string;
+  rating?: number;
+  price?: number;
+  address?: string;
+  phoneNumber?: string;
+  business?: string;
+  desc?: string[];
+  coverImg?: string[];
+  [propName: string]: any;
 }

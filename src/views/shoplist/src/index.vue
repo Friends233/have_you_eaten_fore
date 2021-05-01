@@ -64,6 +64,10 @@ export default class ShopList extends Vue {
     this.selectContent.splice(index, 1)
   }
 
+  get isChecked(): string{
+    return this.selectContent.length === 0?'is-checked':''
+  }
+
   protected render() {
     return (
       <div class="shoplist-wrapper">
@@ -93,7 +97,7 @@ export default class ShopList extends Vue {
               return (
                 <div class="shoplist-classification-module">
                   <p class="none-600">{item.label}</p>
-                  <p class="select is-checked">全部</p>
+                  <p class={"select " + this.isChecked} onClick={() => (this.selectContent = [])}>全部</p>
                   <el-checkbox-group v-model={this.selectContent}>
                     {item.content &&
                       item.content.map((i) => {

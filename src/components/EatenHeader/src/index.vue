@@ -66,6 +66,10 @@ export default class EatenHeader extends Vue {
     return this.$store.getters.loginStatus
   }
 
+  get userName(){
+    return this.$store.getters.userName
+  }
+
   showShoppingCart() {
     this.$showCart(true)
   }
@@ -130,8 +134,8 @@ export default class EatenHeader extends Vue {
                 <router-link to={{ name: 'register' }}>注册</router-link>
               </div>
               <div v-show={this.isLogin} class="isLoginT">
-                <router-link class="orange" to={{ name: 'login' }}>
-                  用户名
+                <router-link class="orange" to={{ name: 'account' }}>
+                  {this.userName}
                 </router-link>
                 <a href="#" onClick={this.logOut}>
                   注销
@@ -224,7 +228,7 @@ export default class EatenHeader extends Vue {
           display: flex;
           justify-content: space-between;
           margin-left: 30px;
-          width: 80px;
+          width: 100px;
           .orange {
             color: #fe8c00;
           }
