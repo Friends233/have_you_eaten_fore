@@ -3,9 +3,11 @@
  * @Author: Friends233
  */
 export interface User {
-  readonly _id?: string;
+  _id?: string;
+  readonly id?: string;
   userName?: string;
   userPass?: string;
   userLevel?: number;
   userAddress?: string;
+  userPhone?: string;
 }

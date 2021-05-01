@@ -3,46 +3,92 @@
  * @Author: Friends233
 -->
 <script lang="tsx">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue, Watch } from 'vue-property-decorator'
+import { userEdit } from '@/api/index'
 
 @Component({
   components: {}
 })
 export default class Account extends Vue {
   avatar = 'https://p0.meituan.net/mmc/89bec9d64cde38d441cf976f751c482e3788.png@120w_120h_1e_1c'
-  name = '用户名'
-  address = '四川成都'
-  phoneNumber = '17347840719'
-  password = '2154516'
+  name = ''
+  address = ''
+  phoneNumber = ''
+  password = ''
   edit: boolean[] = [false, false, false, false, false]
 
   getText(index: number) {
     return this.edit[index] ? '保存' : '修改'
   }
 
+  created() {
+    this.init()
+  }
+
+  init() {
+    this.name = this.$store.getters.userName
+    this.address = this.$store.getters.userAddress
+    this.phoneNumber = this.$store.getters.userPhone
+    this.password = this.$store.getters.userPass
+  }
+
+  refreshUserInfo() {
+    const userInfo = {
+      userName: this.name,
+      userPass: this.password,
+      userAddress: this.address,
+      userPhone: this.phoneNumber
+    }
+    userEdit(this.$store.getters.userId, userInfo).then(() => {
+      this.$store
+        .dispatch('Login', {
+          userName: this.name,
+          userPass: this.password
+        })
+        .then((msg) => {
+          this.$router.go(0)
+        })
+    })
+  }
+
   // 修改头像
   editAvatar() {
     this.$set(this.edit, 0, !this.edit[0])
+    if (!this.edit[0]) {
+      console.log('submit')
+    }
   }
 
   // 修改用户名
   editName() {
     this.$set(this.edit, 1, !this.edit[1])
+    if (!this.edit[1]) {
+      this.refreshUserInfo()
+    }
   }
 
   // 修改地址
   editAddress() {
     this.$set(this.edit, 2, !this.edit[2])
+    if (!this.edit[2]) {
+      this.refreshUserInfo()
+    }
   }
 
   // 修改电话
   editPhoneNumber() {
     this.$set(this.edit, 3, !this.edit[3])
+    if (!this.edit[3]) {
+      this.refreshUserInfo()
+    }
   }
 
   // 修改密码
   editPassword() {
     this.$set(this.edit, 4, !this.edit[4])
+    if (!this.edit[4]) {
+      this.refreshUserInfo()
+    }
   }
 
   protected render() {
@@ -84,7 +130,7 @@ export default class Account extends Vue {
           <li>
             <span class="account-content-label">修改密码</span>
             <div class="account-content-text">
-              <span v-show={!this.edit[4]}>{this.password}</span>
+              <span v-show={!this.edit[4]}>******</span>
               <el-input v-show={this.edit[4]} show-password v-model={this.password}></el-input>
             </div>
             <el-button onClick={this.editPassword}>{this.getText(4)}</el-button>

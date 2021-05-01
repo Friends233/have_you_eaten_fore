@@ -5,7 +5,7 @@
 import { User } from '@/config'
 import { Module } from 'vuex'
 import storage from '@/storage'
-import { userLogin,refreshUser } from '@/api'
+import { userLogin, refreshUser } from '@/api'
 
 interface State {
   userInfo: User;
@@ -26,6 +26,9 @@ export default {
     userName: state => state.userInfo.userName,
     userLevel: state => state.userInfo.userLevel,
     userAddress: state => state.userInfo.userAddress,
+    userPhone: state => state.userInfo.userPhone,
+    userPass: state => state.userInfo.userPass,
+    userId: state => state.userInfo.id,
     token: state => state.accessToken,
     loginStatus: state => {
       if (state.accessToken != '') {
@@ -79,15 +82,17 @@ export default {
         const res: any = await refreshUser({ token: storage.get(UserModule.ACESS_TOKEN) })
         if (res.code == 1) {
           const userInfo: User = {
-            _id:res.data.userInfo._id,
-            userName:res.data.userInfo.user_name,
-            userAddress:res.data.userInfo.user_address,
-            userLevel:res.data.userInfo.user_level,
-            userPass:res.data.userInfo.user_pass
+            _id: res.data.userInfo._id,
+            id: res.data.userInfo.id,
+            userName: res.data.userInfo.user_name,
+            userAddress: res.data.userInfo.user_address,
+            userLevel: res.data.userInfo.user_level,
+            userPass: res.data.userInfo.user_pass,
+            userPhone: res.data.userInfo.user_phone
           }
           commit('setToken', res.data.access_token)
           commit('setUserInfo', userInfo)
-        }else {
+        } else {
           commit('setToken', '')
           commit('setUserInfo', {})
         }

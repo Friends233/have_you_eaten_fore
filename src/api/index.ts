@@ -19,6 +19,11 @@ export function userRegister(params = {}) {
   return api.post('/user/register',params)
 }
 
+/** 修改用户信息 */
+export function userEdit(id = '',params = {}) {
+  return api.post(`/user/edit/${id}`,params)
+}
+
 /** 根据token拿到userInfo */
 export function refreshUser(params = {}) {
   return api.post('/user/refresh',params)
