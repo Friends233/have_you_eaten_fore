@@ -8,7 +8,6 @@ import Logo from '@/components/logo/index'
 import { createRandomId } from '@/utils/index'
 import ShoppingCart from '@/components/Shoppingcart'
 import { Nav } from './index'
-import { getFoodByName } from '@/api/all'
 
 @Component({
   components: { Logo, ShoppingCart }
@@ -94,11 +93,10 @@ export default class EatenHeader extends Vue {
   }
 
   async serachFood(keywords: string) {
-    const data = await getFoodByName({ name: keywords })
     if (this.$route.name === 'search') {
       this.$router.push({ name: 'Home' })
     }
-    this.$router.push({ name: 'search', params: { ids: data.data } })
+    this.$router.push({ name: 'search', params: { keywords: keywords} })
   }
 
   renderTopNavMenu(ary: Array<Nav>) {

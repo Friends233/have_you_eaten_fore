@@ -7,14 +7,14 @@ import { Component, Vue, Watch } from 'vue-property-decorator'
 import storage from '@/storage'
 import EatenHeader from '@/components/EatenHeader/index'
 import EatenFooter from '@/components/EatenFooter/index'
-import ProductCard from '@/components/productCard'
-import { getShopList } from '@/api/home'
+import FoodCard from '@/components/FoodCard'
+import { getFoodByName } from '@/api/all'
 
 @Component({
-  components: { EatenHeader, EatenFooter, ProductCard }
+  components: { EatenHeader, EatenFooter, FoodCard }
 })
 export default class SearchFood extends Vue {
-  shopList = []
+  shopList: any[] = []
   shopIds: number[] = []
 
   created() {
@@ -26,16 +26,18 @@ export default class SearchFood extends Vue {
       e.returnValue = 'stop'
       return stop
     }
-    const data = await getShopList()
-    const ids = this.$route.params.ids.map((item: any) => {
-      return item.shopId
+    const data = await getFoodByName({ name: this.$route.params.keywords && '' })
+    this.shopList = data.data.map((item: any) => {
+      return {
+        imgUrl: item.url,
+        ...item
+      }
     })
-    console.log(ids,data.data)
-    const result = data.data.filter((item: any) => {
-      return ids.includes(item.id)
-    })
-    this.shopList = result
     console.log(this.shopList)
+  }
+
+  shopping() {
+    console.log('加入购物车')
   }
 
   protected render() {
@@ -48,7 +50,7 @@ export default class SearchFood extends Vue {
             {this.shopList.map((item) => {
               return (
                 <li class="product-card-wrapper">
-                  <product-card card={item}></product-card>
+                  <food-card card={item}></food-card>
                 </li>
               )
             })}

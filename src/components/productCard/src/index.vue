@@ -12,6 +12,7 @@ import { CardData } from '../src/index'
 })
 export default class ProductCard extends Vue {
   @Prop() card!: CardData
+  @Prop() shopping?: boolean
 
   goShop() {
     this.$router.push({ name: 'shop', params: { id: this.card.id } })
@@ -20,7 +21,7 @@ export default class ProductCard extends Vue {
   protected render() {
     return (
       <div>
-        <el-card nativeOnClick={this.goShop} body-style={'padding: 0;'}>
+        <el-card nativeOnClick={() => {!this.shopping?this.goShop():''} } body-style={'padding: 0;'}>
           <img src={this.card.imgUrl} />
           <div class="el-card-text">
             <span class="el-card-text-title">{this.card.name}</span>

@@ -177,7 +177,7 @@ export default class Shop extends Vue {
 
   async viewFood(item: any) {
     try {
-      const data: any = await getFood('food_002')
+      const data: any = await getFood(item.id)
       this.$set(this.foodVal, 'goodD', { ...data.data })
       console.log(this.foodVal.goodD)
       this.visible = true
