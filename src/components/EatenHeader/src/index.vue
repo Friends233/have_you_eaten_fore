@@ -94,8 +94,11 @@ export default class EatenHeader extends Vue {
   }
 
   async serachFood(keywords: string) {
-    const data = await getFoodByName(keywords)
-    this.$router.push({ name: 'search', params: { ids:data.data } })
+    const data = await getFoodByName({ name: keywords })
+    if (this.$route.name === 'search') {
+      this.$router.push({ name: 'Home' })
+    }
+    this.$router.push({ name: 'search', params: { ids: data.data } })
   }
 
   renderTopNavMenu(ary: Array<Nav>) {
@@ -163,11 +166,18 @@ export default class EatenHeader extends Vue {
             <logo></logo>
           </div>
           <div class="eaten-header-mid-search">
-            <el-input v-model={this.searchContent} placeholder="搜索店铺、美食或者标签"></el-input>
+            <el-input
+              v-model={this.searchContent}
+              onChange={() => this.serachFood(this.searchContent)}
+              placeholder="搜索店铺、美食或者标签"></el-input>
             <el-button
               type="primary"
               icon="el-icon-search"
-              onClick={() => this.serachFood(this.searchContentF)}></el-button>
+              {...{
+                on: {
+                  '!click': () => this.serachFood(this.searchContent)
+                }
+              }}></el-button>
           </div>
         </div>
         <div v-show={this.show} class="eaten-header-nav">

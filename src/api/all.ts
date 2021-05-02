@@ -16,5 +16,6 @@ export function getFood(id = '') {
 
 /** 搜索 */
 export function getFoodByName(params = {}) {
+  console.log(params)
   return api.get(`/food/serarchNm`,params)
 }
