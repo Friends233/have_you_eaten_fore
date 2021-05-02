@@ -4,7 +4,7 @@
 -->
 <script lang="tsx">
 import { Component, Vue, Watch } from 'vue-property-decorator'
-import { userEdit } from '@/api/index'
+import { userEdit } from '@/api/user'
 
 @Component({
   components: {}

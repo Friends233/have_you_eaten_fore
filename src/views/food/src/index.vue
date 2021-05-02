@@ -189,6 +189,7 @@ export default class Food extends Vue {
           }
           .el-button {
             float: right;
+            padding: 9px 10px;
           }
         }
       }
@@ -197,7 +198,7 @@ export default class Food extends Vue {
 }
 @media screen and (max-width: 600px) {
   ::v-deep .food-dialog {
-    width: 90%;
+    width: 95%;
   }
 }
 </style>

@@ -7,7 +7,7 @@ import { Button } from 'element-ui'
 import { Component, Vue } from 'vue-property-decorator'
 import Logo from '@/components/logo/index'
 import { Form, User } from './index'
-import { userLogin, userRegister } from '@/api'
+import { userLogin, userRegister } from '@/api/user'
 
 @Component({
   components: { Logo }

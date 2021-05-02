@@ -8,3 +8,13 @@ import api from './api'
 export function getSortAll() {
   return api.get('/sort/all')
 }
+
+/** 食品详情 */
+export function getFood(id = '') {
+  return api.get(`/food/serarchId/${id}`)
+}
+
+/** 搜索 */
+export function getFoodByName(params = {}) {
+  return api.get(`/food/serarchNm`,params)
+}

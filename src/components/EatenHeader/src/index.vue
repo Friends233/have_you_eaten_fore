@@ -8,6 +8,7 @@ import Logo from '@/components/logo/index'
 import { createRandomId } from '@/utils/index'
 import ShoppingCart from '@/components/Shoppingcart'
 import { Nav } from './index'
+import { getFoodByName } from '@/api/all'
 
 @Component({
   components: { Logo, ShoppingCart }
@@ -66,7 +67,7 @@ export default class EatenHeader extends Vue {
     return this.$store.getters.loginStatus
   }
 
-  get userName(){
+  get userName() {
     return this.$store.getters.userName
   }
 
@@ -90,6 +91,11 @@ export default class EatenHeader extends Vue {
       console.log(name)
       this.$router.push({ name: name })
     }
+  }
+
+  async serachFood(keywords: string) {
+    const data = await getFoodByName(keywords)
+    this.$router.push({ name: 'search', params: { ids:data.data } })
   }
 
   renderTopNavMenu(ary: Array<Nav>) {
@@ -158,7 +164,10 @@ export default class EatenHeader extends Vue {
           </div>
           <div class="eaten-header-mid-search">
             <el-input v-model={this.searchContent} placeholder="搜索店铺、美食或者标签"></el-input>
-            <el-button type="primary" icon="el-icon-search"></el-button>
+            <el-button
+              type="primary"
+              icon="el-icon-search"
+              onClick={() => this.serachFood(this.searchContentF)}></el-button>
           </div>
         </div>
         <div v-show={this.show} class="eaten-header-nav">

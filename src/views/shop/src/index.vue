@@ -12,6 +12,7 @@ import Food from '@/views/food'
 import { Goods, UserApp, GoodDetails, Shops } from './index'
 import storage from '@/storage'
 import { getShop } from '@/api/home'
+import { getFood } from '@/api/all'
 
 @Component({
   components: { EatenHeader, EatenFooter, Star, Food, Appraisal }
@@ -166,8 +167,23 @@ export default class Shop extends Vue {
     } else {
       this.shopId = storage.get('shopId') as string
     }
-    const data = await getShop(this.shopId)
-    this.shop = data.data
+    try {
+      const data = await getShop(this.shopId)
+      this.shop = data.data
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  async viewFood(item: any) {
+    try {
+      const data: any = await getFood('food_002')
+      this.$set(this.foodVal, 'goodD', { ...data.data })
+      console.log(this.foodVal.goodD)
+      this.visible = true
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   protected render() {
@@ -242,7 +258,7 @@ export default class Shop extends Vue {
                     {this.shop.food &&
                       this.shop.food.popular.map((item: any) => {
                         return (
-                          <li onClick={() => (this.visible = true)} key={item.id}>
+                          <li onClick={() => this.viewFood(item)} key={item.id}>
                             <img src={item.url} />
                             <div class="shop-card-list-text">
                               <p class="shop-card-list-name">{item.name}</p>
@@ -271,7 +287,7 @@ export default class Shop extends Vue {
                     {this.shop.food &&
                       this.shop.food.discount.map((item: any) => {
                         return (
-                          <li onClick={() => (this.visible = true)} key={item.id}>
+                          <li onClick={() => this.viewFood(item)} key={item.id}>
                             <img src={item.url} />
                             <div class="shop-card-list-text">
                               <p class="shop-card-list-name">{item.name}</p>
@@ -303,7 +319,7 @@ export default class Shop extends Vue {
                     {this.shop.food &&
                       this.shop.food.individual.map((item: any) => {
                         return (
-                          <li onClick={() => (this.visible = true)} key={item.id}>
+                          <li onClick={() => this.viewFood(item)} key={item.id}>
                             <img src={item.url} />
                             <div class="shop-card-list-text">
                               <p class="shop-card-list-name">{item.name}</p>
@@ -332,7 +348,7 @@ export default class Shop extends Vue {
                     {this.shop.food &&
                       this.shop.food.team.map((item: any) => {
                         return (
-                          <li onClick={() => (this.visible = true)} key={item.id}>
+                          <li onClick={() => this.viewFood(item)} key={item.id}>
                             <img src={item.url} />
                             <div class="shop-card-list-text">
                               <p class="shop-card-list-name">{item.name}</p>
@@ -364,7 +380,7 @@ export default class Shop extends Vue {
                     {this.shop.food &&
                       this.shop.food.snackDrink.map((item: any) => {
                         return (
-                          <li onClick={() => (this.visible = true)} key={item.id}>
+                          <li onClick={() => this.viewFood(item)} key={item.id}>
                             <img src={item.url} />
                             <div class="shop-card-list-text">
                               <p class="shop-card-list-name">{item.name}</p>
@@ -393,7 +409,7 @@ export default class Shop extends Vue {
                     {this.shop.food &&
                       this.shop.food.fullReduction.map((item: any) => {
                         return (
-                          <li onClick={() => (this.visible = true)} key={item.id}>
+                          <li onClick={() => this.viewFood(item)} key={item.id}>
                             <img src={item.url} />
                             <div class="shop-card-list-text">
                               <p class="shop-card-list-name">{item.name}</p>

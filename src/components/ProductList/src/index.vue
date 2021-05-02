@@ -4,7 +4,7 @@
 -->
 <script lang="tsx">
 import { Component, Vue } from 'vue-property-decorator'
-import ProductCard from '../components/productCard.vue'
+import ProductCard from '@/components/productCard'
 import { getHome } from '@/api/home'
 
 @Component({

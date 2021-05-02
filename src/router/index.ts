@@ -45,6 +45,11 @@ const routes: Array<RouteConfig> = [
     component: () => import('@/views/shop')
   },
   {
+    path: '/search',
+    name: 'search',
+    component: () => import('@/views/serarch')
+  },
+  {
     path: '/userInfo',
     name: 'userInfo',
     component: () => import('@/views/userInfo'),

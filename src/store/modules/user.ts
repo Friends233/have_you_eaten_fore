@@ -5,7 +5,7 @@
 import { User } from '@/config'
 import { Module } from 'vuex'
 import storage from '@/storage'
-import { userLogin, refreshUser } from '@/api'
+import { userLogin, refreshUser } from '@/api/user'
 
 interface State {
   userInfo: User;
