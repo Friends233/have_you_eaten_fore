@@ -86,4 +86,9 @@ export default class SearchFood extends Vue {
     }
   }
 }
+@media screen and (max-width: 600px) {
+  .search-content {
+    width: $bodyMiniWidth;
+  }
+}
 </style>
