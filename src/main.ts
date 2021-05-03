@@ -13,9 +13,9 @@ import 'element-ui/lib/theme-chalk/index.css'
 // 购物车
 import shoppingCart from '@/components/Shoppingcart/src/global'
 
+Vue.use(ElementUI)
 // 购物车挂载到全局
 Vue.use(shoppingCart)
-Vue.use(ElementUI)
 
 Vue.config.productionTip = false;
 

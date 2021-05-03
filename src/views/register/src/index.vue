@@ -41,20 +41,22 @@ export default class Register extends Vue {
       this.$refs.ruleForm.validate(async (status: boolean) => {
         const params: User = {
           userName: this.ruleForm.userName || '',
-          userPass: this.ruleForm.password || ''
+          userPass: this.ruleForm.password || '',
+          userAvatar: '//s0.meituan.net/bs/fe-web-meituan/e3064a3/img/head-img.png'
         }
         if (status) {
           const res: any = await userRegister(params)
           if (res.code == 1) {
             this.$message({
               showClose: true,
-              message: res.data.message,
+              message: res.message,
               type: 'success'
             })
+            this.ruleForm = {}
           } else {
             this.$message({
               showClose: true,
-              message: res.data.message,
+              message: res.message,
               type: 'error'
             })
           }
@@ -180,10 +182,10 @@ export default class Register extends Vue {
       width: $bodyMiniWidth;
       .el-form-item {
         &:nth-child(2) {
-        ::v-deep .el-input {
-          width: 65%;
+          ::v-deep .el-input {
+            width: 65%;
+          }
         }
-      }
       }
     }
   }

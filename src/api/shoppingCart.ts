@@ -4,12 +4,12 @@
  */
 import api from './api'
 
-/** 测试 */
-export function getUserAll() {
-  return api.get('/user/all')
+/** 购物车 */
+export function getSptAll() {
+  return api.get('/shoppingcart/all')
 }
 
-/** 登录 */
-export function userLogin(params = {}){
-  return api.post('/user/login',params)
+/** 获取购物车 */
+export function getSpt(id = ''){
+  return api.get(`/shoppingcart/${id}`)
 }

@@ -89,7 +89,7 @@ export default class FoodCard extends Vue {
     }
   }
 
-  shopping(e) {
+  shopping(e: any) {
     e.stopPropagation()
     console.log('加入购物车')
   }

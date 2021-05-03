@@ -5,12 +5,13 @@
 <script lang="tsx">
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import { ShoppingCartConifg } from './index'
+import storage from '@/storage'
+import { getSpt } from '@/api/shoppingCart'
 
 @Component({
   components: {}
 })
 export default class ShoppingCart extends Vue {
-
   private visible = false
   private foodCheckbox: boolean[] = []
   data: ShoppingCartConifg[] = []
@@ -29,8 +30,11 @@ export default class ShoppingCart extends Vue {
     console.log('close')
   }
 
-  showDialog() {
+  async showDialog() {
     this.visible = true
+    const userinfo: any = storage.get('userInfo')
+    const data = await getSpt(userinfo.id)
+    this.data = data.data.content
   }
 
   hideDialog() {
