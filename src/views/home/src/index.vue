@@ -16,10 +16,6 @@ import ShoppingCart from '@/components/Shoppingcart'
 export default class HelloWorld extends Vue {
   $showCart: any
 
-  get num() {
-    return 0
-  }
-
   protected render() {
     return (
       <div class="home-wrapper">

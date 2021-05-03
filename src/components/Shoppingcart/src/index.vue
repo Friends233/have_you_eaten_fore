@@ -32,9 +32,17 @@ export default class ShoppingCart extends Vue {
 
   async showDialog() {
     this.visible = true
-    const userinfo: any = storage.get('userInfo')
-    const data = await getSpt(userinfo.id)
-    this.data = data.data.content
+    try {
+      const userinfo: any = storage.get('userInfo')
+      if (userinfo.id) {
+        const data = await getSpt(userinfo.id)
+        this.data = data.data.content
+      } else {
+        this.data = []
+      }
+    } catch (err) {
+      this.data = []
+    }
   }
 
   hideDialog() {
@@ -67,7 +75,7 @@ export default class ShoppingCart extends Vue {
   }
 
   get isDisabled() {
-    return !this.foodCheckbox.includes(true)
+    return !this.foodCheckbox.includes(true) || this.data.length === 0
   }
 
   protected render() {
@@ -104,10 +112,7 @@ export default class ShoppingCart extends Vue {
               )
             })}
           </ul>
-          <el-button
-            type="primary"
-            disabled={this.isDisabled || (this.data && this.data.length !== 0)}
-            onClick={this.submint}>
+          <el-button type="primary" disabled={this.isDisabled} onClick={this.submint}>
             去结算
           </el-button>
         </el-drawer>

@@ -10,11 +10,28 @@
 </template>
 
 <script>
+import { getSpt } from '@/api/shoppingCart'
+import storage from '@/storage'
+
 export default {
   name: 'App',
-  computed: {
-    num() {
-      return 0
+  data: function () {
+    return {
+      num: 0
+    }
+  },
+  created() {
+    const userinfo = storage.get('userInfo')
+    if (userinfo.id) {
+      getSpt(userinfo.id || '')
+        .then((res) => {
+          this.num = res.data.content.length
+        })
+        .catch((err) => {
+          this.num = 0
+        })
+    } else {
+      this.num = 0
     }
   }
 }
