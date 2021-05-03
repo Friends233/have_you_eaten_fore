@@ -1,5 +1,5 @@
 <!--
- * @Description: 店铺卡片
+ * @Description: 食物卡片
  * @Author: Friends233
 -->
 <script lang="tsx">
@@ -12,6 +12,7 @@ import { getFood } from '@/api/all'
   components: { Food }
 })
 export default class FoodCard extends Vue {
+  [x: string]: any
   @Prop() card!: any
 
   visible = false
@@ -78,7 +79,6 @@ export default class FoodCard extends Vue {
   }
 
   async viewFood(item: any) {
-    console.log(item)
     try {
       const data: any = await getFood(item.id)
       this.$set(this.foodVal, 'goodD', { ...data.data })
@@ -91,7 +91,7 @@ export default class FoodCard extends Vue {
 
   shopping(e: any) {
     e.stopPropagation()
-    console.log('加入购物车')
+    this.$showCart(this.card.id, true)
   }
 
   protected render() {

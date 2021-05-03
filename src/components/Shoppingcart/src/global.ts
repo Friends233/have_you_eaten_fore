@@ -9,15 +9,11 @@ const spCart: any = Vue.extend(ShoppingCart)
 const install = () => {
   Object.defineProperty(Vue.prototype, '$showCart', {
     get() {
-      const showCart = (flag: boolean) => {
+      const showCart = (id = '', flag = false) => {
         const instance = new spCart()
         instance.vm = instance.$mount()
         document.body.appendChild(instance.vm.$el)
-        if(flag) {
-          instance.showDialog()
-        }else {
-          instance.hideDialog()
-        }
+        instance.showDialog(id, flag)
       }
       return showCart
     }

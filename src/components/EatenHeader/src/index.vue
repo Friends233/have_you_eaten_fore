@@ -71,7 +71,7 @@ export default class EatenHeader extends Vue {
   }
 
   showShoppingCart() {
-    this.$showCart(true)
+    this.$showCart()
   }
 
   handleSelect(key: string) {

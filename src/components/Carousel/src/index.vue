@@ -103,7 +103,7 @@ export default class Carousel extends Vue {
                     <i class="el-icon-star-on"></i>
                     <span>我的收藏</span>
                   </li>
-                  <li onClick={() => this.$showCart(true)}>
+                  <li onClick={() => this.$showCart()}>
                     <i class="el-icon-shopping-cart-2"></i>
                     <span>购物车</span>
                   </li>

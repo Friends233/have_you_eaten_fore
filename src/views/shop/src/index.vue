@@ -18,6 +18,7 @@ import { getFood } from '@/api/all'
   components: { EatenHeader, EatenFooter, Star, Food, Appraisal }
 })
 export default class Shop extends Vue {
+  [x: string]: any
   foodVal: { appraisalTags?: string[]; appraisals?: UserApp[]; goodD?: GoodDetails } = {
     // 评价的排序标签
     appraisalTags: [
@@ -152,8 +153,8 @@ export default class Shop extends Vue {
   elTabIndex = 'first'
 
   addShoppingCart(item: any, e: any) {
-    console.log(item, e, '加入购物车')
     e.stopPropagation()
+    this.$showCart(item.id, true)
   }
 
   mounted() {

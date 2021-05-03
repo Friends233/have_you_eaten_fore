@@ -6,14 +6,16 @@
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import { ShoppingCartConifg } from './index'
 import storage from '@/storage'
-import { getSpt } from '@/api/shoppingCart'
+import { getSpt, addFood, removeFood, clearAll } from '@/api/shoppingCart'
 
 @Component({
   components: {}
 })
 export default class ShoppingCart extends Vue {
+  [x: string]: any
   private visible = false
   private foodCheckbox: boolean[] = []
+  userId = ''
   data: ShoppingCartConifg[] = []
 
   created() {
@@ -24,18 +26,29 @@ export default class ShoppingCart extends Vue {
     this.data.forEach((item) => {
       this.foodCheckbox.push(bl)
     })
+    const userinfo: any = storage.get('userInfo')
+    this.userId = userinfo.id
   }
 
-  handleClose() {
-    console.log('close')
+  async handleClose() {
+    await this.refershCart()
+    await this.$EventBus.$emit('refershCart', this.data.length)
   }
 
-  async showDialog() {
-    this.visible = true
+  async showDialog(id = '', flag = false) {
+    if (!flag) {
+      this.visible = true
+    }
+    if (id !== '') {
+      await this.shopping(id)
+    }
+    await this.refershCart()
+  }
+
+  async refershCart() {
     try {
-      const userinfo: any = storage.get('userInfo')
-      if (userinfo.id) {
-        const data = await getSpt(userinfo.id)
+      if (this.userId) {
+        const data = await getSpt(this.userId)
         this.data = data.data.content
       } else {
         this.data = []
@@ -47,6 +60,33 @@ export default class ShoppingCart extends Vue {
 
   hideDialog() {
     this.visible = false
+    this.$message({
+      type: 'success',
+      message: '操作成功！'
+    })
+  }
+
+  shopping(foodId: string) {
+    const params = {
+      foodId,
+      userId: this.userId
+    }
+    addFood(params)
+      .then((res) => {
+        this.$message({
+          type: 'success',
+          message: '添加成功'
+        })
+        this.refershCart().then(() => {
+          this.$EventBus.$emit('refershCart', this.data.length)
+        })
+      })
+      .catch((err) => {
+        this.$message({
+          type: 'error',
+          message: err.data.message
+        })
+      })
   }
 
   submint() {
@@ -57,9 +97,15 @@ export default class ShoppingCart extends Vue {
     this.$set(this.foodCheckbox, index, !this.foodCheckbox[index])
   }
 
-  clearFood(index: number, e: any) {
-    this.data.splice(index, 1)
+  clearFood(row: any, e: any) {
     e.stopPropagation()
+    const params = {
+      foodId: row.id,
+      userId: this.userId
+    }
+    removeFood(params).then(() => {
+      this.hideDialog()
+    })
   }
 
   checkAll() {
@@ -71,7 +117,9 @@ export default class ShoppingCart extends Vue {
   }
 
   clearAll() {
-    this.data = []
+    clearAll(this.userId).then(() => {
+      this.hideDialog()
+    })
   }
 
   get isDisabled() {
@@ -85,7 +133,7 @@ export default class ShoppingCart extends Vue {
           title="购物车"
           visible={this.visible}
           {...{ on: { 'update:visible': (e: any) => (this.visible = e) } }}
-          onBeforeClose={this.handleClose}>
+          onClose={this.handleClose}>
           <div class="shoppingcart-btn">
             <a onClick={this.checkAll}>全选</a>
             <a onClick={this.clearAll}>清空</a>
@@ -100,7 +148,7 @@ export default class ShoppingCart extends Vue {
                   <el-checkbox size="medium" v-model={this.foodCheckbox[index]}></el-checkbox>
                   <img src={item.img} />
                   <div class="food-list-right">
-                    <i class="el-icon-delete top" onClick={(e: any) => this.clearFood(index, e)}></i>
+                    <i class="el-icon-delete top" onClick={(e: any) => this.clearFood(item, e)}></i>
                     <div class="label">
                       <span>{item.name}</span>
                       <span>￥{item.price}</span>

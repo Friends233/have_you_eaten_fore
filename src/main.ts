@@ -19,6 +19,9 @@ Vue.use(shoppingCart)
 
 Vue.config.productionTip = false;
 
+// EventBus
+Vue.prototype.$EventBus = new Vue();
+
 // 根据token刷新用户信息到store
 (function refreshUserInfo() {
   store.dispatch('refreshUserInfo')

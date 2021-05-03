@@ -13,6 +13,7 @@ import { UserApp, GoodDetails } from './index'
   components: { EatenHeader, EatenFooter, Appraisal }
 })
 export default class Food extends Vue {
+  [x: string]: any
   // 评价的排序标签
   @VModel({ default: {} }) readonly foodVal: any
   @Prop({ default: false, type: Boolean }) readonly show?: boolean
@@ -24,6 +25,10 @@ export default class Food extends Vue {
 
   hideView(e: any) {
     this.$emit('hideView', e)
+  }
+  
+  shopping() {
+    this.$showCart(this.foodVal.goodD.id, true)
   }
 
   protected render() {
@@ -47,7 +52,7 @@ export default class Food extends Vue {
             <span class="pri">{(this.foodVal.goodD.price * this.foodVal.goodD.discount).toFixed(1)}</span>
             <span class="del">￥{this.foodVal.goodD.price}</span>
             <span class="other">包装费￥{this.foodVal.goodD.packagingCosts}/份</span>
-            <el-button type="primary" size="small" icon="el-icon-plus" round>
+            <el-button type="primary" size="small" icon="el-icon-plus" onClick={this.shopping} round>
               加入购物车
             </el-button>
           </div>

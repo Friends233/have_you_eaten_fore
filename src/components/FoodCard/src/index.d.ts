@@ -14,6 +14,7 @@ export interface UserApp {
 }
 
 export interface GoodDetails {
+  id?: string;
   desc?: string;
   material?: string;
   taste?: string;

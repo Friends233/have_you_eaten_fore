@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="top-cart" @click="() => this.$showCart(true)">
+    <div class="top-cart" @click="() => this.$showCart()">
       <el-badge :value="num">
         <i class="el-icon-shopping-cart-1"></i>
       </el-badge>
@@ -20,7 +20,10 @@ export default {
       num: 0
     }
   },
-  created() {
+  mounted() {
+    this.$EventBus.$on('refershCart', (number) => {
+      this.num = number
+    })
     const userinfo = storage.get('userInfo')
     if (userinfo.id) {
       getSpt(userinfo.id || '')
