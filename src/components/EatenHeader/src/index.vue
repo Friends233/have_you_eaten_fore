@@ -16,6 +16,8 @@ export default class EatenHeader extends Vue {
   [x: string]: any
   @Prop({ default: false, type: Boolean }) readonly show: boolean | undefined
 
+  appView = require('@/assets/download-qr.png')
+
   // 顶部的菜单
   topNavMenu: Array<Nav> = [
     {
@@ -32,7 +34,8 @@ export default class EatenHeader extends Vue {
     {
       id: '2',
       value: '手机访问',
-      routerLink: 'test4'
+      routerLink: 'test4',
+      onMouseover: this.appViewer
     },
     {
       id: '3',
@@ -70,6 +73,11 @@ export default class EatenHeader extends Vue {
     return this.$store.getters.userName
   }
 
+  appViewer(view: string) {
+    const appview: any = this.$refs.appView
+    appview.style.display = view
+  }
+
   showShoppingCart() {
     this.$showCart()
   }
@@ -96,7 +104,7 @@ export default class EatenHeader extends Vue {
     if (this.$route.name === 'search') {
       this.$router.push({ name: 'Home' })
     }
-    this.$router.push({ name: 'search', params: { keywords: keywords} })
+    this.$router.push({ name: 'search', params: { keywords: keywords } })
   }
 
   renderTopNavMenu(ary: Array<Nav>) {
@@ -113,7 +121,12 @@ export default class EatenHeader extends Vue {
       } else {
         return (
           <el-menu-item index={item.routerLink}>
-            <span onClick={() => item.onClick && item.onClick()}>{item.value}</span>
+            <span
+              onClick={() => item.onClick && item.onClick()}
+              onMouseout={() => item.onMouseover && item.onMouseover('none')}
+              onMouseover={() => item.onMouseover && item.onMouseover('block')}>
+              {item.value}
+            </span>
           </el-menu-item>
         )
       }
@@ -157,6 +170,9 @@ export default class EatenHeader extends Vue {
             <el-menu default-active="activeIndex" mode="horizontal" onSelect={this.handleSelect}>
               {this.renderTopNavMenu(this.topNavMenu)}
             </el-menu>
+            <div class="app-view" ref="appView">
+              <img src={this.appView} />
+            </div>
           </div>
         </div>
         <div class="eaten-header-mid">
@@ -253,6 +269,7 @@ export default class EatenHeader extends Vue {
       }
     }
     &-right {
+      position: relative;
       ::v-deep .el-menu {
         background-color: #f8f8f8;
         height: 40px;
@@ -269,6 +286,17 @@ export default class EatenHeader extends Vue {
       ::v-deep .el-menu-item {
         height: 40px;
         line-height: 40px;
+      }
+      .app-view {
+        position: absolute;
+        left: 96px;
+        display: none;
+        padding: 5px;
+        margin-top: 5px;
+        box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+        img {
+          width: 86px;
+        }
       }
     }
   }

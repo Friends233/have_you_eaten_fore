@@ -8,5 +8,6 @@ export interface Nav {
   value: string;
   children?: Array<Nav>;
   routerLink?: string;
-  onClick?:Function;
+  onClick?: Function;
+  onMouseover?: Function;
 }
