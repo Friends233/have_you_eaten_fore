@@ -24,3 +24,8 @@ export function getOrder(id = '') {
   return api.get(`/orderForm/${id}`)
 }
 
+/** 订单 */
+export function addFoodLabel(params = {}) {
+  return api.post(`/food/addLabel`, params)
+}
+

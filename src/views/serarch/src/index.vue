@@ -14,6 +14,7 @@ import { getFoodByName } from '@/api/all'
   components: { EatenHeader, EatenFooter, FoodCard }
 })
 export default class SearchFood extends Vue {
+  [x: string]: any
   shopList: any[] = []
   shopIds: number[] = []
 
@@ -33,11 +34,6 @@ export default class SearchFood extends Vue {
         ...item
       }
     })
-    console.log(this.shopList)
-  }
-
-  shopping() {
-    console.log('加入购物车')
   }
 
   protected render() {

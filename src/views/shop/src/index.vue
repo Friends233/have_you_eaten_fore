@@ -439,8 +439,6 @@ export default class Shop extends Vue {
             <el-tab-pane class="shop-card-appraisal" label="评价">
               <Appraisal></Appraisal>
             </el-tab-pane>
-            <el-tab-pane label="商家信息">商家信息</el-tab-pane>
-            <el-tab-pane label="店铺管理">店铺管理</el-tab-pane>
           </el-tabs>
         </div>
         <eaten-footer></eaten-footer>

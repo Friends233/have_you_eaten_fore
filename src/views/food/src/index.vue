@@ -3,11 +3,12 @@
  * @Author: Friends233
 -->
 <script lang="tsx">
-import { Component, Vue, VModel, Prop } from 'vue-property-decorator'
+import { Component, Vue, VModel, Prop, Watch } from 'vue-property-decorator'
 import EatenHeader from '@/components/EatenHeader/index'
 import EatenFooter from '@/components/EatenFooter/index'
 import Appraisal from '@/components/Appraisal/index'
 import { UserApp, GoodDetails } from './index'
+import { addFoodLabel } from '@/api/all'
 
 @Component({
   components: { EatenHeader, EatenFooter, Appraisal }
@@ -18,6 +19,16 @@ export default class Food extends Vue {
   @VModel({ default: {} }) readonly foodVal: any
   @Prop({ default: false, type: Boolean }) readonly show?: boolean
   elTabIndex = 'first'
+  dynamicTags: any = []
+  inputValue = ''
+
+  @Watch('foodVal', { deep: true })
+  fn(val: any) {
+    if (val) {
+      // console.log(val.goodD.label)
+      this.dynamicTags = val.goodD.label.split('，')
+    }
+  }
 
   get visible() {
     return this.show
@@ -26,9 +37,24 @@ export default class Food extends Vue {
   hideView(e: any) {
     this.$emit('hideView', e)
   }
-  
+
   shopping() {
     this.$showCart(this.foodVal.goodD.id, true)
+  }
+
+  handleInputConfirm(tag: any) {
+    if (this.$store.getters.loginStatus) {
+      this.dynamicTags.push(tag)
+      this.inputValue = ''
+      const label = this.dynamicTags.join('，')
+      console.log({ id: this.foodVal.goodD.id, label })
+      addFoodLabel({ id: this.foodVal.goodD.id, label })
+    } else {
+      this.$alert('请先登录', '警告', {
+        confirmButtonText: '确定',
+        type: 'warning'
+      })
+    }
   }
 
   protected render() {
@@ -80,6 +106,23 @@ export default class Food extends Vue {
           </el-tab-pane>
           <el-tab-pane label="评价" class="shop-card-appraisal" name="second">
             <appraisal></appraisal>
+          </el-tab-pane>
+          <el-tab-pane label="标签" class="shop-card-label" name="third">
+            <el-input
+              v-model={this.inputValue}
+              ref="saveTagInput"
+              size="small"
+              placeholder="请输入标签内容"
+              maxlength="20"
+              show-word-limit
+              onChange={this.handleInputConfirm}></el-input>
+            {this.dynamicTags.map((item) => {
+              return (
+                <el-tag key={item} disable-transitions="false">
+                  {item}
+                </el-tag>
+              )
+            })}
           </el-tab-pane>
         </el-tabs>
       </el-dialog>
@@ -134,6 +177,13 @@ export default class Food extends Vue {
               color: black;
             }
           }
+        }
+      }
+      .shop-card-label {
+        min-height: 194px;
+        .el-tag {
+          margin-top: 10px;
+          margin-right: 10px;
         }
       }
     }
