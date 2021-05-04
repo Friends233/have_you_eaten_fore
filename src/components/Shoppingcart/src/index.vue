@@ -6,7 +6,7 @@
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import { ShoppingCartConifg } from './index'
 import storage from '@/storage'
-import { getSpt, addFood, removeFood, clearAll } from '@/api/shoppingCart'
+import { getSpt, addFood, removeFood, clearAll, submitCart } from '@/api/shoppingCart'
 
 @Component({
   components: {}
@@ -18,7 +18,7 @@ export default class ShoppingCart extends Vue {
   userId = ''
   data: ShoppingCartConifg[] = []
 
-  created() {
+  mounted() {
     this.init(false)
   }
 
@@ -89,8 +89,16 @@ export default class ShoppingCart extends Vue {
       })
   }
 
-  submint() {
-    console.log('submint')
+  async submint() {
+    const content = this.data.filter((item, index) => {
+      return this.foodCheckbox[index]
+    })
+    const ids = this.data.map((item) => {
+      return item.id
+    })
+    submitCart({ userId: this.userId, foodIds: ids.join(','), content }).then(() => {
+      this.hideDialog()
+    })
   }
 
   checkChecked(index: number) {
@@ -120,6 +128,16 @@ export default class ShoppingCart extends Vue {
     clearAll(this.userId).then(() => {
       this.hideDialog()
     })
+  }
+
+  get price() {
+    let price = 0
+    this.data.forEach((item, index) => {
+      if (this.foodCheckbox[index]) {
+        price += Number(item.price) * Number(item.number)
+      }
+    })
+    return price
   }
 
   get isDisabled() {
@@ -160,6 +178,9 @@ export default class ShoppingCart extends Vue {
               )
             })}
           </ul>
+          <div class="bottom-price">
+            合计：<span>{this.price}￥</span>
+          </div>
           <el-button type="primary" disabled={this.isDisabled} onClick={this.submint}>
             去结算
           </el-button>
@@ -182,6 +203,17 @@ export default class ShoppingCart extends Vue {
     .el-drawer__body {
       position: relative;
     }
+  }
+  .bottom-price {
+    span {
+      color: red;
+      font-weight: 700;
+      font-size: 17px;
+    }
+    font-size: 18px;
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
   }
   &-btn {
     display: flex;

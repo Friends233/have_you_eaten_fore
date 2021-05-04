@@ -27,6 +27,17 @@ export default class UserInfo extends Vue {
     { label: '账户设置', type: 'mid', routLink: { name: 'account', index: 1 } }
   ]
 
+  beforeCreate() {
+    if (!this.$store.getters.loginStatus) {
+      this.$alert('请先登录?', '提示', {
+        confirmButtonText: '确定',
+        type: 'warning'
+      }).finally(() => {
+        this.$router.go(-1)
+      })
+    }
+  }
+
   goView(link: any) {
     const { name, index } = link
     if (index !== 0 && name !== '') {

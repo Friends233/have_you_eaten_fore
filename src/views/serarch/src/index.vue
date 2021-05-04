@@ -17,7 +17,7 @@ export default class SearchFood extends Vue {
   shopList: any[] = []
   shopIds: number[] = []
 
-  created() {
+  mounted() {
     this.init()
   }
 

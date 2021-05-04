@@ -26,7 +26,7 @@ export default class ShopList extends Vue {
   shoplist: Array<Shop> = []
   idToType: any = {}
 
-  created() {
+  mounted() {
     this.init()
   }
 

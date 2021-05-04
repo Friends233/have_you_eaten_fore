@@ -16,5 +16,11 @@ export function getFood(id = '') {
 
 /** 搜索 */
 export function getFoodByName(params = {}) {
-  return api.get(`/food/serarchNm`,params)
+  return api.get(`/food/serarchNm`, params)
 }
+
+/** 订单 */
+export function getOrder(id = '') {
+  return api.get(`/orderForm/${id}`)
+}
+

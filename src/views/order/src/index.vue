@@ -4,6 +4,8 @@
 -->
 <script lang="tsx">
 import { Component, Vue, Watch } from 'vue-property-decorator'
+import { OrderList } from './index'
+import { getOrder } from '@/api/all'
 
 const typeToText = ['', '待付款', '待使用', '待评价', '售后']
 const typeToPrompt = ['总价', '需付款', '', '', '']
@@ -15,76 +17,28 @@ const indexToView = ['', 'first', 'second', 'third', 'fourth']
 })
 export default class Order extends Vue {
   activeName = 'first'
-  orderData = {
-    firest: [
-      {
-        label: '新锐连锁公寓',
-        desc: '雅致单人间',
-        num: 1,
-        date: '2020-07-24 - 2020-07-25',
-        price: 88.0,
-        url: '//p1.meituan.net/hotelbiz/5ffdf0c91ab7f48b1a593953623913db261161.jpg@90w_90h_1e_1c',
-        type: 0
-      },
-      {
-        label: '新锐连锁公寓',
-        desc: '雅致单人间',
-        num: 1,
-        date: '2020-07-24 - 2020-07-25',
-        price: 88.0,
-        url: '//p1.meituan.net/hotelbiz/5ffdf0c91ab7f48b1a593953623913db261161.jpg@90w_90h_1e_1c',
-        type: 1
-      }
-    ],
-    second: [
-      {
-        label: '新锐连锁公寓',
-        desc: '雅致单人间',
-        num: 1,
-        date: '2020-07-24 - 2020-07-25',
-        price: 88.0,
-        url: '//p1.meituan.net/hotelbiz/5ffdf0c91ab7f48b1a593953623913db261161.jpg@90w_90h_1e_1c',
-        type: 0
-      }
-    ],
-    third: [
-      {
-        label: '新锐连锁公寓',
-        desc: '雅致单人间',
-        num: 1,
-        date: '2020-07-24 - 2020-07-25',
-        price: 88.0,
-        url: '//p1.meituan.net/hotelbiz/5ffdf0c91ab7f48b1a593953623913db261161.jpg@90w_90h_1e_1c',
-        type: 0
-      }
-    ],
-    fourth: [
-      {
-        label: '新锐连锁公寓',
-        desc: '雅致单人间',
-        num: 1,
-        date: '2020-07-24 - 2020-07-25',
-        price: 88.0,
-        url: '//p1.meituan.net/hotelbiz/5ffdf0c91ab7f48b1a593953623913db261161.jpg@90w_90h_1e_1c',
-        type: 0
-      }
-    ],
-    fifth: [
-      {
-        label: '新锐连锁公寓',
-        desc: '雅致单人间',
-        num: 1,
-        date: '2020-07-24 - 2020-07-25',
-        price: 88.0,
-        url: '//p1.meituan.net/hotelbiz/5ffdf0c91ab7f48b1a593953623913db261161.jpg@90w_90h_1e_1c',
-        type: 0
-      }
-    ]
-  }
+  orderData: { firest?: OrderList[]; second?: OrderList[]; third?: OrderList[]; fourth?: OrderList[] } = {}
 
   @Watch('$route', { deep: true })
   listenersRouter(val: any) {
     this.activeName = indexToView[Number(val.query.index)] || 'first'
+  }
+
+  mounted() {
+    this.init()
+  }
+
+  getPrice(item: OrderList) {
+    let price = 0
+    price = Number(item.num) * Number(item.price)
+    return price
+  }
+
+  async init() {
+    const data = await getOrder(this.$store.getters.userId)
+    this.orderData = {
+      ...data.data
+    }
   }
 
   protected render() {
@@ -92,86 +46,94 @@ export default class Order extends Vue {
       <el-tabs v-model={this.activeName}>
         <el-tab-pane label="全部订单" name="first">
           <ul class="order-list">
-            {this.orderData.firest.map((item) => {
-              return (
-                <li>
-                  <img src={item.url} />
-                  <div>
-                    <span class="label">{item.label}</span>
-                    <span class="num">{item.num} 间，</span>
-                    <span class="desc">{item.desc}</span>
-                    <span class="date">{item.date}</span>
-                  </div>
-                  <p class="price">
-                    {typeToPrompt[item.type]}：{item.price}
-                  </p>
-                  <p class="news none-600">{typeToText[item.type]}</p>
-                </li>
-              )
-            })}
+            {this.orderData.firest?.length === 0 && <p>暂无记录</p>}
+            {this.orderData.firest &&
+              this.orderData.firest.map((item) => {
+                return (
+                  <li>
+                    <img src={item.url} />
+                    <div>
+                      <span class="label">{item.label}</span>
+                      <span class="num">{item.num} 份，</span>
+                      <span class="desc">{item.desc}</span>
+                      <span class="date">{item.date}</span>
+                    </div>
+                    <p class="price">
+                      {typeToPrompt[item.type]}：{this.getPrice(item)}
+                    </p>
+                    <p class="news none-600">{typeToText[item.type]}</p>
+                  </li>
+                )
+              })}
           </ul>
         </el-tab-pane>
         <el-tab-pane label="待付款" name="second">
           <ul class="order-list">
-            {this.orderData.second.map((item) => {
-              return (
-                <li>
-                  <img src={item.url} />
-                  <div>
-                    <span class="label">{item.label}</span>
-                    <span class="num">{item.num} 间，</span>
-                    <span class="desc">{item.desc}</span>
-                    <span class="date">{item.date}</span>
-                  </div>
-                  <p class="price">
-                    {typeToPrompt[item.type]}：{item.price}
-                  </p>
-                  <p class="news none-600">{typeToText[item.type]}</p>
-                </li>
-              )
-            })}
+            {this.orderData.second?.length === 0 && <p>暂无记录</p>}
+            {this.orderData.second &&
+              this.orderData.second.map((item) => {
+                return (
+                  <li>
+                    <img src={item.url} />
+                    <div>
+                      <span class="label">{item.label}</span>
+                      <span class="num">{item.num} 份，</span>
+                      <span class="desc">{item.desc}</span>
+                      <span class="date">{item.date}</span>
+                    </div>
+                    <p class="price">
+                      {typeToPrompt[item.type]}：{this.getPrice(item)}
+                    </p>
+                    <p class="news none-600">{typeToText[item.type]}</p>
+                  </li>
+                )
+              })}
           </ul>
         </el-tab-pane>
         <el-tab-pane label="待评价" name="third">
           <ul class="order-list">
-            {this.orderData.fourth.map((item) => {
-              return (
-                <li>
-                  <img src={item.url} />
-                  <div>
-                    <span class="label">{item.label}</span>
-                    <span class="num">{item.num} 间，</span>
-                    <span class="desc">{item.desc}</span>
-                    <span class="date">{item.date}</span>
-                  </div>
-                  <p class="price">
-                    {typeToPrompt[item.type]}：{item.price}
-                  </p>
-                  <p class="news none-600">{typeToText[item.type]}</p>
-                </li>
-              )
-            })}
+            {this.orderData.third?.length === 0 && <p>暂无记录</p>}
+            {this.orderData.third &&
+              this.orderData.third.map((item) => {
+                return (
+                  <li>
+                    <img src={item.url} />
+                    <div>
+                      <span class="label">{item.label}</span>
+                      <span class="num">{item.num} 份，</span>
+                      <span class="desc">{item.desc}</span>
+                      <span class="date">{item.date}</span>
+                    </div>
+                    <p class="price">
+                      {typeToPrompt[item.type]}：{this.getPrice(item)}
+                    </p>
+                    <p class="news none-600">{typeToText[item.type]}</p>
+                  </li>
+                )
+              })}
           </ul>
         </el-tab-pane>
         <el-tab-pane label="退款/售后" name="fourth">
           <ul class="order-list">
-            {this.orderData.firest.map((item) => {
-              return (
-                <li>
-                  <img src={item.url} />
-                  <div>
-                    <span class="label">{item.label}</span>
-                    <span class="num">{item.num} 间，</span>
-                    <span class="desc">{item.desc}</span>
-                    <span class="date">{item.date}</span>
-                  </div>
-                  <p class="price">
-                    {typeToPrompt[item.type]}：{item.price}
-                  </p>
-                  <p class="news none-600">{typeToText[item.type]}</p>
-                </li>
-              )
-            })}
+            {this.orderData.fourth?.length === 0 && <p>暂无记录</p>}
+            {this.orderData.fourth &&
+              this.orderData.fourth.map((item) => {
+                return (
+                  <li>
+                    <img src={item.url} />
+                    <div>
+                      <span class="label">{item.label}</span>
+                      <span class="num">{item.num} 份，</span>
+                      <span class="desc">{item.desc}</span>
+                      <span class="date">{item.date}</span>
+                    </div>
+                    <p class="price">
+                      {typeToPrompt[item.type]}：{this.getPrice(item)}
+                    </p>
+                    <p class="news none-600">{typeToText[item.type]}</p>
+                  </li>
+                )
+              })}
           </ul>
         </el-tab-pane>
       </el-tabs>

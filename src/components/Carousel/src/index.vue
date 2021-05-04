@@ -39,7 +39,7 @@ export default class Carousel extends Vue {
   ]
   foodTypeList: Array<FoodType> = []
 
-  async created() {
+  async mounted() {
     const content = await getSortAll()
     this.foodTypeList = content.data
   }

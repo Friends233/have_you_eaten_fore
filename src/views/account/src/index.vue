@@ -21,7 +21,7 @@ export default class Account extends Vue {
     return this.edit[index] ? '保存' : '修改'
   }
 
-  created() {
+  mounted() {
     this.init()
   }
 

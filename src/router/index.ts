@@ -5,6 +5,7 @@ import Order from '@/views/order'
 import Account from '@/views/account'
 import Coupon from '@/views/coupon'
 import Favorites from '@/views/favorites'
+import storage from '@/storage'
 
 Vue.use(VueRouter)
 

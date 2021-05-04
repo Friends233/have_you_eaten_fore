@@ -29,3 +29,8 @@ export function removeFood(params = {}) {
   return api.post(`/shoppingcart/remove`, params)
 }
 
+/** 结算 */
+export function submitCart(params = {}) {
+  return api.post(`/shoppingcart/submit`, params)
+}
+

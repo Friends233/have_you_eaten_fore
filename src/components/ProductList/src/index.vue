@@ -13,7 +13,7 @@ import { getHome } from '@/api/home'
 export default class ProductList extends Vue {
   cardList: Array<number> = [1, 2, 3, 4, 5, 6]
   cardData: any = {}
-  async created() {
+  async mounted() {
     const data = await getHome()
     this.cardData = data.data
   }
