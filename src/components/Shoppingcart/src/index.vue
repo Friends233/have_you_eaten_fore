@@ -30,9 +30,17 @@ export default class ShoppingCart extends Vue {
     this.userId = userinfo.id
   }
 
-  async handleClose() {
+  async emitNum() {
     await this.refershCart()
-    await this.$EventBus.$emit('refershCart', this.data.length)
+    let num = 0
+    await this.data.forEach((item) => {
+      num += Number(item.number)
+    })
+    await this.$EventBus.$emit('refershCart', num)
+  }
+
+  async handleClose() {
+    this.emitNum()
   }
 
   async showDialog(id = '', flag = false) {
@@ -40,7 +48,14 @@ export default class ShoppingCart extends Vue {
       this.visible = true
     }
     if (id !== '') {
-      await this.shopping(id)
+      if (this.userId !== '') {
+        await this.shopping(id)
+      } else {
+        this.$alert('请先登录', '警告', {
+          confirmButtonText: '确定',
+          type: 'warning'
+        })
+      }
     }
     await this.refershCart()
   }
@@ -77,9 +92,7 @@ export default class ShoppingCart extends Vue {
           type: 'success',
           message: '添加成功'
         })
-        this.refershCart().then(() => {
-          this.$EventBus.$emit('refershCart', this.data.length)
-        })
+       this.emitNum()
       })
       .catch((err) => {
         this.$message({

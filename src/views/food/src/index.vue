@@ -47,7 +47,7 @@ export default class Food extends Vue {
       this.dynamicTags.push(tag)
       this.inputValue = ''
       const label = this.dynamicTags.join('，')
-      console.log({ id: this.foodVal.goodD.id, label })
+      // console.log({ id: this.foodVal.goodD.id, label })
       addFoodLabel({ id: this.foodVal.goodD.id, label })
     } else {
       this.$alert('请先登录', '警告', {
@@ -116,9 +116,9 @@ export default class Food extends Vue {
               maxlength="20"
               show-word-limit
               onChange={this.handleInputConfirm}></el-input>
-            {this.dynamicTags.map((item) => {
+            {this.dynamicTags.map((item: any) => {
               return (
-                <el-tag key={item} disable-transitions="false">
+                <el-tag key={item} disable-transitions={false}>
                   {item}
                 </el-tag>
               )

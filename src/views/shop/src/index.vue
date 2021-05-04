@@ -180,7 +180,7 @@ export default class Shop extends Vue {
     try {
       const data: any = await getFood(item.id)
       this.$set(this.foodVal, 'goodD', { ...data.data })
-      console.log(this.foodVal.goodD)
+      // console.log(this.foodVal.goodD)
       this.visible = true
     } catch (err) {
       console.log(err)

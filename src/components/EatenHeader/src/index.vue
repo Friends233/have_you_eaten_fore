@@ -95,7 +95,6 @@ export default class EatenHeader extends Vue {
 
   goView(name = '') {
     if (name !== '') {
-      console.log(name)
       this.$router.push({ name: name })
     }
   }

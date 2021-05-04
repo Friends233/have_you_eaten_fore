@@ -28,7 +28,11 @@ export default {
     if (userinfo.id) {
       getSpt(userinfo.id || '')
         .then((res) => {
-          this.num = res.data.content.length
+          let num = 0
+          res.data.content.forEach((item) => {
+            num += item.number
+          })
+          this.num = num
         })
         .catch((err) => {
           this.num = 0
