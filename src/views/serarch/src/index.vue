@@ -18,21 +18,25 @@ export default class SearchFood extends Vue {
   shopList: any[] = []
   shopIds: number[] = []
 
-  mounted() {
+  created() {
     this.init()
   }
 
-  async init() {
+  init() {
     window.onbeforeunload = function (e: any) {
       e.returnValue = 'stop'
       return stop
     }
-    const data = await getFoodByName({ name: this.$route.params.keywords && '' })
-    this.shopList = data.data.map((item: any) => {
-      return {
-        imgUrl: item.url,
-        ...item
-      }
+    this.$EventBus.$on('searchFood', (keywords: string) => {
+      getFoodByName({ name: keywords || '' }).then((data) => {
+        console.log(data)
+        this.shopList = data.data.map((item: any) => {
+          return {
+            imgUrl: item.url,
+            ...item
+          }
+        })
+      })
     })
   }
 
