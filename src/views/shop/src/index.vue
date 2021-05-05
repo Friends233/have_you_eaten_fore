@@ -147,7 +147,7 @@ export default class Shop extends Vue {
     }
   ]
 
-  shop: Shops = {}
+  shop: { shop?: Shops; food?: any[] } = {}
   shopId = ''
   visible = false
   elTabIndex = 'first'
@@ -201,31 +201,31 @@ export default class Shop extends Vue {
           <div class="shop-header">
             <div class="shop-header-left">
               <div>
-                <p class="shop-header-left-title">{this.shop.name}</p>
+                <p class="shop-header-left-title">{this.shop?.shop?.name}</p>
                 <div>
-                  <star num={this.shop.rating} size={'16'}></star>
+                  <star num={this.shop?.shop?.rating} size={'16'}></star>
                   <p>
-                    {this.shop.rating}分人均￥{this.shop.price}
+                    {this.shop?.shop?.rating}分人均￥{this.shop?.shop?.price}
                   </p>
                 </div>
               </div>
               <div>
                 <p>
-                  地址：{this.shop.address}
+                  地址：{this.shop?.shop?.address}
                   <i class="el-icon-location-information"></i>
                 </p>
-                <p>电话：{this.shop.phoneNumber}</p>
-                <p>营业时间：{this.shop.business}</p>
+                <p>电话：{this.shop?.shop?.phoneNumber}</p>
+                <p>营业时间：{this.shop?.shop?.business}</p>
               </div>
               <div>
                 <ul>
-                  {this.shop.desc?.includes('wifi') && (
+                  {this.shop?.shop?.desc?.includes('wifi') && (
                     <li>
                       <img src="https://p0.meituan.net/codeman/551290739062eda37e52999e2315f50c1887.png" />
                       <p>提供wifi</p>
                     </li>
                   )}
-                  {this.shop.desc?.includes('stop') && (
+                  {this.shop?.shop?.desc?.includes('stop') && (
                     <li>
                       <img src="https://p1.meituan.net/codeman/4b1c5696fe5bf2c4d23fb01659b3e68b1960.png" />
                       <p>停车位</p>
@@ -236,16 +236,15 @@ export default class Shop extends Vue {
             </div>
             <div class="shop-header-right none-600">
               <div>
-                <img src={this.shop.coverImg && this.shop.coverImg[0]} />
+                <img src={this.shop?.shop?.coverImg && this.shop?.shop?.coverImg[0]} />
               </div>
               <div>
-                {this.shop.coverImg &&
-                  this.shop.coverImg.map((item) => {
+                {this.shop?.shop?.coverImg?.map((item) => {
                     return (
                       <el-image
                         style="width: 100px; height: 100px"
                         src={item}
-                        preview-src-list={this.shop.coverImg}></el-image>
+                        preview-src-list={this.shop?.shop?.coverImg}></el-image>
                     )
                   })}
               </div>
@@ -253,188 +252,33 @@ export default class Shop extends Vue {
           </div>
           <el-tabs class="shop-card" type="border-card">
             <el-tab-pane label="点餐">
-              <el-tabs tab-position="left">
-                <el-tab-pane label="热销">
-                  <ul class="shop-card-list">
-                    {this.shop.food &&
-                      this.shop.food.popular.map((item: any) => {
-                        return (
-                          <li onClick={() => this.viewFood(item)} key={item.id}>
-                            <img src={item.url} />
-                            <div class="shop-card-list-text">
-                              <p class="shop-card-list-name">{item.name}</p>
-                              <p class="shop-card-list-desc">{item.desc}</p>
-                              <p class="shop-card-list-sold">{item.sold}</p>
-                            </div>
-                            <p class="shop-card-list-price">￥{item.price}</p>
-                            <a class="none" onClick={(e: any) => this.addShoppingCart(item, e)}>
-                              加入购物车
-                            </a>
-                            <el-button
-                              onClick={(e: any) => this.addShoppingCart(item, e)}
-                              class="none-600"
-                              type="primary"
-                              icon="el-icon-plus"
-                              plain>
-                              加入购物车
-                            </el-button>
-                          </li>
-                        )
-                      })}
-                  </ul>
-                </el-tab-pane>
-                <el-tab-pane label="优惠">
-                  <ul class="shop-card-list">
-                    {this.shop.food &&
-                      this.shop.food.discount.map((item: any) => {
-                        return (
-                          <li onClick={() => this.viewFood(item)} key={item.id}>
-                            <img src={item.url} />
-                            <div class="shop-card-list-text">
-                              <p class="shop-card-list-name">{item.name}</p>
-                              <p class="shop-card-list-desc">{item.desc}</p>
-                              <p class="shop-card-list-sold">{item.sold}</p>
-                            </div>
-                            <p class="shop-card-list-price">￥{item.price}</p>
-                            <a class="none" onClick={(e: any) => this.addShoppingCart(item, e)}>
-                              加入购物车
-                            </a>
-                            <el-button
-                              onClick={(e: any) => this.addShoppingCart(item, e)}
-                              class="none-600"
-                              type="primary"
-                              icon="el-icon-plus"
-                              plain>
-                              加入购物车
-                            </el-button>
-                          </li>
-                        )
-                      })}
-                  </ul>
-                </el-tab-pane>
-                <el-tab-pane label="单人套餐">
-                  <span slot="label">
-                    <i class="el-icon-fork-spoon"></i>单人套餐
-                  </span>
-                  <ul class="shop-card-list">
-                    {this.shop.food &&
-                      this.shop.food.individual.map((item: any) => {
-                        return (
-                          <li onClick={() => this.viewFood(item)} key={item.id}>
-                            <img src={item.url} />
-                            <div class="shop-card-list-text">
-                              <p class="shop-card-list-name">{item.name}</p>
-                              <p class="shop-card-list-desc">{item.desc}</p>
-                              <p class="shop-card-list-sold">{item.sold}</p>
-                            </div>
-                            <p class="shop-card-list-price">￥{item.price}</p>
-                            <a class="none" onClick={(e: any) => this.addShoppingCart(item, e)}>
-                              加入购物车
-                            </a>
-                            <el-button
-                              onClick={(e: any) => this.addShoppingCart(item, e)}
-                              class="none-600"
-                              type="primary"
-                              icon="el-icon-plus"
-                              plain>
-                              加入购物车
-                            </el-button>
-                          </li>
-                        )
-                      })}
-                  </ul>
-                </el-tab-pane>
-                <el-tab-pane label="团队订餐">
-                  <ul class="shop-card-list">
-                    {this.shop.food &&
-                      this.shop.food.team.map((item: any) => {
-                        return (
-                          <li onClick={() => this.viewFood(item)} key={item.id}>
-                            <img src={item.url} />
-                            <div class="shop-card-list-text">
-                              <p class="shop-card-list-name">{item.name}</p>
-                              <p class="shop-card-list-desc">{item.desc}</p>
-                              <p class="shop-card-list-sold">{item.sold}</p>
-                            </div>
-                            <p class="shop-card-list-price">￥{item.price}</p>
-                            <a class="none" onClick={(e: any) => this.addShoppingCart(item, e)}>
-                              加入购物车
-                            </a>
-                            <el-button
-                              onClick={(e: any) => this.addShoppingCart(item, e)}
-                              class="none-600"
-                              type="primary"
-                              icon="el-icon-plus"
-                              plain>
-                              加入购物车
-                            </el-button>
-                          </li>
-                        )
-                      })}
-                  </ul>
-                </el-tab-pane>
-                <el-tab-pane label="小吃饮料">
-                  <span slot="label">
-                    <i class="el-icon-cold-drink"></i>小吃饮料
-                  </span>
-                  <ul class="shop-card-list">
-                    {this.shop.food &&
-                      this.shop.food.snackDrink.map((item: any) => {
-                        return (
-                          <li onClick={() => this.viewFood(item)} key={item.id}>
-                            <img src={item.url} />
-                            <div class="shop-card-list-text">
-                              <p class="shop-card-list-name">{item.name}</p>
-                              <p class="shop-card-list-desc">{item.desc}</p>
-                              <p class="shop-card-list-sold">{item.sold}</p>
-                            </div>
-                            <p class="shop-card-list-price">￥{item.price}</p>
-                            <a class="none" onClick={(e: any) => this.addShoppingCart(item, e)}>
-                              加入购物车
-                            </a>
-                            <el-button
-                              onClick={(e: any) => this.addShoppingCart(item, e)}
-                              class="none-600"
-                              type="primary"
-                              icon="el-icon-plus"
-                              plain>
-                              加入购物车
-                            </el-button>
-                          </li>
-                        )
-                      })}
-                  </ul>
-                </el-tab-pane>
-                <el-tab-pane label="超值满减">
-                  <ul class="shop-card-list">
-                    {this.shop.food &&
-                      this.shop.food.fullReduction.map((item: any) => {
-                        return (
-                          <li onClick={() => this.viewFood(item)} key={item.id}>
-                            <img src={item.url} />
-                            <div class="shop-card-list-text">
-                              <p class="shop-card-list-name">{item.name}</p>
-                              <p class="shop-card-list-desc">{item.desc}</p>
-                              <p class="shop-card-list-sold">{item.sold}</p>
-                            </div>
-                            <p class="shop-card-list-price">￥{item.price}</p>
-                            <a class="none" onClick={(e: any) => this.addShoppingCart(item, e)}>
-                              加入购物车
-                            </a>
-                            <el-button
-                              onClick={(e: any) => this.addShoppingCart(item, e)}
-                              class="none-600"
-                              type="primary"
-                              icon="el-icon-plus"
-                              plain>
-                              加入购物车
-                            </el-button>
-                          </li>
-                        )
-                      })}
-                  </ul>
-                </el-tab-pane>
-              </el-tabs>
+              <ul class="shop-card-list">
+                {this.shop.food &&
+                  this.shop.food.map((item: any) => {
+                    return (
+                      <li onClick={() => this.viewFood(item)} key={item.id}>
+                        <img src={item.url} />
+                        <div class="shop-card-list-text">
+                          <p class="shop-card-list-name">{item.name}</p>
+                          <p class="shop-card-list-desc">{item.desc}</p>
+                          <p class="shop-card-list-sold">{item.sold}</p>
+                        </div>
+                        <p class="shop-card-list-price">￥{item.price}</p>
+                        <a class="none" onClick={(e: any) => this.addShoppingCart(item, e)}>
+                          加入购物车
+                        </a>
+                        <el-button
+                          onClick={(e: any) => this.addShoppingCart(item, e)}
+                          class="none-600"
+                          type="primary"
+                          icon="el-icon-plus"
+                          plain>
+                          加入购物车
+                        </el-button>
+                      </li>
+                    )
+                  })}
+              </ul>
             </el-tab-pane>
             <el-tab-pane class="shop-card-appraisal" label="评价">
               <Appraisal></Appraisal>
@@ -527,8 +371,7 @@ export default class Shop extends Vue {
         font-size: 1rem;
       }
       &-list {
-        height: 52.94rem;
-        overflow-y: scroll;
+        min-height: 52.94rem;
         img {
           width: 6.25rem;
         }

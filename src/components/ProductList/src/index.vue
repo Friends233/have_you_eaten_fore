@@ -126,9 +126,6 @@ export default class ProductList extends Vue {
     padding-top: 3.13rem;
     margin-top: 0.93rem;
     position: relative;
-    // display: flex;
-    // flex-wrap: wrap;
-    // justify-content: space-around;
     &::after {
       content: '';
       clear: both;
@@ -158,8 +155,9 @@ export default class ProductList extends Vue {
     }
     .product-card-wrapper {
       margin: 0.31rem 0.7rem;
-      // padding: 5px 11px;
       float: left;
+      width: 14.5rem;
+      height: 19.1rem;
     }
     &-recommend {
       .product-card-header {

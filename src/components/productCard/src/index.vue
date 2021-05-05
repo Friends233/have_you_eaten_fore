@@ -20,26 +20,28 @@ export default class ProductCard extends Vue {
 
   protected render() {
     return (
-      <div>
-        <el-card nativeOnClick={() => {!this.shopping?this.goShop():''} } body-style={'padding: 0;'}>
-          <img src={this.card.imgUrl} />
-          <div class="el-card-text">
-            <span class="el-card-text-title">{this.card.name}</span>
-            <div class="el-card-text-rating">
-              <star num={this.card.rating} size="16"></star>
-              <span>{this.card.appraisalNumber}个评价</span>
-            </div>
-            <div class="el-card-text-location">{this.card.location}</div>
-            <div class="el-card-text-price">￥{this.card.price}起</div>
-            <div class="el-card-text-bottom">
-              <el-button type="text">
-                <i class="el-icon-plus"></i>
-                查看详情
-              </el-button>
-            </div>
+      <el-card
+        nativeOnClick={() => {
+          !this.shopping ? this.goShop() : ''
+        }}
+        body-style={'padding: 0;'}>
+        <img src={this.card.imgUrl} />
+        <div class="el-card-text">
+          <span class="el-card-text-title">{this.card.name}</span>
+          <div class="el-card-text-rating">
+            <star num={this.card.rating} size="16"></star>
+            <span>{this.card.appraisalNumber}个评价</span>
           </div>
-        </el-card>
-      </div>
+          <div class="el-card-text-location">{this.card.location}</div>
+          <div class="el-card-text-price">￥{this.card.price}起</div>
+          <div class="el-card-text-bottom">
+            <el-button type="text">
+              <i class="el-icon-plus"></i>
+              查看详情
+            </el-button>
+          </div>
+        </div>
+      </el-card>
     )
   }
 }
@@ -48,10 +50,13 @@ export default class ProductCard extends Vue {
 .el-card {
   // width: 233px;
   width: 100%;
+  height: 100%;
   cursor: pointer;
+  position: relative;
   ::v-deep .el-card__body {
     > img {
       width: 14.56rem;
+      height: 8.25rem;
     }
   }
   &-text {
@@ -59,6 +64,8 @@ export default class ProductCard extends Vue {
     margin-top: 0.63rem;
     &-title {
       font-size: 1.13rem;
+      min-height: 3rem;
+      display: inline-block;
     }
     &-rating {
       display: flex;
@@ -83,6 +90,9 @@ export default class ProductCard extends Vue {
     }
     &-bottom {
       text-align: right;
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
       .el-button {
         padding: 0.63rem 0.94rem;
       }

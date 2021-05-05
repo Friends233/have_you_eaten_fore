@@ -124,6 +124,7 @@ export default class FoodCard extends Vue {
   ::v-deep .el-card__body {
     > img {
       width: 14.56rem;
+      height: 14.56rem;
     }
   }
   &-text {

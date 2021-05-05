@@ -48,7 +48,7 @@ export default class ShoppingCart extends Vue {
       this.visible = true
     }
     if (id !== '') {
-      if (this.userId !== '') {
+      if (this.userId && this.userId !== '') {
         await this.shopping(id)
       } else {
         this.$alert('请先登录', '警告', {
@@ -92,13 +92,7 @@ export default class ShoppingCart extends Vue {
           type: 'success',
           message: '添加成功'
         })
-       this.emitNum()
-      })
-      .catch((err) => {
-        this.$message({
-          type: 'error',
-          message: err.data.message
-        })
+        this.emitNum()
       })
   }
 

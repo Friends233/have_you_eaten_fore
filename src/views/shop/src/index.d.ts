@@ -43,5 +43,6 @@ export interface Shops {
   business?: string;
   desc?: string[];
   coverImg?: string[];
+  food?: any[];
   [propName: string]: any;
 }

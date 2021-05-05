@@ -26,7 +26,11 @@ export default class Food extends Vue {
   fn(val: any) {
     if (val) {
       // console.log(val.goodD.label)
-      this.dynamicTags = val.goodD.label.split('，')
+      if (val.goodD.label !== '') {
+        this.dynamicTags = val.goodD.label.split('，')
+      } else {
+        this.dynamicTags = []
+      }
     }
   }
 
@@ -66,14 +70,14 @@ export default class Food extends Vue {
         visible={this.visible}
         {...{ on: { 'update:visible': this.hideView } }}>
         <div class="img-backgorund">
-          <img src="https://img.meituan.net/msmerchant/c344e8b9ab73f43596eac885b790f175148974.jpg@600w_600h_1l" />
+          <img src={this.foodVal.goodD.url} />
         </div>
         <div class="food-dialog-mid">
           <div>
             <span>月售 {this.foodVal.goodD.monthlySale}</span>
             <span>好评率 {this.foodVal.goodD.favorableRate}%</span>
           </div>
-          <div>{(this.foodVal.goodD.discount * 10).toFixed(1)}折</div>
+          <div>{this.foodVal.goodD.discount != 1 ? (this.foodVal.goodD.discount * 10).toFixed(1) : '0.99'}折</div>
           <div>
             <span class="pri">{(this.foodVal.goodD.price * this.foodVal.goodD.discount).toFixed(1)}</span>
             <span class="del">￥{this.foodVal.goodD.price}</span>
@@ -154,6 +158,7 @@ export default class Food extends Vue {
       margin-top: -30px;
       img {
         width: 100%;
+        height: 28.19rem;
       }
     }
     .food-dialog-footer {
