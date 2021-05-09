@@ -27,6 +27,14 @@ export default class SearchFood extends Vue {
       e.returnValue = 'stop'
       return stop
     }
+    getFoodByName({ name: this.$route.params.keywords || '' }).then((data) => {
+      this.shopList = data.data.map((item: any) => {
+        return {
+          imgUrl: item.url,
+          ...item
+        }
+      })
+    })
     this.$EventBus.$on('searchFood', (keywords: string) => {
       getFoodByName({ name: keywords || '' }).then((data) => {
         console.log(data)
@@ -47,7 +55,7 @@ export default class SearchFood extends Vue {
         <div class="search-content">
           <p class="lable">搜索结果</p>
           <ul class="product-list">
-          {this.shopList.length === 0 && <p>暂无记录</p>}
+            {this.shopList.length === 0 && <p>暂无记录</p>}
             {this.shopList.map((item) => {
               return (
                 <li class="product-card-wrapper">

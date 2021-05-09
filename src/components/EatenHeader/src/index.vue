@@ -101,9 +101,10 @@ export default class EatenHeader extends Vue {
 
   async serachFood(keywords: string) {
     if (this.$route.name !== 'search') {
-      this.$router.push({ name: 'search' })
+      this.$router.push({ name: 'search', params: { keywords: keywords } })
+    } else {
+      this.$EventBus.$emit('searchFood', keywords)
     }
-    this.$EventBus.$emit('searchFood', keywords)
   }
 
   renderTopNavMenu(ary: Array<Nav>) {

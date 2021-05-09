@@ -35,7 +35,7 @@ export default class Order extends Vue {
   }
 
   async init() {
-    const data = await getOrder(this.$store.getters.userId)
+    const data = await getOrder(this.$store.getters.userId || '')
     this.orderData = {
       ...data.data
     }
