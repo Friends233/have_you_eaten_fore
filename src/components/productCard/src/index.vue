@@ -15,7 +15,7 @@ export default class ProductCard extends Vue {
   @Prop() shopping?: boolean
 
   goShop() {
-    this.$router.push({ name: 'shop', params: { id: this.card.id } })
+    this.$router.push({ name: 'shop', params: { id: this.card.id || '' } })
   }
 
   protected render() {

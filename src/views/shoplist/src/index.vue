@@ -5,6 +5,7 @@
 <script lang="tsx">
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import { Clf, Shop } from './index'
+import { deepClone } from '@/utils'
 import Star from '@/components/Star/index'
 import EatenHeader from '@/components/EatenHeader/index'
 import EatenFooter from '@/components/EatenFooter/index'
@@ -24,6 +25,7 @@ export default class ShopList extends Vue {
     }
   ]
   shoplist: Array<Shop> = []
+  copy: Array<Shop> = []
   idToType: any = {}
 
   mounted() {
@@ -43,6 +45,7 @@ export default class ShopList extends Vue {
           ...item
         }
       })
+      this.copy = deepClone(this.shoplist) as any
     })
   }
 
@@ -64,8 +67,32 @@ export default class ShopList extends Vue {
     this.selectContent.splice(index, 1)
   }
 
-  get isChecked(): string{
-    return this.selectContent.length === 0?'is-checked':''
+  active(index: number) {
+    const ref: any = this.$refs
+    for (let i = 1; i <= 4; i++) {
+      ref['a' + i].className = ''
+      console.log(this.$refs['a' + i])
+    }
+    ref['a' + index].className = 'is-active'
+    if (index === 1) {
+      this.shoplist = deepClone(this.copy) as any
+    } else if (index === 2) {
+      this.shoplist.sort((a, b) => {
+        return (100 - a.price) * a.rating - (100 - b.price) * b.rating
+      })
+    } else if (index === 3) {
+      this.shoplist.sort((a, b) => {
+        return a.price - b.price
+      })
+    } else if (index === 4) {
+      this.shoplist.sort((a, b) => {
+        return b.rating - a.rating
+      })
+    }
+  }
+
+  get isChecked(): string {
+    return this.selectContent.length === 0 ? 'is-checked' : ''
   }
 
   protected render() {
@@ -97,7 +124,9 @@ export default class ShopList extends Vue {
               return (
                 <div class="shoplist-classification-module">
                   <p class="none-600">{item.label}</p>
-                  <p class={"select " + this.isChecked} onClick={() => (this.selectContent = [])}>全部</p>
+                  <p class={'select ' + this.isChecked} onClick={() => (this.selectContent = [])}>
+                    全部
+                  </p>
                   <el-checkbox-group v-model={this.selectContent}>
                     {item.content &&
                       item.content.map((i) => {
@@ -114,12 +143,18 @@ export default class ShopList extends Vue {
           </div>
           <div class="shoplist-list">
             <div class="shoplist-list-sort">
-              <a class="is-active" href="#">
+              <a ref="a1" onClick={() => this.active(1)} class="is-active" href="#">
                 综合
               </a>
-              <a href="#">销量</a>
-              <a href="#">价格</a>
-              <a href="#">好评最多</a>
+              <a ref="a2" onClick={() => this.active(2)} href="#">
+                销量
+              </a>
+              <a ref="a3" onClick={() => this.active(3)} href="#">
+                价格
+              </a>
+              <a ref="a4" onClick={() => this.active(4)} href="#">
+                好评最多
+              </a>
             </div>
             <ul class="shoplist-list-content">
               {this.shoplist.map((item, index) => {

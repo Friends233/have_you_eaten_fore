@@ -235,14 +235,14 @@ export default class Shop extends Vue {
               </div>
             </div>
             <div class="shop-header-right none-600">
-              <div>
+              <div class="img-top">
                 <img src={this.shop?.shop?.coverImg && this.shop?.shop?.coverImg[0]} />
               </div>
               <div>
                 {this.shop?.shop?.coverImg?.map((item) => {
                     return (
                       <el-image
-                        style="width: 100px; height: 100px"
+                        style="width: 100px; height: 100px; margin-right: 5px;"
                         src={item}
                         preview-src-list={this.shop?.shop?.coverImg}></el-image>
                     )
@@ -354,6 +354,13 @@ export default class Shop extends Vue {
       }
       &-right {
         flex: 0 0 20.88rem;
+        .img-top {
+          img {
+            width: 380px;
+          height: 214px;
+          }
+          
+        }
       }
     }
     &-card {

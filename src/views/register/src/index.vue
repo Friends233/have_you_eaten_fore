@@ -27,13 +27,21 @@ export default class Register extends Vue {
     // phoneNumber: [{ type: 'phoneNumber', required: true, message: '请输入手机号码', trigger: 'change' }],
     checkPass: [
       { required: true, message: '请再次输入密码', trigger: 'blur' },
-      { min: 6, max: 12, message: '密码长度在 6 到 12 个字符', trigger: 'change' }
+      { min: 6, max: 12, message: '密码长度在 6 到 12 个字符', trigger: 'change' },
+      { validator: this.validateCheckPass, trigger: 'blur' }
     ],
     checked: [{ required: true, message: '请勾选服务协议', trigger: 'blur' }],
     password: [
       { required: true, message: '请输入密码', trigger: 'blur' },
       { min: 6, max: 12, message: '密码长度在 6 到 12 个字符', trigger: 'change' }
     ]
+  }
+
+  validateCheckPass(rule: any, value: string, callback: Function) {
+    if (value && value !== this.ruleForm.password) {
+      callback('两次密码输入不一致')
+    }
+    callback()
   }
 
   submitForm() {

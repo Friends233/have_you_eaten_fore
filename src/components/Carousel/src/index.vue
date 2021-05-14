@@ -54,7 +54,7 @@ export default class Carousel extends Vue {
                 return (
                   <li
                     class="food-type"
-                    onClick={() => this.$router.push({ name: 'shoplist', params: { typeId: item.id } })}>
+                    onClick={() => this.$router.push({ name: 'shoplist', params: { typeId: item.id || '' } })}>
                     <i class={item.icon} style={'color:' + item.color + ';'}></i>
                     <a href="#">{item.label}</a>
                   </li>
@@ -65,7 +65,7 @@ export default class Carousel extends Vue {
           <el-carousel trigger="click">
             {this.carouselList.map((item, index) => {
               return (
-                <li key={index} onClick={() => this.$router.push({ name: 'shop', params: { id: item.id } })}>
+                <li key={index} onClick={() => this.$router.push({ name: 'shop', params: { id: item.id || '' } })}>
                   <el-carousel-item>
                     <img width="100%" height="100%" src={item.url} />
                   </el-carousel-item>

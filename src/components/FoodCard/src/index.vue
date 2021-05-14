@@ -90,7 +90,7 @@ export default class FoodCard extends Vue {
 
   shopping(e: any) {
     e.stopPropagation()
-    this.$showCart(this.card.id, true)
+    this.$showCart(this.card.id || '', true)
   }
 
   protected render() {

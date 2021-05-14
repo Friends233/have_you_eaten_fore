@@ -47,7 +47,7 @@ export default class ShoppingCart extends Vue {
     if (!flag) {
       this.visible = true
     }
-    if (id !== '') {
+    if (id && id !== '') {
       if (this.userId && this.userId !== '') {
         await this.shopping(id)
       } else {
